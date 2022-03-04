@@ -1,0 +1,1835 @@
+<html>
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@700&family=Montserrat&family=Share+Tech&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+
+    <style>
+        @font-face {
+            font-family: 'Matamata';
+            /*a name to be used later*/
+            src: url('Matamata-Bold.otf');
+            /*URL to font*/
+        }
+
+        .Displayed {
+            font-family: 'Matamata';
+            color: rgb(255, 255, 255);
+        }
+
+        .Displayed.PlayerName {
+            font-size: 50px;
+            color: rgb(255, 255, 255);
+            line-height: 0.5;
+            margin-left: 15x;
+        }
+
+        .MissText {
+            position: relative;
+            text-align: center;
+            bottom: 0px;
+            z-index: 1;
+            font-size: 45px;
+            line-height: 0.5;
+        }
+
+        .Acc {
+            position: relative;
+            text-align: center;
+            top: 0px;
+            z-index: 1;
+            font-size: 45px;
+            line-height: 0.5;
+        }
+
+        .Displayed.Combo {
+            font-size: 40px;
+            line-height: 0.5;
+        }
+
+
+        .left {
+            text-align: left;
+        }
+
+        .right {
+            text-align: right;
+        }
+
+        .P1PlayerInfo {
+            position: fixed;
+            bottom: 730;
+            right: 965;
+            width: 400px;
+            height: 100px;
+            padding: 10px;
+            margin: 0px;
+            background-color: rgba(0, 0, 0, 0.0);
+            border-radius: 40px;
+            text-align: center;
+        }
+
+        .P2PlayerInfo {
+            position: fixed;
+            bottom: 730;
+            left: 965px;
+            width: 400px;
+            height: 100px;
+            padding: 10px;
+            margin: 0px;
+            background-color: rgba(0, 0, 0, 0.0);
+            border-radius: 40px;
+            text-align: center;
+        }
+
+
+        .pfpimg {
+            height: 75px;
+            width: 75px;
+            border-radius: 100px;
+            bottom: 0;
+            padding: 10px;
+
+        }
+
+        .P1Image {
+            display: block;
+            float: right;
+            padding: 0px;
+        }
+
+        .P2Image {
+            display: block;
+            float: left;
+            padding: 0px;
+        }
+
+        .SongInfo {
+            background-color: rgba(0, 0, 0, 0.0);
+            text-align: center;
+            font-family: 'Matamata';
+            overflow-wrap: break-word;
+            overflow: hidden;
+            color: rgb(255, 255, 255);
+            width: 400px;
+            height: 150px;
+            line-height: 20px;
+            text-shadow: 2px 2px #000000
+        }
+
+
+
+        .SongArtist {
+            position: relative;
+            text-align: center;
+            top: -10px;
+            z-index: 1;
+            font-size: 25px;
+        }
+
+        .SongName {
+            position: relative;
+            text-align: center;
+            top: -15px;
+            z-index: -1;
+            font-size: 30px;
+            line-height: 30px;
+            width: 399.99px;
+            overflow-wrap: normal;
+
+
+
+        }
+
+        .SongDiff {
+            position: absolute;
+            text-align: right;
+            top: -10px;
+            right: 15px;
+            z-index: 2;
+            font-size: 25px;
+
+
+        }
+
+        .SongKey {
+            position: absolute;
+            text-align: left;
+            top: -5px;
+            left: 15px;
+            z-index: 2;
+            font-size: 20px;
+
+
+        }
+
+        .SongMapper {
+            position: absolute;
+            text-align: center;
+            bottom: -3px;
+            z-index: 4;
+            font-size: 25px;
+            line-height: 0px;
+            width: 400px;
+
+
+        }
+
+        .SongCover {
+            position: absolute;
+            bottom: -100px;
+            right: 0px;
+            width: 400px;
+            height: 400px;
+            z-index: -4;
+            filter: blur(8px);
+            -webkit-filter: blur(8px);
+
+        }
+
+        .SongInfo.Zero {
+            position: fixed;
+            top: 320px;
+            left: 150px;
+
+        }
+
+        .SongInfo.One {
+            position: fixed;
+            top: 520px;
+            left: 150px;
+
+        }
+
+        .SongInfo.Two {
+            position: fixed;
+            top: 720px;
+            left: 150px;
+
+        }
+
+        .SongInfo.Three {
+            position: fixed;
+            top: 320px;
+            left: 150px;
+
+        }
+
+        .SongInfo.Four {
+            position: fixed;
+            top: 520px;
+            left: 150px;
+
+        }
+
+        .SongInfo.Five {
+            position: fixed;
+            top: 720px;
+            left: 150px;
+
+        }
+
+        .SongInfo.Six {
+            position: fixed;
+            top: 320px;
+            left: 150px;
+
+        }
+
+        .SongInfo.Seven {
+            position: fixed;
+            top: 520px;
+            left: 150px;
+
+        }
+
+        .SongInfo.Eight {
+            position: fixed;
+            top: 720px;
+            left: 150px;
+
+        }
+
+
+
+
+        .casterInfo {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            background-color: rgba(0, 0, 0, 0.0);
+            text-align: center;
+            font-family: 'Matamata';
+            overflow-wrap: break-word;
+            overflow: hidden;
+            color: rgb(255, 255, 255);
+            width: 400px;
+            height: 150px;
+            line-height: 20px;
+            text-shadow: 2px 2px #000000
+        }
+
+        .casterName {
+            position: relative;
+            text-align: center;
+            top: 0;
+            z-index: -1;
+            font-size: 50px;
+            line-height: 70px;
+            width: 399.99px;
+        }
+
+        .PickOrBan {
+            animation: fadeIn;
+            animation-duration: 2s;
+            position: absolute;
+            bottom: -100px;
+            right: 0px;
+            width: 400px;
+            height: 400px;
+            z-index: -3;
+        }
+
+        .fadeInAnimation {
+            animation: fadeInLeft;
+            animation-duration: 1s;
+        }
+
+        .P1ScorePos1 {
+            position: fixed;
+            top: 320px;
+            right: 985px;
+            width: 350px;
+            height: 150px;
+            padding: 00px;
+            margin: 0px;
+            font-size: 30px;
+            background-color: rgba(0, 0, 0, 0.0);
+            border-radius: 40px;
+            text-align: center;
+        }
+
+        .P1ScorePos2 {
+            position: fixed;
+            top: 520px;
+            right: 985px;
+            width: 350px;
+            height: 150px;
+            padding: 00px;
+            margin: 0px;
+            font-size: 30px;
+            background-color: rgba(0, 0, 0, 0.0);
+            border-radius: 40px;
+            text-align: center;
+        }
+
+        .P1ScorePos3 {
+            position: fixed;
+            top: 720px;
+            right: 985px;
+            width: 350px;
+            height: 150px;
+            padding: 00px;
+            margin: 0px;
+            font-size: 30px;
+            background-color: rgba(0, 0, 0, 0.0);
+            border-radius: 40px;
+            text-align: center;
+        }
+
+
+        .P2ScorePos1 {
+            position: fixed;
+            top: 320px;
+            right: 585px;
+            width: 350px;
+            height: 150px;
+            padding: 00px;
+            margin: 0px;
+            font-size: 30px;
+            background-color: rgba(0, 0, 0, 0.0);
+            border-radius: 40px;
+            text-align: center;
+        }
+
+        .P2ScorePos2 {
+            position: fixed;
+            top: 520px;
+            right: 585px;
+            width: 350px;
+            height: 150px;
+            padding: 00px;
+            margin: 0px;
+            font-size: 30px;
+            background-color: rgba(0, 0, 0, 0.0);
+            border-radius: 40px;
+            text-align: center;
+        }
+
+        .P2ScorePos3 {
+            position: fixed;
+            top: 720px;
+            right: 585px;
+            width: 350px;
+            height: 150px;
+            padding: 00px;
+            margin: 0px;
+            font-size: 30px;
+            background-color: rgba(0, 0, 0, 0.0);
+            border-radius: 40px;
+            text-align: center;
+        }
+
+        .PlayerRAnk {
+            position: absolute;
+            text-align: center;
+            top: -10px;
+            z-index: 4;
+            font-size: 25px;
+            line-height: 0px;
+            width: 400px;
+
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class=P1PlayerInfo>
+        <h1 id="P1Name" class="Displayed PlayerName">Player 1</h1>
+        <h1 id="P1Rank" class="Displayed PlayerRank">#0000</h1>
+        <!-- <img id="P1pfp" src="" class="P1Image pfpimg"> -->
+
+
+
+    </div>
+
+    <div class="P2PlayerInfo">
+        <h1 id="P2Name" class="Displayed PlayerName">Player 2</h1>
+        <h1 id="P2Rank" class="Displayed PlayerRank">#0000</h1>
+        <!--<img id="P2pfp" src="" class="P2Image pfpimg"> -->
+    </div>
+
+    <div class="P1ScorePos1" id="P1Map0">
+        <h2 id="P1Map0Acc" class="Displayed Acc">00.00%</h2>
+        <h2 id="P1Map0Misses" class="Displayed MissText">0 missed</h2>
+    </div>
+    <div class="P1ScorePos2" id="P1Map1">
+        <h2 id="P1Map1Acc" class="Displayed Acc">00.00%</h2>
+        <h2 id="P1Map1Misses" class="Displayed MissText">0 missed</h2>
+    </div>
+
+    <div class="P1ScorePos3" id="P1Map2">
+        <h2 id="P1Map2Acc" class="Displayed Acc">00.00%</h2>
+        <h2 id="P1Map2Misses" class="Displayed MissText">0 missed</h2>
+    </div>
+    <div class="P1ScorePos1" id="P1Map3">
+        <h2 id="P1Map3Acc" class="Displayed Acc">00.00%</h2>
+        <h2 id="P1Map3Misses" class="Displayed MissText">0 missed</h2>
+    </div>
+    <div class="P1ScorePos2" id="P1Map4">
+        <h2 id="P1Map4Acc" class="Displayed Acc">00.00%</h2>
+        <h2 id="P1Map4Misses" class="Displayed MissText">0 missed</h2>
+    </div>
+
+    <div class="P1ScorePos3" id="P1Map5">
+        <h2 id="P1Map5Acc" class="Displayed Acc">00.00%</h2>
+        <h2 id="P1Map5Misses" class="Displayed MissText">0 missed</h2>
+    </div>
+    <div class="P1ScorePos1" id="P1Map6">
+        <h2 id="P1Map6Acc" class="Displayed Acc">00.00%</h2>
+        <h2 id="P1Map6Misses" class="Displayed MissText">0 missed</h2>
+    </div>
+    <div class="P1ScorePos2" id="P1Map7">
+        <h2 id="P1Map7Acc" class="Displayed Acc">00.00%</h2>
+        <h2 id="P1Map7Misses" class="Displayed MissText">0 missed</h2>
+    </div>
+
+    <div class="P1ScorePos3" id="P1Map8">
+        <h2 id="P1Map8Acc" class="Displayed Acc">00.00%</h2>
+        <h2 id="P1Map8Misses" class="Displayed MissText">0 missed</h2>
+    </div>
+
+    <div class="P2ScorePos1" id="P2Map0">
+        <h2 id="P2Map0Acc" class="Displayed Acc">00.00%</h2>
+        <h2 id="P2Map0Misses" class="Displayed MissText">0 missed</h2>
+    </div>
+    <div class="P2ScorePos2" id="P2Map1">
+        <h2 id="P2Map1Acc" class="Displayed Acc">00.00%</h2>
+        <h2 id="P2Map1Misses" class="Displayed MissText">0 missed</h2>
+    </div>
+
+    <div class="P2ScorePos3" id="P2Map2">
+        <h2 id="P2Map2Acc" class="Displayed Acc">00.00%</h2>
+        <h2 id="P2Map2Misses" class="Displayed MissText">0 missed</h2>
+    </div>
+    <div class="P2ScorePos1" id="P2Map3">
+        <h2 id="P2Map3Acc" class="Displayed Acc">00.00%</h2>
+        <h2 id="P2Map3Misses" class="Displayed MissText">0 missed</h2>
+    </div>
+    <div class="P2ScorePos2" id="P2Map4">
+        <h2 id="P2Map4Acc" class="Displayed Acc">00.00%</h2>
+        <h2 id="P2Map4Misses" class="Displayed MissText">0 missed</h2>
+    </div>
+
+    <div class="P2ScorePos3" id="P2Map5">
+        <h2 id="P2Map5Acc" class="Displayed Acc">00.00%</h2>
+        <h2 id="P2Map5Misses" class="Displayed MissText">0 missed</h2>
+    </div>
+    <div class="P2ScorePos1" id="P2Map6">
+        <h2 id="P2Map6Acc" class="Displayed Acc">00.00%</h2>
+        <h2 id="P2Map6Misses" class="Displayed MissText">0 missed</h2>
+    </div>
+    <div class="P2ScorePos2" id="P2Map7">
+        <h2 id="P2Map7Acc" class="Displayed Acc">00.00%</h2>
+        <h2 id="P2Map7Misses" class="Displayed MissText">0 missed</h2>
+    </div>
+
+    <div class="P2ScorePos3" id="P2Map8">
+        <h2 id="P2Map8Acc" class="Displayed Acc">00.00%</h2>
+        <h2 id="P2Map8Misses" class="Displayed MissText">0 missed</h2>
+    </div>
+
+
+
+    <div class=casterInfo>
+        <span id="caster1Name" class="casterName">Caster 1</span><br>
+        <span id="caster2Name" class="casterName">Caster 2</span>
+
+
+    </div>
+
+
+    <div class="SongInfo Zero" id="song0" style="border-radius:25px;">
+        <p id="SongArtist0" class="SongArtist">Artist</p>
+        <p id="SongName0" class="SongName">Song Name</p>
+        <p id="SongMapper0" class="SongMapper">Mapper</p>
+        <p id="SongDiff0" class="SongDiff">Diff</p>
+        <p id="SongKey0" class="SongKey">Key</p>
+        <img id="pickBan0" src="" class="none">
+        <img id="songCover0" src="images/nosongcover.png" class="SongCover">
+    </div>
+
+
+    <div class="SongInfo One" id="song1" style="border-radius:25px;">
+        <p id="SongArtist1" class="SongArtist">Artist</p>
+        <p id="SongName1" class="SongName">Song Name</p>
+        <p id="SongMapper1" class="SongMapper">Mapper</p>
+        <p id="SongDiff1" class="SongDiff">Diff</p>
+        <p id="SongKey1" class="SongKey">Key</p>
+        <img id="pickBan1" src="" class="none">
+        <img id="songCover1" src="images/nosongcover.png" class="SongCover">
+    </div>
+
+    <div class="SongInfo Two" id="song2" style="border-radius:25px;">
+        <p id="SongArtist2" class="SongArtist">Artist</p>
+        <p id="SongName2" class="SongName">Song Name</p>
+        <p id="SongMapper2" class="SongMapper">Mapper</p>
+        <p id="SongDiff2" class="SongDiff">Diff</p>
+        <p id="SongKey2" class="SongKey">Key</p>
+        <img id="pickBan2" src="" class="none">
+        <img id="songCover2" src="images/nosongcover.png" class="SongCover">
+    </div>
+
+    <div class="SongInfo Three" id="song3" style="border-radius:25px;">
+        <p id="SongArtist3" class="SongArtist">Artist</p>
+        <p id="SongName3" class="SongName">Song Name</p>
+        <p id="SongMapper3" class="SongMapper">Mapper</p>
+        <p id="SongDiff3" class="SongDiff">Diff</p>
+        <p id="SongKey3" class="SongKey">Key</p>
+        <img id="pickBan3" src="" class="none">
+        <img id="songCover3" src="images/nosongcover.png" class="SongCover">
+    </div>
+
+    <div class="SongInfo Four" id="song4" style="border-radius:25px;">
+        <p id="SongArtist4" class="SongArtist">Artist</p>
+        <p id="SongName4" class="SongName">Song Name</p>
+        <p id="SongMapper4" class="SongMapper">Mapper</p>
+        <p id="SongDiff4" class="SongDiff">Diff</p>
+        <p id="SongKey4" class="SongKey">Key</p>
+        <img id="pickBan4" src="" class="none">
+        <img id="songCover4" src="images/nosongcover.png" class="SongCover">
+    </div>
+
+    <div class="SongInfo Five" id="song5" style="border-radius:25px;">
+        <p id="SongArtist5" class="SongArtist">Artist</p>
+        <p id="SongName5" class="SongName">Song Name</p>
+        <p id="SongMapper5" class="SongMapper">Mapper</p>
+        <p id="SongDiff5" class="SongDiff">Diff</p>
+        <p id="SongKey5" class="SongKey">Key</p>
+        <img id="pickBan5" src="" class="none">
+        <img id="songCover5" src="images/nosongcover.png" class="SongCover">
+    </div>
+
+    <div class="SongInfo Six" id="song6" style="border-radius:25px;">
+        <p id="SongArtist6" class="SongArtist">Artist</p>
+        <p id="SongName6" class="SongName">Song Name</p>
+        <p id="SongMapper6" class="SongMapper">Mapper</p>
+        <p id="SongDiff6" class="SongDiff">Diff</p>
+        <p id="SongKey6" class="SongKey">Key</p>
+        <img id="pickBan6" src="" class="none">
+        <img id="songCover6" src="images/nosongcover.png" class="SongCover">
+    </div>
+
+    <div class="SongInfo Seven" id="song7" style="border-radius:25px;">
+        <p id="SongArtist7" class="SongArtist">Artist</p>
+        <p id="SongName7" class="SongName">Song Name</p>
+        <p id="SongMapper7" class="SongMapper">Mapper</p>
+        <p id="SongDiff7" class="SongDiff">Diff</p>
+        <p id="SongKey7" class="SongKey">Key</p>
+        <img id="pickBan7" src="" class="none">
+        <img id="songCover7" src="images/nosongcover.png" class="SongCover">
+    </div>
+
+    <div class="SongInfo Eight" id="song8" style="border-radius:25px;">
+        <p id="SongArtist8" class="SongArtist">Artist</p>
+        <p id="SongName8" class="SongName">Song Name</p>
+        <p id="SongMapper8" class="SongMapper">Mapper</p>
+        <p id="SongDiff8" class="SongDiff">Diff</p>
+        <p id="SongKey8" class="SongKey">Key</p>
+        <img id="pickBan8" src="" class="none">
+        <img id="songCover8" src="images/nosongcover.png" class="SongCover">
+    </div>
+
+
+
+
+</body>
+
+</body>
+
+<script>
+    var P1Name = document.getElementById('P1Name');
+    var P2Name = document.getElementById('P2Name');
+    var P1Rank = document.getElementById('P1Rank');
+    var P2Rank = document.getElementById('P2Rank');
+
+    var P1RawName = '';
+    var P2RawName = '';
+
+
+
+    var P1ScoreSaber = '';
+    var P2ScoreSaber = '';
+    var P3ScoreSaber = '';
+    var P4ScoreSaber = '';
+
+    //var P1Map0Score = document.getElementById('P1Map0Score');
+        var P1Map0Acc = document.getElementById('P1Map0Acc');
+        var P1Map0Misses = document.getElementById('P1Map0Misses');
+        //var P1Map1Score = document.getElementById('P1Map1Score');
+        var P1Map1Acc = document.getElementById('P1Map1Acc');
+        var P1Map1Misses = document.getElementById('P1Map1Misses');
+        //var P1Map2Score = document.getElementById('P1Map2Score');
+        var P1Map2Acc = document.getElementById('P1Map2Acc');
+        var P1Map2Misses = document.getElementById('P1Map2Misses');
+       // var P1Map3Score = document.getElementById('P1Map3Score');
+        var P1Map3Acc = document.getElementById('P1Map3Acc');
+        var P1Map3Misses = document.getElementById('P1Map3Misses');
+        //var P1Map4Score = document.getElementById('P1Map4Score');
+        var P1Map4Acc = document.getElementById('P1Map4Acc');
+        var P1Map4Misses = document.getElementById('P1Map4Misses');
+       // var P1Map5Score = document.getElementById('P1Map5Score');
+        var P1Map5Acc = document.getElementById('P1Map5Acc');
+        var P1Map5Misses = document.getElementById('P1Map5Misses');
+      //  var P1Map6Score = document.getElementById('P1Map6Score');
+        var P1Map6Acc = document.getElementById('P1Map6Acc');
+        var P1Map6Misses = document.getElementById('P1Map6Misses');
+      //  var P1Map7Score = document.getElementById('P1Map7Score');
+        var P1Map7Acc = document.getElementById('P1Map7Acc');
+        var P1Map7Misses = document.getElementById('P1Map7Misses');
+      //  var P1Map8Score = document.getElementById('P1Map8Score');
+        var P1Map8Acc = document.getElementById('P1Map8Acc');
+        var P1Map8Misses = document.getElementById('P1Map8Misses');
+      //  var P2Map0Score = document.getElementById('P2Map0Score');
+        var P2Map0Acc = document.getElementById('P2Map0Acc');
+        var P2Map0Misses = document.getElementById('P2Map0Misses');
+      //  var P2Map1Score = document.getElementById('P2Map1Score');
+        var P2Map1Acc = document.getElementById('P2Map1Acc');
+        var P2Map1Misses = document.getElementById('P2Map1Misses');
+     //   var P2Map2Score = document.getElementById('P2Map2Score');
+        var P2Map2Acc = document.getElementById('P2Map2Acc');
+        var P2Map2Misses = document.getElementById('P2Map2Misses');
+      //  var P2Map3Score = document.getElementById('P2Map3Score');
+        var P2Map3Acc = document.getElementById('P2Map3Acc');
+        var P2Map3Misses = document.getElementById('P2Map3Misses');
+      //  var P2Map4Score = document.getElementById('P2Map4Score');
+        var P2Map4Acc = document.getElementById('P2Map4Acc');
+        var P2Map4Misses = document.getElementById('P2Map4Misses');
+       // var P2Map5Score = document.getElementById('P2Map5Score');
+        var P2Map5Acc = document.getElementById('P2Map5Acc');
+        var P2Map5Misses = document.getElementById('P2Map5Misses');
+      //  var P2Map6Score = document.getElementById('P2Map6Score');
+        var P2Map6Acc = document.getElementById('P2Map6Acc');
+        var P2Map6Misses = document.getElementById('P2Map6Misses');
+      //  var P2Map7Score = document.getElementById('P2Map7Score');
+        var P2Map7Acc = document.getElementById('P2Map7Acc');
+        var P2Map7Misses = document.getElementById('P2Map7Misses');
+      //  var P2Map8Score = document.getElementById('P2Map8Score');
+        var P2Map8Acc = document.getElementById('P2Map8Acc');
+        var P2Map8Misses = document.getElementById('P2Map8Misses');
+        // var P3Map0Score = document.getElementById('P3Map0Score');
+        // var P3Map0Acc = document.getElementById('P3Map0Acc');
+        // var P3Map0Misses = document.getElementById('P3Map0Misses');
+        // var P3Map1Score = document.getElementById('P3Map1Score');
+        // var P3Map1Acc = document.getElementById('P3Map1Acc');
+        // var P3Map1Misses = document.getElementById('P3Map1Misses');
+        // var P3Map2Score = document.getElementById('P3Map2Score');
+        // var P3Map2Acc = document.getElementById('P3Map2Acc');
+        // var P3Map2Misses = document.getElementById('P3Map2Misses');
+        // var P3Map3Score = document.getElementById('P3Map3Score');
+        // var P3Map3Acc = document.getElementById('P3Map3Acc');
+        // var P3Map3Misses = document.getElementById('P3Map3Misses');
+        // var P3Map4Score = document.getElementById('P3Map4Score');
+        // var P3Map4Acc = document.getElementById('P3Map4Acc');
+        // var P3Map4Misses = document.getElementById('P3Map4Misses');
+        // var P3Map5Score = document.getElementById('P3Map5Score');
+        // var P3Map5Acc = document.getElementById('P3Map5Acc');
+        // var P3Map5Misses = document.getElementById('P3Map5Misses');
+        // var P3Map6Score = document.getElementById('P3Map6Score');
+        // var P3Map6Acc = document.getElementById('P3Map6Acc');
+        // var P3Map6Misses = document.getElementById('P3Map6Misses');
+        // var P3Map7Score = document.getElementById('P3Map7Score');
+        // var P3Map7Acc = document.getElementById('P3Map7Acc');
+        // var P3Map7Misses = document.getElementById('P3Map7Misses');
+        // var P3Map8Score = document.getElementById('P3Map8Score');
+        // var P3Map8Acc = document.getElementById('P3Map8Acc');
+        // var P3Map8Misses = document.getElementById('P3Map8Misses');
+        // var P4Map0Score = document.getElementById('P4Map0Score');
+        // var P4Map0Acc = document.getElementById('P4Map0Acc');
+        // var P4Map0Misses = document.getElementById('P4Map0Misses');
+        // var P4Map1Score = document.getElementById('P4Map1Score');
+        // var P4Map1Acc = document.getElementById('P4Map1Acc');
+        // var P4Map1Misses = document.getElementById('P4Map1Misses');
+        // var P4Map2Score = document.getElementById('P4Map2Score');
+        // var P4Map2Acc = document.getElementById('P4Map2Acc');
+        // var P4Map2Misses = document.getElementById('P4Map2Misses');
+        // var P4Map3Score = document.getElementById('P4Map3Score');
+        // var P4Map3Acc = document.getElementById('P4Map3Acc');
+        // var P4Map3Misses = document.getElementById('P4Map3Misses');
+        // var P4Map4Score = document.getElementById('P4Map4Score');
+        // var P4Map4Acc = document.getElementById('P4Map4Acc');
+        // var P4Map4Misses = document.getElementById('P4Map4Misses');
+        // var P4Map5Score = document.getElementById('P4Map5Score');
+        // var P4Map5Acc = document.getElementById('P4Map5Acc');
+        // var P4Map5Misses = document.getElementById('P4Map5Misses');
+        // var P4Map6Score = document.getElementById('P4Map6Score');
+        // var P4Map6Acc = document.getElementById('P4Map6Acc');
+        // var P4Map6Misses = document.getElementById('P4Map6Misses');
+        // var P4Map7Score = document.getElementById('P4Map7Score');
+        // var P4Map7Acc = document.getElementById('P4Map7Acc');
+        // var P4Map7Misses = document.getElementById('P4Map7Misses');
+        // var P4Map8Score = document.getElementById('P4Map8Score');
+        // var P4Map8Acc = document.getElementById('P4Map8Acc');
+        // var P4Map8Misses = document.getElementById('P4Map8Misses');
+
+    //var TAsock = new WebSocket("ws://beatsaber.networkauditor.org:10157");
+    //var TAsock = new WebSocket("ws://ta.asodev.net:10157");
+    console.log("connecting");
+
+
+
+
+
+
+
+    function connect() {
+
+        sock = new WebSocket("ws://localhost:1337");
+        sock.onopen = function () {
+            console.log("Connected to BSTournamentHelper");
+        };
+
+        sock.onclose = function (e) {
+            console.log("Socket is closed. Reconnect attempt in 1 second");
+            setTimeout(function () {
+                connect();
+            }, 1000);
+        }
+
+        sock.onerror = function (err) {
+            console.log(err);
+            sock.close();
+        }
+        sock.onmessage = function (msg) {
+            let data = JSON.parse(msg.data);
+            console.log(data);
+
+            if (data.Event == "StatsPage") {
+
+                
+                //P1Map0Score.innerHTML = data.Data.P1Map0Score;
+                P1Map0Acc.innerHTML = (Math.round(data.Data.P1Map0Acc * 100 * 100) / 100).toFixed(2) + "%";
+                P1Map0Misses.innerHTML = data.Data.P1Map0Misses + " missed";
+              //  P1Map1Score.innerHTML = data.Data.P1Map1Score;
+                P1Map1Acc.innerHTML = (Math.round(data.Data.P1Map1Acc * 100 * 100) / 100).toFixed(2) + "%";
+                P1Map1Misses.innerHTML = data.Data.P1Map1Misses + " missed";
+              //  P1Map2Score.innerHTML = data.Data.P1Map2Score;
+                P1Map2Acc.innerHTML = (Math.round(data.Data.P1Map2Acc * 100 * 100) / 100).toFixed(2) + "%";
+                P1Map2Misses.innerHTML = data.Data.P1Map2Misses + " missed";
+             //   P1Map3Score.innerHTML = data.Data.P1Map3Score;
+                P1Map3Acc.innerHTML = (Math.round(data.Data.P1Map3Acc * 100 * 100) / 100).toFixed(2) + "%";
+                P1Map3Misses.innerHTML = data.Data.P1Map3Misses + " missed";
+             //   P1Map4Score.innerHTML = data.Data.P1Map4Score;
+                P1Map4Acc.innerHTML = (Math.round(data.Data.P1Map4Acc * 100 * 100) / 100).toFixed(2) + "%";
+                P1Map4Misses.innerHTML = data.Data.P1Map4Misses + " missed";
+             //   P1Map5Score.innerHTML = data.Data.P1Map5Score;
+                P1Map5Acc.innerHTML = (Math.round(data.Data.P1Map5Acc * 100 * 100) / 100).toFixed(2) + "%";
+                P1Map5Misses.innerHTML = data.Data.P1Map5Misses + " missed";
+             //   P1Map6Score.innerHTML = data.Data.P1Map6Score;
+                P1Map6Acc.innerHTML = (Math.round(data.Data.P1Map6Acc * 100 * 100) / 100).toFixed(2) + "%";
+                P1Map6Misses.innerHTML = data.Data.P1Map6Misses + " missed";
+             //   P1Map7Score.innerHTML = data.Data.P1Map7Score;
+                P1Map7Acc.innerHTML = (Math.round(data.Data.P1Map7Acc * 100 * 100) / 100).toFixed(2) + "%";
+                P1Map7Misses.innerHTML = data.Data.P1Map7Misses + " missed";
+              //  P1Map8Score.innerHTML = data.Data.P1Map8Score;
+                P1Map8Acc.innerHTML = (Math.round(data.Data.P1Map8Acc * 100 * 100) / 100).toFixed(2) + "%";
+                P1Map8Misses.innerHTML = data.Data.P1Map8Misses + " missed";
+             //   P2Map0Score.innerHTML = data.Data.P2Map0Score;
+                P2Map0Acc.innerHTML = (Math.round(data.Data.P2Map0Acc * 100 * 100) / 100).toFixed(2) + "%";
+                P2Map0Misses.innerHTML = data.Data.P2Map0Misses + " missed";
+             //   P2Map1Score.innerHTML = data.Data.P2Map1Score;
+                P2Map1Acc.innerHTML = (Math.round(data.Data.P2Map1Acc * 100 * 100) / 100).toFixed(2) + "%";
+                P2Map1Misses.innerHTML = data.Data.P2Map1Misses + " missed";
+             //   P2Map2Score.innerHTML = data.Data.P2Map2Score;
+                P2Map2Acc.innerHTML = (Math.round(data.Data.P2Map2Acc * 100 * 100) / 100).toFixed(2) + "%";
+                P2Map2Misses.innerHTML = data.Data.P2Map2Misses + " missed";
+             //   P2Map3Score.innerHTML = data.Data.P2Map3Score;
+                P2Map3Acc.innerHTML = (Math.round(data.Data.P2Map3Acc * 100 * 100) / 100).toFixed(2) + "%";
+                P2Map3Misses.innerHTML = data.Data.P2Map3Misses + " missed";
+             //   P2Map4Score.innerHTML = data.Data.P2Map4Score;
+                P2Map4Acc.innerHTML = (Math.round(data.Data.P2Map4Acc * 100 * 100) / 100).toFixed(2) + "%";
+                P2Map4Misses.innerHTML = data.Data.P2Map4Misses + " missed";
+             //   P2Map5Score.innerHTML = data.Data.P2Map5Score;
+                P2Map5Acc.innerHTML = (Math.round(data.Data.P2Map5Acc * 100 * 100) / 100).toFixed(2) + "%";
+                P2Map5Misses.innerHTML = data.Data.P2Map5Misses + " missed";
+             //   P2Map6Score.innerHTML = data.Data.P2Map6Score;
+                P2Map6Acc.innerHTML = (Math.round(data.Data.P2Map6Acc * 100 * 100) / 100).toFixed(2) + "%";
+                P2Map6Misses.innerHTML = data.Data.P2Map6Misses + " missed";
+             //   P2Map7Score.innerHTML = data.Data.P2Map7Score;
+                P2Map7Acc.innerHTML = (Math.round(data.Data.P2Map7Acc * 100 * 100) / 100).toFixed(2) + "%";
+                P2Map7Misses.innerHTML = data.Data.P2Map7Misses + " missed";
+              //  P2Map8Score.innerHTML = data.Data.P2Map8Score;
+                P2Map8Acc.innerHTML = (Math.round(data.Data.P2Map8Acc * 100 * 100) / 100).toFixed(2) + "%";
+                P2Map8Misses.innerHTML = data.Data.P2Map8Misses + " missed";
+                // P3Map0Score.innerHTML = data.Data.P3Map0Score;
+                // P3Map0Acc.innerHTML = (Math.round(data.Data.P3Map0Acc * 100 * 100) / 100).toFixed(2) + "%";
+                // P3Map0Misses.innerHTML = data.Data.P3Map0Misses + " missed";
+                // P3Map1Score.innerHTML = data.Data.P3Map1Score;
+                // P3Map1Acc.innerHTML = (Math.round(data.Data.P3Map1Acc * 100 * 100) / 100).toFixed(2) + "%";
+                // P3Map1Misses.innerHTML = data.Data.P3Map1Misses + " missed";
+                // P3Map2Score.innerHTML = data.Data.P3Map2Score;
+                // P3Map2Acc.innerHTML = (Math.round(data.Data.P3Map2Acc * 100 * 100) / 100).toFixed(2) + "%";
+                // P3Map2Misses.innerHTML = data.Data.P3Map2Misses + " missed";
+                // P3Map3Score.innerHTML = data.Data.P3Map3Score;
+                // P3Map3Acc.innerHTML = (Math.round(data.Data.P3Map3Acc * 100 * 100) / 100).toFixed(2) + "%";
+                // P3Map3Misses.innerHTML = data.Data.P3Map3Misses + " missed";
+                // P3Map4Score.innerHTML = data.Data.P3Map4Score;
+                // P3Map4Acc.innerHTML = (Math.round(data.Data.P3Map4Acc * 100 * 100) / 100).toFixed(2) + "%";
+                // P3Map4Misses.innerHTML = data.Data.P3Map4Misses + " missed";
+                // P3Map5Score.innerHTML = data.Data.P3Map5Score;
+                // P3Map5Acc.innerHTML = (Math.round(data.Data.P3Map5Acc * 100 * 100) / 100).toFixed(2) + "%";
+                // P3Map5Misses.innerHTML = data.Data.P3Map5Misses + " missed";
+                // P3Map6Score.innerHTML = data.Data.P3Map6Score;
+                // P3Map6Acc.innerHTML = (Math.round(data.Data.P3Map6Acc * 100 * 100) / 100).toFixed(2) + "%";
+                // P3Map6Misses.innerHTML = data.Data.P3Map6Misses + " missed";
+                // P3Map7Score.innerHTML = data.Data.P3Map7Score;
+                // P3Map7Acc.innerHTML = (Math.round(data.Data.P3Map7Acc * 100 * 100) / 100).toFixed(2) + "%";
+                // P3Map7Misses.innerHTML = data.Data.P3Map7Misses + " missed";
+                // P3Map8Score.innerHTML = data.Data.P3Map8Score;
+                // P3Map8Acc.innerHTML = (Math.round(data.Data.P3Map8Acc * 100 * 100) / 100).toFixed(2) + "%";
+                // P3Map8Misses.innerHTML = data.Data.P3Map8Misses + " missed";
+                // P4Map0Score.innerHTML = data.Data.P4Map0Score;
+                // P4Map0Acc.innerHTML = (Math.round(data.Data.P4Map0Acc * 100 * 100) / 100).toFixed(2) + "%";
+                // P4Map0Misses.innerHTML = data.Data.P4Map0Misses + " missed";
+                // P4Map1Score.innerHTML = data.Data.P4Map1Score;
+                // P4Map1Acc.innerHTML = (Math.round(data.Data.P4Map1Acc * 100 * 100) / 100).toFixed(2) + "%";
+                // P4Map1Misses.innerHTML = data.Data.P4Map1Misses + " missed";
+                // P4Map2Score.innerHTML = data.Data.P4Map2Score;
+                // P4Map2Acc.innerHTML = (Math.round(data.Data.P4Map2Acc * 100 * 100) / 100).toFixed(2) + "%";
+                // P4Map2Misses.innerHTML = data.Data.P4Map2Misses + " missed";
+                // P4Map3Score.innerHTML = data.Data.P4Map3Score;
+                // P4Map3Acc.innerHTML = (Math.round(data.Data.P4Map3Acc * 100 * 100) / 100).toFixed(2) + "%";
+                // P4Map3Misses.innerHTML = data.Data.P4Map3Misses + " missed";
+                // P4Map4Score.innerHTML = data.Data.P4Map4Score;
+                // P4Map4Acc.innerHTML = (Math.round(data.Data.P4Map4Acc * 100 * 100) / 100).toFixed(2) + "%";
+                // P4Map4Misses.innerHTML = data.Data.P4Map4Misses + " missed";
+                // P4Map5Score.innerHTML = data.Data.P4Map5Score;
+                // P4Map5Acc.innerHTML = (Math.round(data.Data.P4Map5Acc * 100 * 100) / 100).toFixed(2) + "%";
+                // P4Map5Misses.innerHTML = data.Data.P4Map5Misses + " missed";
+                // P4Map6Score.innerHTML = data.Data.P4Map6Score;
+                // P4Map6Acc.innerHTML = (Math.round(data.Data.P4Map6Acc * 100 * 100) / 100).toFixed(2) + "%";
+                // P4Map6Misses.innerHTML = data.Data.P4Map6Misses + " missed";
+                // P4Map7Score.innerHTML = data.Data.P4Map7Score;
+                // P4Map7Acc.innerHTML = (Math.round(data.Data.P4Map7Acc * 100 * 100) / 100).toFixed(2) + "%";
+                // P4Map7Misses.innerHTML = data.Data.P4Map7Misses + " missed";
+                // P4Map8Score.innerHTML = data.Data.P4Map8Score;
+                // P4Map8Acc.innerHTML = (Math.round(data.Data.P4Map8Acc * 100 * 100) / 100).toFixed(2) + "%";
+                // P4Map8Misses.innerHTML = data.Data.P4Map8Misses + " missed";
+
+
+
+
+
+
+
+            }
+
+
+
+
+
+
+            if (data.Event == "MatchData") {
+                P1ScoreSaber = data.Data.P1;
+                P2ScoreSaber = data.Data.P2;
+                P3ScoreSaber = data.Data.P3;
+                P4ScoreSaber = data.Data.P4;
+                MapPool = data.Data.MapPool + '';
+                Map0 = data.Data.Map0;
+                Map1 = data.Data.Map1;
+                Map2 = data.Data.Map2;
+                Map3 = data.Data.Map3;
+                Map4 = data.Data.Map4;
+                Map5 = data.Data.Map5;
+                Map6 = data.Data.Map6;
+                Map7 = data.Data.Map7;
+                Map8 = data.Data.Map8;
+                displayedMaps = data.Data.DisplayedMaps;
+                mapPoolUpdate();
+
+                // document.getElementById('P1pfp').src = "https://cdn.scoresaber.com/avatars/" + P1ScoreSaber +
+                ".jpg";
+                //  document.getElementById('P2pfp').src = "https://cdn.scoresaber.com/avatars/" + P2ScoreSaber +
+                ".jpg";
+
+                fetch(`https://new.scoresaber.com/api/player/${P1ScoreSaber}/full`)
+                    .then(response => {
+                        return response.json()
+                    })
+                    .then(data => {
+                        console.log(data);
+                        // Do stuff here
+                        P1RawName = data.playerInfo.playerName;
+                        P1Name.innerText = P1RawName;
+                        P1Rank.innerText = "#" + data.playerInfo.rank;
+                        console.log(P1Rank);
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+                fetch(`https://new.scoresaber.com/api/player/${P2ScoreSaber}/full`)
+                    .then(response => {
+                        return response.json()
+                    })
+                    .then(data => {
+                        console.log(data);
+                        // Do stuff here
+                        P2RawName = data.playerInfo.playerName;
+                        P2Name.innerText = P2RawName;
+                        P2Rank.innerText = "#" + data.playerInfo.rank;
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+
+
+
+                caster1 = data.Data.Caster1;
+                caster2 = data.Data.Caster2;
+                caster1Name.innerText = caster1;
+                caster2Name.innerText = caster2;
+
+
+            }
+
+        }
+    }
+
+    function mapPoolUpdate() {
+        fetch(`https://beatkhana.com/api/tournament/2147484253/map-pools`)
+            .then(response => {
+                return response.json()
+            })
+            .then(data => {
+
+                console.log(data);
+                // Do stuff here
+                levelIDs = [];
+                levelNames = [];
+                levelArtists = [];
+                levelMappers = [];
+                levelDiffs = [];
+                levelHashes = [];
+                levelHashesLower = [];
+                SongLeaderboardID = [];
+                SongNoteCount = [];
+
+                var mapCount = 0;
+
+
+
+                //console.log(MapPool);
+                for (var i = 0; i < data[MapPool].songs.length; i++) {
+
+                    levelIDs.push(data[MapPool].songs[i].key);
+                    levelNames.push(data[MapPool].songs[i].name);
+                    levelArtists.push(data[MapPool].songs[i].songAuthor);
+                    levelMappers.push(data[MapPool].songs[i].levelAuthor);
+                    levelDiffs.push(data[MapPool].songs[i].diff);
+                    levelHashes.push(data[MapPool].songs[i].hash);
+                    SongLeaderboardID.push((data[MapPool].songs[i].ssLink).split(
+                        "https://scoresaber.com/leaderboard/"));
+                    SongNoteCount.push(data[MapPool].songs[i].numNotes);
+
+                    levelHashesLower[i] = levelHashes[i].toLowerCase();
+
+                    mapCount = data[MapPool].songs.length;
+                    console.log(SongLeaderboardID);
+
+
+
+
+                    // console.log(levelIDs[i]);
+                    // console.log(levelNames[i]);
+                    // console.log(levelArtists[i]);
+                    // console.log(levelMappers[i]);
+                    // console.log(levelHashes[i]);
+                    // console.log(levelHashesLower[i]);
+
+                    SongName = [];
+                    SongArtist = [];
+                    SongKey = [];
+                    SongMapper = [];
+                    SongDiff = [];
+                    SongHash = [];
+
+                    setTimeout(function () {
+                        resetPositions();
+                    scoreResetPositions();
+                    namePush();
+                    artistPush();
+                    keyPush();
+                    mapperPush();
+                    diffPush();
+                    coverPush();
+                    mapsDisplayed();
+                    scoresDisplayed();
+                    mapCountSort();
+                    scoreCountSort();
+                    pickOrBan();
+            }, 1000);
+
+                    
+
+
+                    function mapsDisplayed() {
+                        if (displayedMaps == "3") {
+                            document.getElementById("song0").classList.add("fadeInAnimation");
+                            document.getElementById("song1").classList.add("fadeInAnimation");
+                            document.getElementById("song2").classList.add("fadeInAnimation");
+                            document.getElementById("song0").style.display = "";
+                            document.getElementById("song1").style.display = "";
+                            document.getElementById("song2").style.display = "";
+                            document.getElementById("song3").style.display = "none";
+                            document.getElementById("song4").style.display = "none";
+                            document.getElementById("song5").style.display = "none";
+                            document.getElementById("song6").style.display = "none";
+                            document.getElementById("song7").style.display = "none";
+                            document.getElementById("song8").style.display = "none";
+
+
+                        }
+
+                        if (displayedMaps == "6") {
+                            document.getElementById("song0").style.display = "none";
+                            document.getElementById("song1").style.display = "none";
+                            document.getElementById("song2").style.display = "none";
+                            document.getElementById("song3").style.display = "";
+                            document.getElementById("song4").style.display = "";
+                            document.getElementById("song5").style.display = "";
+                            document.getElementById("song3").classList.add("fadeInAnimation");
+                            document.getElementById("song4").classList.add("fadeInAnimation");
+                            document.getElementById("song5").classList.add("fadeInAnimation");
+                            document.getElementById("song6").style.display = "none";
+                            document.getElementById("song7").style.display = "none";
+                            document.getElementById("song8").style.display = "none";
+
+                        }
+                        if (displayedMaps == "9") {
+                            document.getElementById("song0").style.display = "none";
+                            document.getElementById("song1").style.display = "none";
+                            document.getElementById("song2").style.display = "none";
+                            document.getElementById("song3").style.display = "none";
+                            document.getElementById("song4").style.display = "none";
+                            document.getElementById("song5").style.display = "none";
+                            document.getElementById("song6").style.display = "";
+                            document.getElementById("song7").style.display = "";
+                            document.getElementById("song8").style.display = "";
+                            document.getElementById("song6").classList.add("fadeInAnimation");
+                            document.getElementById("song7").classList.add("fadeInAnimation");
+                            document.getElementById("song8").classList.add("fadeInAnimation");
+
+
+
+
+                        }
+
+                    }
+
+                    function scoresDisplayed() {
+                        if (displayedMaps == "3") {
+                            document.getElementById("P1Map0").classList.add("fadeInAnimation");
+                            document.getElementById("P1Map1").classList.add("fadeInAnimation");
+                            document.getElementById("P1Map2").classList.add("fadeInAnimation");
+                            document.getElementById("P1Map0").style.display = "";
+                            document.getElementById("P1Map1").style.display = "";
+                            document.getElementById("P1Map2").style.display = "";
+                            document.getElementById("P2Map0").classList.add("fadeInAnimation");
+                            document.getElementById("P2Map1").classList.add("fadeInAnimation");
+                            document.getElementById("P2Map2").classList.add("fadeInAnimation");
+                            document.getElementById("P2Map0").style.display = "";
+                            document.getElementById("P2Map1").style.display = "";
+                            document.getElementById("P2Map2").style.display = "";
+
+
+                        }
+
+                        if (displayedMaps == "6") {
+                            document.getElementById("P1Map3").style.display = "";
+                            document.getElementById("P1Map4").style.display = "";
+                            document.getElementById("P1Map5").style.display = "";
+                            document.getElementById("P1Map3").classList.add("fadeInAnimation");
+                            document.getElementById("P1Map4").classList.add("fadeInAnimation");
+                            document.getElementById("P1Map5").classList.add("fadeInAnimation");
+                            document.getElementById("P2Map3").style.display = "";
+                            document.getElementById("P2Map4").style.display = "";
+                            document.getElementById("P2Map5").style.display = "";
+                            document.getElementById("P2Map3").classList.add("fadeInAnimation");
+                            document.getElementById("P2Map4").classList.add("fadeInAnimation");
+                            document.getElementById("P2Map5").classList.add("fadeInAnimation");
+
+                        }
+                        if (displayedMaps == "9") {
+                            document.getElementById("P1Map6").style.display = "";
+                            document.getElementById("P1Map7").style.display = "";
+                            document.getElementById("P1Map8").style.display = "";
+                            document.getElementById("P1Map6").classList.add("fadeInAnimation");
+                            document.getElementById("P1Map7").classList.add("fadeInAnimation");
+                            document.getElementById("P1Map8").classList.add("fadeInAnimation");
+                            document.getElementById("P2Map6").style.display = "";
+                            document.getElementById("P2Map7").style.display = "";
+                            document.getElementById("P2Map8").style.display = "";
+                            document.getElementById("P2Map6").classList.add("fadeInAnimation");
+                            document.getElementById("P2Map7").classList.add("fadeInAnimation");
+                            document.getElementById("P2Map8").classList.add("fadeInAnimation");
+
+
+
+
+                        }
+
+                    }
+                    //Map Count Sorting
+                    function mapCountSort() {
+                        if (mapCount == 1) {
+
+                            document.getElementById("song1").style.display = "none";
+                            document.getElementById("song2").style.display = "none";
+                            document.getElementById("song3").style.display = "none";
+                            document.getElementById("song4").style.display = "none";
+                            document.getElementById("song5").style.display = "none";
+                            document.getElementById("song6").style.display = "none";
+                            document.getElementById("song7").style.display = "none";
+                            document.getElementById("song8").style.display = "none";
+
+                        }
+                        if (mapCount == 2) {
+
+                            document.getElementById("song2").style.display = "none";
+                            document.getElementById("song3").style.display = "none";
+                            document.getElementById("song4").style.display = "none";
+                            document.getElementById("song5").style.display = "none";
+                            document.getElementById("song6").style.display = "none";
+                            document.getElementById("song7").style.display = "none";
+                            document.getElementById("song8").style.display = "none";
+
+                        }
+                        if (mapCount == 3) {
+
+                            document.getElementById("song3").style.display = "none";
+                            document.getElementById("song4").style.display = "none";
+                            document.getElementById("song5").style.display = "none";
+                            document.getElementById("song6").style.display = "none";
+                            document.getElementById("song7").style.display = "none";
+                            document.getElementById("song8").style.display = "none";
+                        }
+                        if (mapCount == 4) {
+
+                            document.getElementById("song4").style.display = "none";
+                            document.getElementById("song5").style.display = "none";
+                            document.getElementById("song6").style.display = "none";
+                            document.getElementById("song7").style.display = "none";
+                            document.getElementById("song8").style.display = "none";
+
+                        }
+                        if (mapCount == 5) {
+                            document.getElementById("song5").style.display = "none";
+                            document.getElementById("song6").style.display = "none";
+                            document.getElementById("song7").style.display = "none";
+                            document.getElementById("song8").style.display = "none";
+
+                        }
+                        if (mapCount == 6) {
+                            document.getElementById("song6").style.display = "none";
+                            document.getElementById("song7").style.display = "none";
+                            document.getElementById("song8").style.display = "none";
+                        }
+                        if (mapCount == 7) {
+                            document.getElementById("song7").style.display = "none";
+                            document.getElementById("song8").style.display = "none";
+
+                        }
+                        if (mapCount == 8) {
+                            document.getElementById("song8").style.display = "none";
+
+                        }
+
+                    }
+
+                    function scoreCountSort() {
+                        if (mapCount == 1) {
+
+                            document.getElementById("P1Map1").style.display = "none";
+                            document.getElementById("P1Map2").style.display = "none";
+                            document.getElementById("P1Map3").style.display = "none";
+                            document.getElementById("P1Map4").style.display = "none";
+                            document.getElementById("P1Map5").style.display = "none";
+                            document.getElementById("P1Map6").style.display = "none";
+                            document.getElementById("P1Map7").style.display = "none";
+                            document.getElementById("P1Map8").style.display = "none";
+                            document.getElementById("P2Map1").style.display = "none";
+                            document.getElementById("P2Map2").style.display = "none";
+                            document.getElementById("P2Map3").style.display = "none";
+                            document.getElementById("P2Map4").style.display = "none";
+                            document.getElementById("P2Map5").style.display = "none";
+                            document.getElementById("P2Map6").style.display = "none";
+                            document.getElementById("P2Map7").style.display = "none";
+                            document.getElementById("P2Map8").style.display = "none";
+
+                        }
+                        if (mapCount == 2) {
+
+                            document.getElementById("P1Map2").style.display = "none";
+                            document.getElementById("P1Map3").style.display = "none";
+                            document.getElementById("P1Map4").style.display = "none";
+                            document.getElementById("P1Map5").style.display = "none";
+                            document.getElementById("P1Map6").style.display = "none";
+                            document.getElementById("P1Map7").style.display = "none";
+                            document.getElementById("P1Map8").style.display = "none";
+                            document.getElementById("P2Map2").style.display = "none";
+                            document.getElementById("P2Map3").style.display = "none";
+                            document.getElementById("P2Map4").style.display = "none";
+                            document.getElementById("P2Map5").style.display = "none";
+                            document.getElementById("P2Map6").style.display = "none";
+                            document.getElementById("P2Map7").style.display = "none";
+                            document.getElementById("P2Map8").style.display = "none";
+
+                        }
+                        if (mapCount == 3) {
+
+                            document.getElementById("P1Map3").style.display = "none";
+                            document.getElementById("P1Map4").style.display = "none";
+                            document.getElementById("P1Map5").style.display = "none";
+                            document.getElementById("P1Map6").style.display = "none";
+                            document.getElementById("P1Map7").style.display = "none";
+                            document.getElementById("P1Map8").style.display = "none";
+                            document.getElementById("P2Map3").style.display = "none";
+                            document.getElementById("P2Map4").style.display = "none";
+                            document.getElementById("P2Map5").style.display = "none";
+                            document.getElementById("P2Map6").style.display = "none";
+                            document.getElementById("P2Map7").style.display = "none";
+                            document.getElementById("P2Map8").style.display = "none";
+                        }
+                        if (mapCount == 4) {
+
+                            document.getElementById("P1Map4").style.display = "none";
+                            document.getElementById("P1Map5").style.display = "none";
+                            document.getElementById("P1Map6").style.display = "none";
+                            document.getElementById("P1Map7").style.display = "none";
+                            document.getElementById("P1Map8").style.display = "none";
+                            document.getElementById("P2Map4").style.display = "none";
+                            document.getElementById("P2Map5").style.display = "none";
+                            document.getElementById("P2Map6").style.display = "none";
+                            document.getElementById("P2Map7").style.display = "none";
+                            document.getElementById("P2Map8").style.display = "none";
+
+                        }
+                        if (mapCount == 5) {
+                            document.getElementById("P1Map5").style.display = "none";
+                            document.getElementById("P1Map6").style.display = "none";
+                            document.getElementById("P1Map7").style.display = "none";
+                            document.getElementById("P1Map8").style.display = "none";
+                            document.getElementById("P2Map5").style.display = "none";
+                            document.getElementById("P2Map6").style.display = "none";
+                            document.getElementById("P2Map7").style.display = "none";
+                            document.getElementById("P2Map8").style.display = "none";
+
+                        }
+                        if (mapCount == 6) {
+                            document.getElementById("P1Map6").style.display = "none";
+                            document.getElementById("P1Map7").style.display = "none";
+                            document.getElementById("P1Map8").style.display = "none";
+                            document.getElementById("P2Map6").style.display = "none";
+                            document.getElementById("P2Map7").style.display = "none";
+                            document.getElementById("P2Map8").style.display = "none";
+                        }
+                        if (mapCount == 7) {
+                            document.getElementById("P1Map7").style.display = "none";
+                            document.getElementById("P1Map8").style.display = "none";
+                            document.getElementById("P2Map7").style.display = "none";
+                            document.getElementById("P2Map8").style.display = "none";
+
+                        }
+                        if (mapCount == 8) {
+                            document.getElementById("P1Map8").style.display = "none";
+                            document.getElementById("P2Map8").style.display = "none";
+
+                        }
+
+                    }
+
+                    function resetPositions() {
+
+                        document.getElementById("song0").style.display = "";
+                        document.getElementById("song0").classList.remove("fadeInAnimation");
+                        document.getElementById("song1").style.display = "";
+                        document.getElementById("song1").classList.remove("fadeInAnimation");
+                        document.getElementById("song2").style.display = "";
+                        document.getElementById("song2").classList.remove("fadeInAnimation");
+                        document.getElementById("song3").style.display = "";
+                        document.getElementById("song3").classList.remove("fadeInAnimation");
+                        document.getElementById("song4").style.display = "";
+                        document.getElementById("song4").classList.remove("fadeInAnimation");
+                        document.getElementById("song5").style.display = "";
+                        document.getElementById("song5").classList.remove("fadeInAnimation");
+                        document.getElementById("song6").style.display = "";
+                        document.getElementById("song6").classList.remove("fadeInAnimation");
+                        document.getElementById("song7").style.display = "";
+                        document.getElementById("song7").classList.remove("fadeInAnimation");
+                        document.getElementById("song8").style.display = "";
+                        document.getElementById("song8").classList.remove("fadeInAnimation");
+
+                    }
+
+                    function scoreResetPositions() {
+
+                        document.getElementById("P1Map0").style.display = "none";
+                        document.getElementById("P1Map1").style.display = "none";
+                        document.getElementById("P1Map2").style.display = "none";
+                        document.getElementById("P1Map3").style.display = "none";
+                        document.getElementById("P1Map4").style.display = "none";
+                        document.getElementById("P1Map5").style.display = "none";
+                        document.getElementById("P1Map6").style.display = "none";
+                        document.getElementById("P1Map7").style.display = "none";
+                        document.getElementById("P1Map8").style.display = "none";
+                        document.getElementById("P2Map0").style.display = "none";
+                        document.getElementById("P2Map1").style.display = "none";
+                        document.getElementById("P2Map2").style.display = "none";
+                        document.getElementById("P2Map3").style.display = "none";
+                        document.getElementById("P2Map4").style.display = "none";
+                        document.getElementById("P2Map5").style.display = "none";
+                        document.getElementById("P2Map6").style.display = "none";
+                        document.getElementById("P2Map7").style.display = "none";
+                        document.getElementById("P2Map8").style.display = "none";
+
+                    }
+
+                    //Song Names
+                    function namePush() {
+                        if (mapCount >= 1) {
+                            SongName.push(levelNames[0]);
+                            SongName0 = SongName.at(0);
+                            document.getElementById('SongName0').innerHTML = SongName0;
+                        }
+
+                        if (mapCount >= 2) {
+                            SongName.push(levelNames[1]);
+                            SongName1 = SongName.at(1);
+                            document.getElementById('SongName1').innerHTML = SongName1;
+                        }
+
+                        if (mapCount >= 3) {
+                            SongName.push(levelNames[2]);
+                            SongName2 = SongName.at(2);
+                            document.getElementById('SongName2').innerHTML = SongName2;
+                        }
+
+                        if (mapCount >= 4) {
+                            SongName.push(levelNames[3]);
+                            SongName3 = SongName.at(3);
+                            document.getElementById('SongName3').innerHTML = SongName3;
+                        }
+
+                        if (mapCount >= 5) {
+                            SongName.push(levelNames[4]);
+                            SongName4 = SongName.at(4);
+                            document.getElementById('SongName4').innerHTML = SongName4;
+                        }
+
+                        if (mapCount >= 6) {
+                            SongName.push(levelNames[5]);
+                            SongName5 = SongName.at(5);
+                            document.getElementById('SongName5').innerHTML = SongName5;
+                        }
+
+                        if (mapCount >= 7) {
+                            SongName.push(levelNames[6]);
+                            SongName6 = SongName.at(6);
+                            document.getElementById('SongName6').innerHTML = SongName6;
+                        }
+
+                        if (mapCount >= 8) {
+                            SongName.push(levelNames[7]);
+                            SongName7 = SongName.at(7);
+                            document.getElementById('SongName7').innerHTML = SongName7;
+                        }
+
+                        if (mapCount >= 9) {
+                            SongName.push(levelNames[8]);
+                            SongName8 = SongName.at(8);
+                            document.getElementById('SongName8').innerHTML = SongName8;
+                        }
+                    }
+
+                    //Song Artist
+
+                    function artistPush() {
+                        if (mapCount >= 1) {
+                            SongArtist.push(levelArtists[0]);
+                            SongArtist0 = SongArtist.at(0);
+                            document.getElementById('SongArtist0').innerHTML = SongArtist0;
+                        }
+
+                        if (mapCount >= 2) {
+                            SongArtist.push(levelArtists[1]);
+                            SongArtist1 = SongArtist.at(1);
+                            document.getElementById('SongArtist1').innerHTML = SongArtist1;
+                        }
+
+                        if (mapCount >= 3) {
+                            SongArtist.push(levelArtists[2]);
+                            SongArtist2 = SongArtist.at(2);
+                            document.getElementById('SongArtist2').innerHTML = SongArtist2;
+                        }
+
+                        if (mapCount >= 4) {
+                            SongArtist.push(levelArtists[3]);
+                            SongArtist3 = SongArtist.at(3);
+                            document.getElementById('SongArtist3').innerHTML = SongArtist3;
+                        }
+
+                        if (mapCount >= 5) {
+                            SongArtist.push(levelArtists[4]);
+                            SongArtist4 = SongArtist.at(4);
+                            document.getElementById('SongArtist4').innerHTML = SongArtist4;
+                        }
+
+                        if (mapCount >= 6) {
+                            SongArtist.push(levelArtists[5]);
+                            SongArtist5 = SongArtist.at(5);
+                            document.getElementById('SongArtist5').innerHTML = SongArtist5;
+                        }
+
+                        if (mapCount >= 7) {
+                            SongArtist.push(levelArtists[6]);
+                            SongArtist6 = SongArtist.at(6);
+                            document.getElementById('SongArtist6').innerHTML = SongArtist6;
+                        }
+
+                        if (mapCount >= 8) {
+                            SongArtist.push(levelArtists[7]);
+                            SongArtist7 = SongArtist.at(7);
+                            document.getElementById('SongArtist7').innerHTML = SongArtist7;
+                        }
+
+                        if (mapCount >= 9) {
+                            SongArtist.push(levelArtists[8]);
+                            SongArtist8 = SongArtist.at(8);
+                            document.getElementById('SongArtist8').innerHTML = SongArtist8;
+                        }
+                    }
+
+                    //Song Key
+                    function keyPush() {
+                        if (mapCount >= 1) {
+                            SongKey.push(levelIDs[0]);
+                            SongKey0 = SongKey.at(0);
+                            document.getElementById('SongKey0').innerHTML = SongKey0;
+                        }
+
+                        if (mapCount >= 2) {
+                            SongKey.push(levelIDs[1]);
+                            SongKey1 = SongKey.at(1);
+                            document.getElementById('SongKey1').innerHTML = SongKey1;
+                        }
+
+                        if (mapCount >= 3) {
+                            SongKey.push(levelIDs[2]);
+                            SongKey2 = SongKey.at(2);
+                            document.getElementById('SongKey2').innerHTML = SongKey2;
+                        }
+
+                        if (mapCount >= 4) {
+                            SongKey.push(levelIDs[3]);
+                            SongKey3 = SongKey.at(3);
+                            document.getElementById('SongKey3').innerHTML = SongKey3;
+                        }
+
+                        if (mapCount >= 5) {
+                            SongKey.push(levelIDs[4]);
+                            SongKey4 = SongKey.at(4);
+                            document.getElementById('SongKey4').innerHTML = SongKey4;
+                        }
+
+                        if (mapCount >= 6) {
+                            SongKey.push(levelIDs[5]);
+                            SongKey5 = SongKey.at(5);
+                            document.getElementById('SongKey5').innerHTML = SongKey5;
+                        }
+
+                        if (mapCount >= 7) {
+                            SongKey.push(levelIDs[6]);
+                            SongKey6 = SongKey.at(6);
+                            document.getElementById('SongKey6').innerHTML = SongKey6;
+                        }
+
+                        if (mapCount >= 8) {
+                            SongKey.push(levelIDs[7]);
+                            SongKey7 = SongKey.at(7);
+                            document.getElementById('SongKey7').innerHTML = SongKey7;
+                        }
+
+                        if (mapCount >= 9) {
+                            SongKey.push(levelIDs[8]);
+                            SongKey8 = SongKey.at(8);
+                            document.getElementById('SongKey8').innerHTML = SongKey8;
+                        }
+                    }
+
+                    // Song Mapper 
+                    function mapperPush() {
+                        if (mapCount >= 1) {
+                            SongMapper.push(levelMappers[0]);
+                            SongMapper0 = SongMapper.at(0);
+                            document.getElementById('SongMapper0').innerHTML = SongMapper0;
+                        }
+
+                        if (mapCount >= 2) {
+                            SongMapper.push(levelMappers[1]);
+                            SongMapper1 = SongMapper.at(1);
+                            document.getElementById('SongMapper1').innerHTML = SongMapper1;
+                        }
+
+                        if (mapCount >= 3) {
+                            SongMapper.push(levelMappers[2]);
+                            SongMapper2 = SongMapper.at(2);
+                            document.getElementById('SongMapper2').innerHTML = SongMapper2;
+                        }
+
+                        if (mapCount >= 4) {
+                            SongMapper.push(levelMappers[3]);
+                            SongMapper3 = SongMapper.at(3);
+                            document.getElementById('SongMapper3').innerHTML = SongMapper3;
+                        }
+
+                        if (mapCount >= 5) {
+                            SongMapper.push(levelMappers[4]);
+                            SongMapper4 = SongMapper.at(4);
+                            document.getElementById('SongMapper4').innerHTML = SongMapper4;
+                        }
+
+                        if (mapCount >= 6) {
+                            SongMapper.push(levelMappers[5]);
+                            SongMapper5 = SongMapper.at(5);
+                            document.getElementById('SongMapper5').innerHTML = SongMapper5;
+                        }
+
+                        if (mapCount >= 7) {
+                            SongMapper.push(levelMappers[6]);
+                            SongMapper6 = SongMapper.at(6);
+                            document.getElementById('SongMapper6').innerHTML = SongMapper6;
+                        }
+
+                        if (mapCount >= 8) {
+                            SongMapper.push(levelMappers[7]);
+                            SongMapper7 = SongMapper.at(7);
+                            document.getElementById('SongMapper7').innerHTML = SongMapper7;
+                        }
+
+                        if (mapCount >= 9) {
+                            SongMapper.push(levelMappers[8]);
+                            SongMapper8 = SongMapper.at(8);
+                            document.getElementById('SongMapper8').innerHTML = SongMapper8;
+                        }
+
+                    }
+
+                    // Song Diff
+                    function diffPush() {
+                        if (mapCount >= 1) {
+                            SongDiff.push(levelDiffs[0]);
+                            SongDiff0 = SongDiff.at(0);
+                            document.getElementById('SongDiff0').innerHTML = SongDiff0;
+                        }
+
+                        if (mapCount >= 2) {
+                            SongDiff.push(levelDiffs[1]);
+                            SongDiff1 = SongDiff.at(1);
+                            document.getElementById('SongDiff1').innerHTML = SongDiff1;
+                        }
+
+                        if (mapCount >= 3) {
+                            SongDiff.push(levelDiffs[2]);
+                            SongDiff2 = SongDiff.at(2);
+                            document.getElementById('SongDiff2').innerHTML = SongDiff2;
+                        }
+
+                        if (mapCount >= 4) {
+                            SongDiff.push(levelDiffs[3]);
+                            SongDiff3 = SongDiff.at(3);
+                            document.getElementById('SongDiff3').innerHTML = SongDiff3;
+                        }
+
+                        if (mapCount >= 5) {
+                            SongDiff.push(levelDiffs[4]);
+                            SongDiff4 = SongDiff.at(4);
+                            document.getElementById('SongDiff4').innerHTML = SongDiff4;
+                        }
+
+                        if (mapCount >= 6) {
+                            SongDiff.push(levelDiffs[5]);
+                            SongDiff5 = SongDiff.at(5);
+                            document.getElementById('SongDiff5').innerHTML = SongDiff5;
+                        }
+
+                        if (mapCount >= 7) {
+                            SongDiff.push(levelDiffs[6]);
+                            SongDiff6 = SongDiff.at(6);
+                            document.getElementById('SongDiff6').innerHTML = SongDiff6;
+                        }
+
+                        if (mapCount >= 8) {
+                            SongDiff.push(levelDiffs[7]);
+                            SongDiff7 = SongDiff.at(7);
+                            document.getElementById('SongDiff7').innerHTML = SongDiff7;
+                        }
+
+                        if (mapCount >= 9) {
+                            SongDiff.push(levelDiffs[8]);
+                            SongDiff8 = SongDiff.at(8);
+                            document.getElementById('SongDiff8').innerHTML = SongDiff8;
+                        }
+
+                    }
+                    // Song Cover
+                    function coverPush() {
+                        if (mapCount >= 1) {
+                            document.getElementById('songCover0').src = "https://na.cdn.beatsaver.com/" +
+                                levelHashesLower.at(0) + ".jpg";
+                        }
+
+                        if (mapCount >= 2) {
+                            document.getElementById('songCover1').src = "https://na.cdn.beatsaver.com/" +
+                                levelHashesLower.at(1) + ".jpg";
+                        }
+
+                        if (mapCount >= 3) {
+                            document.getElementById('songCover2').src = "https://na.cdn.beatsaver.com/" +
+                                levelHashesLower.at(2) + ".jpg";
+                        }
+
+                        if (mapCount >= 4) {
+                            document.getElementById('songCover3').src = "https://na.cdn.beatsaver.com/" +
+                                levelHashesLower.at(3) + ".jpg";
+                        }
+
+                        if (mapCount >= 5) {
+                            document.getElementById('songCover4').src = "https://na.cdn.beatsaver.com/" +
+                                levelHashesLower.at(4) + ".jpg";
+                        }
+
+                        if (mapCount >= 6) {
+                            document.getElementById('songCover5').src = "https://na.cdn.beatsaver.com/" +
+                                levelHashesLower.at(5) + ".jpg";
+                        }
+
+                        if (mapCount >= 7) {
+                            document.getElementById('songCover6').src = "https://na.cdn.beatsaver.com/" +
+                                levelHashesLower.at(6) + ".jpg";
+                        }
+
+                        if (mapCount >= 8) {
+                            document.getElementById('songCover7').src = "https://na.cdn.beatsaver.com/" +
+                                levelHashesLower.at(7) + ".jpg";
+                        }
+
+                        if (mapCount >= 9) {
+                            document.getElementById('songCover8').src = "https://na.cdn.beatsaver.com/" +
+                                levelHashesLower.at(8) + ".jpg";
+                        }
+
+
+                    }
+
+                    function noteCountPush() {
+                        if (mapCount >= 1) {
+                            SongNoteCount.push(numNotes[0]);
+                            SongNoteCount0 = SongNoteCount.at(0);
+                            document.getElementById('SongNoteCount0').innerHTML = SongNoteCount0;
+                        }
+
+                        if (mapCount >= 2) {
+                            SongNoteCount.push(numNotes[1]);
+                            SongNoteCount1 = SongNoteCount.at(1);
+                            document.getElementById('SongNoteCount1').innerHTML = SongNoteCount1;
+                        }
+
+                        if (mapCount >= 3) {
+                            SongNoteCount.push(numNotes[2]);
+                            SongNoteCount2 = SongNoteCount.at(2);
+                            document.getElementById('SongNoteCount2').innerHTML = SongNoteCount2;
+                        }
+
+                        if (mapCount >= 4) {
+                            SongNoteCount.push(numNotes[3]);
+                            SongNoteCount3 = SongNoteCount.at(3);
+                            document.getElementById('SongNoteCount3').innerHTML = SongNoteCount3;
+                        }
+
+                        if (mapCount >= 5) {
+                            SongNoteCount.push(numNotes[4]);
+                            SongNoteCount4 = SongNoteCount.at(4);
+                            document.getElementById('SongNoteCount4').innerHTML = SongNoteCount4;
+                        }
+
+                        if (mapCount >= 6) {
+                            SongNoteCount.push(numNotes[5]);
+                            SongNoteCount5 = SongNoteCount.at(5);
+                            document.getElementById('SongNoteCount5').innerHTML = SongNoteCount5;
+                        }
+
+                        if (mapCount >= 7) {
+                            SongNoteCount.push(numNotes[6]);
+                            SongNoteCount6 = SongNoteCount.at(6);
+                            document.getElementById('SongNoteCount6').innerHTML = SongNoteCount6;
+                        }
+
+                        if (mapCount >= 8) {
+                            SongNoteCount.push(numNotes[7]);
+                            SongNoteCount7 = SongNoteCount.at(7);
+                            document.getElementById('SongNoteCount7').innerHTML = SongNoteCount7;
+                        }
+
+                        if (mapCount >= 9) {
+                            SongNoteCount.push(numNotes[8]);
+                            SongNoteCount8 = SongNoteCount.at(8);
+                            document.getElementById('SongNoteCount8').innerHTML = SongNoteCount8;
+                        }
+
+                    }
+
+
+                }
+
+
+
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
+    function pickOrBan() {
+
+
+        if (Map0 != "default") {
+            document.getElementById('pickBan0').src = "images/" + Map0 + ".png";
+            document.getElementById("pickBan0").className = "PickOrBan";
+        } else {
+            document.getElementById('pickBan0').src = "";
+            document.getElementById("pickBan0").className = "none";
+        }
+
+        if (Map1 != "default") {
+            document.getElementById('pickBan1').src = "images/" + Map1 + ".png";
+            document.getElementById("pickBan1").className = "PickOrBan";
+        } else {
+            document.getElementById('pickBan1').src = "";
+            document.getElementById("pickBan1").className = "none";
+        }
+        if (Map2 != "default") {
+            document.getElementById('pickBan2').src = "images/" + Map2 + ".png";
+            document.getElementById("pickBan2").className = "PickOrBan";
+        } else {
+            document.getElementById('pickBan2').src = "";
+            document.getElementById("pickBan2").className = "none";
+        }
+        if (Map3 != "default") {
+            document.getElementById('pickBan3').src = "images/" + Map3 + ".png";
+            document.getElementById("pickBan3").className = "PickOrBan";
+        } else {
+            document.getElementById('pickBan3').src = "";
+            document.getElementById("pickBan3").className = "none";
+        }
+        if (Map4 != "default") {
+            document.getElementById('pickBan4').src = "images/" + Map4 + ".png";
+            document.getElementById("pickBan4").className = "PickOrBan";
+        } else {
+            document.getElementById('pickBan4').src = "";
+            document.getElementById("pickBan4").className = "none";
+        }
+        if (Map5 != "default") {
+            document.getElementById('pickBan5').src = "images/" + Map5 + ".png";
+            document.getElementById("pickBan5").className = "PickOrBan";
+        } else {
+            document.getElementById('pickBan5').src = "";
+            document.getElementById("pickBan5").className = "none";
+        }
+        if (Map6 != "default") {
+            document.getElementById('pickBan6').src = "images/" + Map6 + ".png";
+            document.getElementById("pickBan6").className = "PickOrBan";
+        } else {
+            document.getElementById('pickBan6').src = "";
+            document.getElementById("pickBan6").className = "none";
+        }
+        if (Map7 != "default") {
+            document.getElementById('pickBan7').src = "images/" + Map7 + ".png";
+            document.getElementById("pickBan7").className = "PickOrBan";
+        } else {
+            document.getElementById('pickBan7').src = "";
+            document.getElementById("pickBan7").className = "none";
+        }
+        if (Map8 != "default") {
+            document.getElementById('pickBan8').src = "images/" + Map8 + ".png";
+            document.getElementById("pickBan8").className = "PickOrBan";
+        } else {
+            document.getElementById('pickBan8').src = "";
+            document.getElementById("pickBan8").className = "none";
+        }
+
+
+
+    }
+
+
+    connect();
+</script>
+
+</html>

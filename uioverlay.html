@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<style>
+            @font-face {
+             font-family: 'Matamata'; /*a name to be used later*/
+             src: url('Matamata-Bold.otf'); /*URL to font*/
+			}
+	.team1 {
+		background-color:rgba(0, 0, 0, 0.0);
+		font-family: Matamata;
+		color: #ffffff;
+		font-size: 60.17px;
+		font-weight: 700;
+		line-height: 83.32px;
+		 left: 160px; 
+		 top: 3px ;
+		 position: absolute; 
+		 width: 300px;
+		 inline-size: 300px;
+		overflow-wrap: break-word;
+		 z-index:25;
+
+	}
+	.team2 {
+		background-color:rgba(0, 0, 0, 0.0);
+		font-family: Matamata;
+		color: #ffffff;
+		font-size: 60.17px;
+		font-weight: 700;
+		line-height: 83.32px;
+		inline-size: 300px;
+		overflow-wrap: break-word;
+		right: 160px; 
+	 	top: 3px; 
+		 width: 300px;
+		 position: absolute; 
+		 z-index:26;
+		 text-align: right;
+
+		}
+		#RightImage
+		{ 
+		left: 1769px; 
+		top: 13px; 
+		position: absolute; 
+		width: 145px;
+		height: 145px;
+		z-index: 5;
+	}
+
+		#LeftImage
+		{ 
+		left: 7px; 
+		top: 13px; 
+		position: absolute; 
+		width: 145px;
+		height: 145px;
+		padding: 0px;
+		z-index: 5;
+		}
+
+	.bg {
+		height: 100%;
+  		position: absolute;
+  		left: 0;
+  		top: 0;
+		  z-index: -1;
+
+		}
+
+	.Scores {
+		height: 100%;
+		z-index: 3;
+		position: absolute;
+  		left: 0;
+  		top: 0;
+	}
+
+
+
+
+
+
+
+</style>
+<html>
+  <body>
+	  <div class = team1>
+		  <span id="team1Name">Team 1</span>
+	  </div>
+	  <div class = team2>
+		<span id="team2Name">Team 2
+		</span>
+	</div>
+
+	<div id="LeftImage" class = "rounded-corners"><img id = "team1Image" src= "images/LeftTeam.png" style="border-radius:25px;"></div>
+	<div id="RightImage" class = "rounded-corners"><img id = "team2Image" src="images/RightTeam.png" style="border-radius:25px;"></div>
+
+
+</div>
+<div class = "Scores">
+	<img id = "team1ScoreImage" src= "">
+	
+ </div>
+ <div class = "Scores"> <img id = "team2ScoreImage" src= ""> </div>
+
+ <div class = bg>
+
+	<img id = "bestOfImage" src= "images/bestof/unselected.png">
+
+</div>
+
+
+
+
+	<script>
+				function connect() {
+
+				sock = new WebSocket("ws://localhost:1337");
+				sock.onopen = function() {
+					console.log("Connected to BSTournamentHelper");
+				};
+
+				sock.onclose = function(e) {
+					console.log("Socket is closed. Reconnect attempt in 1 second");
+					setTimeout(function() {
+						connect();
+					}, 1000);
+				}
+
+				sock.onerror = function(err) {
+					console.log(err);
+					sock.close();
+				}
+				sock.onmessage = function(msg) {
+				let data = JSON.parse(msg.data);
+					console.log(data);
+
+					if (data.Event == "MatchData") {
+						team1Selection = data.Data.Team1;
+						team2Selection = data.Data.Team2;
+						team1Score = data.Data.Team1Score;
+						team2Score = data.Data.Team2Score;
+						bestof = data.Data.BestOf;
+						console.log(bestof + team1Score + team2Score);
+						var team1Info = {
+							"longhorn": {
+								"name": "Longhorn Gaming",
+								"logo": "images/Longhorn.png"
+								},
+							"michigan": {
+								"name": "Michigan",
+								"logo": "images/Michigan.png"
+								},
+							"ucberkeley": {
+								"name": "UC Berkeley",
+								"logo": "images/UCBerkeley.png"
+							},
+						}
+						var team2Info = {
+							"longhorn": {
+								"name": "Longhorn Gaming",
+								"logo": "images/Longhorn.png"
+								},
+							"michigan": {
+								"name": "Michigan",
+								"logo": "images/Michigan.png"
+								},
+							"ucberkeley": {
+								"name": "UC Berkeley",
+								"logo": "images/UCBerkeley.png"
+							},
+						}
+					
+						team1Name.innerText = team1Info[team1Selection].name;
+						document.getElementById('team1Image').src = team1Info[team1Selection].logo;
+
+						team2Name.innerText = team2Info[team2Selection].name;
+						document.getElementById('team2Image').src = team1Info[team2Selection].logo;
+
+						var bestOfImage = {
+							"bo3": {
+								"name": "Best of 3",
+								"image": "images/bestof/bo3.png"
+								},
+							"bo5": {
+								"name": "Best of 5",
+								"image": "images/bestof/bo5.png"
+								},
+							"bo7": {
+								"name": "Best of 7",
+								"image": "images/bestof/bo7.png"
+								},
+							"bo9": {
+								"name": "Best of 7",
+								"image": "images/bestof/bo9.png"
+								},
+						}
+						bestof.innerText = team1Info[team1Selection].name;
+						document.getElementById('bestOfImage').src = bestOfImage[bestof].image;
+
+						//Scoring
+
+						document.getElementById('team1ScoreImage').src = "images/bestof/" + bestof + "/team1score" + team1Score + ".png";
+						document.getElementById('team2ScoreImage').src = "images/bestof/" + bestof + "/team2score" + team2Score + ".png";
+				
+					
+				}
+			}
+
+
+}
+
+
+
+ 
+connect();
+
+
+</script>
+
+
+ </body>
+ </html>

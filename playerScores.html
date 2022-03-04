@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Player Scores</title>
+        <style>
+            h1 {
+                width: 100%;
+                text-align: center;
+                font-family: monospace;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>
+            <span id="P1Score">0</span> - <span id="P2Score">0</span>
+        </h1>
+    </body>
+    <script>
+
+    var p1ScoreElement = document.getElementById("P1Score");
+    var p2ScoreElement = document.getElementById("P2Score");
+
+        function connect() {
+
+            sock = new WebSocket("ws://localhost:1337");
+            sock.onopen = function() {
+                console.log("Connected to BSTournamentHelper");
+            };
+
+            sock.onclose = function(e) {
+                console.log("Socket is closed. Reconnect attempt in 1 second");
+                setTimeout(function() {
+                    connect();
+                }, 1000);
+            }
+
+            sock.onerror = function(err) {
+                console.log(err);
+                sock.close();
+            }
+
+            sock.onmessage = function(msg) {
+                let data = JSON.parse(msg.data);
+                console.log(data);
+
+                if (data.Event == "PlayersScores") {
+                    p1ScoreElement.innerText = data.Data.P1;
+                    p2ScoreElement.innerText = data.Data.P2;
+                }
+            }
+        }
+
+        connect();
+
+    </script>
+</html>

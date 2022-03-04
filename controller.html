@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+
+<html>
+
+<head>
+    <title>Controller Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@700&family=Montserrat&family=Share+Tech&display=swap"
+        rel="stylesheet">
+</head>
+
+<style>
+    
+    body {
+        font-family: Montserrat;
+        font-size: 15px;
+        line-height: 20px;
+    }
+
+    input {
+        font-family: Montserrat;
+        font-size: 15px;
+        line-height: 20px;
+    }
+
+    option {
+        font-family: Montserrat;
+        font-size: 15px;
+        line-height: 20px;
+    }
+
+    button {
+        font-family: Montserrat;
+        font-size: 15px;
+        line-height: 20px
+    }
+
+    .pickbanText {
+        display: none;
+    }
+</style>
+
+<body>
+    Player 1 SSID: <input type="text" id="p1SSID" value = "76561198117409561"><br>
+    Player 2 SSID: <input type="text" id="p2SSID" value = "2538637699496776"><br>
+    Player 3 SSID: <input type="text" id="p3SSID" value = "76561198333869741"><br>
+    Player 4 SSID: <input type="text" id="p4SSID" value = "76561198187936410"><br>
+    <br>
+    <!--  Coordinator Name: <input type="text" id="coordName"><br> -->
+    Caster 1:<input type="text" id="caster1" value ="Caster 1"><br>
+    Caster 2:<input type="text" id="caster2" value ="Caster 2"><br>
+    <br>
+    Team 1: <select id="team1">
+        <option value="longhorn">Longhorn</option>
+        <option value="michigan">Michigan</option>
+        <option value="ucberkeley">UC Berkeley</option>
+    </select> Score: <input type="number" id="team1Score" value="0" min="0" max="5"><br>
+    Team 2: <select id="team2">
+        <option value="longhorn">Longhorn</option>
+        <option value="michigan">Michigan</option>
+        <option value="ucberkeley">UC Berkeley</option>
+    </select> Score: <input type="number" id="team2Score" value="0" min="0" max="5"><br>
+    Best of: <select id="bestof">
+        <option value="bo3">3</option>
+        <option value="bo5">5</option>
+        <option value="bo7">7</option>
+        <option value="bo9">9</option>
+    </select><br>
+    Map Pool: <select id="mapPoolID">
+        <option value="332">Ghilo Moment (332)</option>
+        <option value="336">Div. 2 (336)</option>
+        <option value="338">Best Map Pool (338)</option>
+    </select><br>
+
+    Map 1: <select id="map0">
+        <option value="default">Default</option>
+        <option value="pick">Pick</option>
+        <option value="ban">Ban</option>
+    </select>
+
+    Map 2: <select id="map1">
+        <option value="default">Default</option>
+        <option value="pick">Pick</option>
+        <option value="ban">Ban</option>
+    </select>
+    Map 3: <select id="map2">
+        <option value="default">Default</option>
+        <option value="pick">Pick</option>
+        <option value="ban">Ban</option>
+    </select><br>
+
+    Map 4: <select id="map3">
+        <option value="default">Default</option>
+        <option value="pick">Pick</option>
+        <option value="ban">Ban</option>
+    </select>
+
+    Map 5: <select id="map4">
+        <option value="default">Default</option>
+        <option value="pick">Pick</option>
+        <option value="ban">Ban</option>
+    </select>
+
+    Map 6: <select id="map5">
+        <option value="default">Default</option>
+        <option value="pick">Pick</option>
+        <option value="ban">Ban</option>
+    </select>
+    <br>
+    Map 7: <select id="map6">
+        <option value="default">Default</option>
+        <option value="pick">Pick</option>
+        <option value="ban">Ban</option>
+    </select>
+
+    Map 8: <select id="map7">
+        <option value="default">Default</option>
+        <option value="pick">Pick</option>
+        <option value="ban">Ban</option>
+    </select>
+
+    Map 9: <select id="map8">
+        <option value="default">Default</option>
+        <option value="pick">Pick</option>
+        <option value="ban">Ban</option>
+    </select>
+    <br>
+
+    Stats Page Displayed Maps: <select id="displayedMaps">
+        <option value="3">1-3</option>
+        <option value="6">4-6</option>
+        <option value="9">7-9</option>
+    </select>
+    <br>
+    <button id="SendButton">Send Data</button>
+    <span id="team1Selection"></span>
+    <span id="team2Selection"></span>
+    <span id="bestofSelection"></span>
+    <span id="mapPoolSelection"></span>
+    <div class="pickbanText" style="display:none;">
+        <span id="displayedMapsSelection"></span>
+        <span id="map0Selection"></span>
+        <span id="map1Selection"></span>
+        <span id="map2Selection"></span>
+        <span id="map3Selection"></span>
+        <span id="map4Selection"></span>
+        <span id="map5Selection"></span>
+        <span id="map6Selection"></span>
+        <span id="map7Selection"></span>
+        <span id="map8Selection"></span>
+
+
+    </div>
+</body>
+<script>
+    function teamListUpdate() {
+        var e1 = document.getElementById("team1");
+        var team1Selection = e1.options[e1.selectedIndex].value;
+
+        document.getElementById("team1Selection").innerHTML = team1Selection;
+
+        var e2 = document.getElementById("team2");
+        var team2Selection = e2.options[e2.selectedIndex].value;
+
+        document.getElementById("team2Selection").innerHTML = team2Selection;
+    }
+
+    function mapUpdate() {
+
+        var e11 = document.getElementById("displayedMaps");
+        var displayedMapsSelection = e11.options[e11.selectedIndex].value;
+        console.log(displayedMapsSelection);
+        document.getElementById("displayedMapsSelection").innerHTML = displayedMapsSelection;
+
+        var e10 = document.getElementById("mapPoolID");
+        var mapPoolSelection = e10.options[e10.selectedIndex].value;
+        console.log(mapPoolSelection);
+        document.getElementById("mapPoolSelection").innerHTML = mapPoolSelection;
+
+
+        var e0 = document.getElementById("map0");
+        var map0Selection = e0.options[e0.selectedIndex].value;
+        console.log(map0Selection);
+        document.getElementById("map0Selection").innerHTML = map0Selection;
+
+        var e1 = document.getElementById("map1");
+        var map1Selection = e1.options[e1.selectedIndex].value;
+
+        document.getElementById("map1Selection").innerHTML = map1Selection;
+
+        var e2 = document.getElementById("map2");
+        var map2Selection = e2.options[e2.selectedIndex].value;
+
+        document.getElementById("map2Selection").innerHTML = map2Selection;
+
+        var e3 = document.getElementById("map3");
+        var map3Selection = e3.options[e3.selectedIndex].value;
+
+        document.getElementById("map3Selection").innerHTML = map3Selection;
+
+        var e4 = document.getElementById("map4");
+        var map4Selection = e4.options[e4.selectedIndex].value;
+
+        document.getElementById("map4Selection").innerHTML = map4Selection;
+
+        var e5 = document.getElementById("map5");
+        var map5Selection = e5.options[e5.selectedIndex].value;
+
+        document.getElementById("map5Selection").innerHTML = map5Selection;
+
+        var e6 = document.getElementById("map6");
+        var map6Selection = e6.options[e6.selectedIndex].value;
+
+        document.getElementById("map6Selection").innerHTML = map6Selection;
+
+        var e7 = document.getElementById("map7");
+        var map7Selection = e7.options[e7.selectedIndex].value;
+
+        document.getElementById("map7Selection").innerHTML = map7Selection;
+
+        var e8 = document.getElementById("map8");
+        var map8Selection = e8.options[e8.selectedIndex].value;
+
+        document.getElementById("map8Selection").innerHTML = map8Selection;
+    }
+
+
+    function bestofUpdate() {
+        var b = document.getElementById("bestof");
+        var bestofSelection = b.options[b.selectedIndex].value;
+
+        document.getElementById("bestofSelection").innerHTML = bestofSelection;
+
+    }
+
+    function connect() {
+
+        sock = new WebSocket("ws://localhost:1337");
+        sock.onopen = function () {
+            console.log("Connected to BSTournamentHelper");
+        };
+
+        sock.onclose = function (e) {
+            console.log("Socket is closed. Reconnect attempt in 1 second");
+            setTimeout(function () {
+                connect();
+            }, 1000);
+        }
+
+        sock.onerror = function (err) {
+            console.log(err);
+            sock.close();
+        }
+
+        var button = document.getElementById("SendButton");
+        button.onclick = function (e) {
+            teamListUpdate();
+            bestofUpdate();
+            mapUpdate();
+            var p1ScoreID = document.getElementById("p1SSID");
+            var p2ScoreID = document.getElementById("p2SSID");
+            var p3ScoreID = document.getElementById("p3SSID");
+            var p4ScoreID = document.getElementById("p4SSID");
+            var caster1Name = document.getElementById("caster1");
+            var caster2Name = document.getElementById("caster2");
+            var team1Score = document.getElementById("team1Score");
+            var team2Score = document.getElementById("team2Score");
+            var messageData = {
+                "Event": "MatchData",
+                "Data": {
+                    "P1": p1ScoreID.value,
+                    "P2": p2ScoreID.value,
+                    "P3": p3ScoreID.value,
+                    "P4": p4ScoreID.value,
+                    "Team1": team1Selection.innerHTML,
+                    "Team2": team2Selection.innerHTML,
+                    "Caster1": caster1Name.value,
+                    "Caster2": caster2Name.value,
+                    "BestOf": bestofSelection.innerHTML,
+                    "Team1Score": team1Score.value,
+                    "Team2Score": team2Score.value,
+                    "MapPool": mapPoolSelection.innerHTML,
+                    "Map0": map0Selection.innerHTML,
+                    "Map1": map1Selection.innerHTML,
+                    "Map2": map2Selection.innerHTML,
+                    "Map3": map3Selection.innerHTML,
+                    "Map4": map4Selection.innerHTML,
+                    "Map5": map5Selection.innerHTML,
+                    "Map6": map6Selection.innerHTML,
+                    "Map7": map7Selection.innerHTML,
+                    "Map8": map8Selection.innerHTML,
+                    "DisplayedMaps": displayedMapsSelection.innerHTML,
+                }
+
+
+
+
+
+            }
+        
+
+
+        var messageString = JSON.stringify(messageData);
+
+        console.log(messageString);
+
+        sock.send(messageString);
+    }
+
+    }
+    connect();
+</script>
+
+</html>
