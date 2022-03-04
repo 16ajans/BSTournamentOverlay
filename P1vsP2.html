@@ -447,10 +447,21 @@
                 coordinatorName = data.Data.CoordinatorName;
 
                 document.getElementById('P1pfp').src = "https://cdn.scoresaber.com/avatars/" + P1ScoreSaber +
-                    ".jpg";
+                        ".jpg";
+                        P1ScoreSaber = '' + P1ScoreSaber;
+                if (P1ScoreSaber.startsWith("765") == false) {
+                    document.getElementById('P1pfp').src = "https://cdn.scoresaber.com/avatars/oculus.png";
+                } 
+                    
+                
                 document.getElementById('P2pfp').src = "https://cdn.scoresaber.com/avatars/" + P2ScoreSaber +
-                    ".jpg";
-
+                        ".jpg";
+                        P2ScoreSaber = '' + P2ScoreSaber;
+                        if (P2ScoreSaber.startsWith("765") == false) {
+                    document.getElementById('P2pfp').src = "https://cdn.scoresaber.com/avatars/oculus.png";
+                } 
+                    
+                
                 fetch(`https://new.scoresaber.com/api/player/${P1ScoreSaber}/full`)
                     .then(response => {
                         return response.json()

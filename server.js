@@ -1104,7 +1104,7 @@ function P4accFinder() {
                 return response.json()
             }).then(data => {
                 console.log(data);
-
+                console.log ("look here");
                 P4Map1Score = data.scores[0].baseScore;
                 console.log(P4Map1Score);
                 P4Map1Acc = (P4Map1Score / SongMaxScore[1]);

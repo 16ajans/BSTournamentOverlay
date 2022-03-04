@@ -28,6 +28,8 @@
             color: rgb(255, 255, 255);
             line-height: 0.5;
             margin-left: 15x;
+            top: 20px;
+            position: relative;
         }
 
         .MissText {
@@ -64,53 +66,50 @@
 
         .P1PlayerInfo {
             position: fixed;
-            bottom: 730;
+            bottom: 760px;
             right: 1100px;
             width: 350px;
             height: 100px;
-            padding: 10px;
             margin: 0px;
             background-color: rgba(0, 0, 0, 0.0);
-            border-radius: 40px;
             text-align: center;
+            overflow: hidden;
         }
 
         .P3PlayerInfo {
             position: fixed;
-            bottom: 730;
+            bottom: 760;
             right: 750px;
             width: 350px;
             height: 100px;
-            padding: 10px;
             margin: 0px;
             background-color: rgba(0, 0, 0, 0.0);
-            border-radius: 40px;
             text-align: center;
+            overflow: hidden;
         }
+
         .P2PlayerInfo {
             position: fixed;
-            bottom: 730;
+            bottom: 760;
             right: 400px;
             width: 350px;
             height: 100px;
-            padding: 10px;
             margin: 0px;
             background-color: rgba(0, 0, 0, 0.0);
-            border-radius: 40px;
             text-align: center;
+            overflow: hidden;
         }
 
         .P4PlayerInfo {
             position: fixed;
-            bottom: 730;
+            bottom: 760;
             right: 50px;
             width: 350px;
             height: 100px;
-            padding: 10px;
             margin: 0px;
             background-color: rgba(0, 0, 0, 0.0);
-            border-radius: 40px;
             text-align: center;
+            overflow: hidden;
         }
 
 
@@ -452,6 +451,7 @@
             border-radius: 40px;
             text-align: center;
         }
+
         .P4ScorePos1 {
             position: fixed;
             top: 320px;
@@ -500,11 +500,13 @@
         .PlayerRank {
             position: absolute;
             text-align: center;
-            top: -10px;
+            top: 5px;
+            height: 50px;
             z-index: 4;
             font-size: 25px;
             line-height: 0px;
             width: 349px;
+            overflow: visible;
 
 
         }
@@ -658,7 +660,7 @@
     <div class="P3ScorePos3" id="P3Map8">
         <h2 id="P3Map8Acc" class="Displayed Acc">00.00%</h2>
         <h2 id="P3Map8Misses" class="Displayed MissText">0 missed</h2>
-
+</div>
 
 
         <!-- Player 4-->
@@ -702,7 +704,7 @@
             <h2 id="P4Map8Acc" class="Displayed Acc">00.00%</h2>
             <h2 id="P4Map8Misses" class="Displayed MissText">0 missed</h2>
 
-
+</div>
 
 
 
@@ -819,12 +821,19 @@
 <script>
     var P1Name = document.getElementById('P1Name');
     var P2Name = document.getElementById('P2Name');
+    var P3Name = document.getElementById('P3Name');
+    var P4Name = document.getElementById('P4Name');
     var P1Rank = document.getElementById('P1Rank');
     var P2Rank = document.getElementById('P2Rank');
+    var P3Rank = document.getElementById('P3Rank');
+    var P4Rank = document.getElementById('P4Rank');
 
     var P1RawName = '';
     var P2RawName = '';
+    var P3RawName = '';
+    var P4RawName = '';
 
+    var mapCount = 0;
 
 
     var P1ScoreSaber = '';
@@ -1114,7 +1123,7 @@
                 Map7 = data.Data.Map7;
                 Map8 = data.Data.Map8;
                 displayedMaps = data.Data.DisplayedMaps;
-                
+
 
                 // document.getElementById('P1pfp').src = "https://cdn.scoresaber.com/avatars/" + P1ScoreSaber +
                 ".jpg";
@@ -1183,6 +1192,7 @@
                 caster2 = data.Data.Caster2;
                 caster1Name.innerText = caster1;
                 caster2Name.innerText = caster2;
+                console.log("Grabbed Player/Caster info");
                 mapPoolUpdate();
 
 
@@ -1210,8 +1220,8 @@
                 SongLeaderboardID = [];
                 SongNoteCount = [];
 
-                var mapCount = 0;
-                console.log(MapCount);
+
+                console.log(mapCount);
 
 
 
@@ -1231,6 +1241,7 @@
                     levelHashesLower[i] = levelHashes[i].toLowerCase();
 
                     mapCount = data[MapPool].songs.length;
+                    console.log(mapCount);
                     console.log(SongLeaderboardID);
 
 
@@ -1250,903 +1261,51 @@
                     SongDiff = [];
                     SongHash = [];
 
-                    setTimeout(function () {
-                        resetPositions();
-                        scoreResetPositions();
-                        namePush();
-                        artistPush();
-                        keyPush();
-                        mapperPush();
-                        diffPush();
-                        coverPush();
-                        mapsDisplayed();
-                        scoresDisplayed();
-                        mapCountSort();
-                        scoreCountSort();
-                        pickOrBan();
-                    }, 2000);
 
 
 
 
-                    function mapsDisplayed() {
-                        if (displayedMaps == "3") {
-                            document.getElementById("song0").classList.add("fadeInAnimation");
-                            document.getElementById("song1").classList.add("fadeInAnimation");
-                            document.getElementById("song2").classList.add("fadeInAnimation");
-                            document.getElementById("song0").style.display = "";
-                            document.getElementById("song1").style.display = "";
-                            document.getElementById("song2").style.display = "";
-                            document.getElementById("song3").style.display = "none";
-                            document.getElementById("song4").style.display = "none";
-                            document.getElementById("song5").style.display = "none";
-                            document.getElementById("song6").style.display = "none";
-                            document.getElementById("song7").style.display = "none";
-                            document.getElementById("song8").style.display = "none";
 
 
-                        }
 
-                        if (displayedMaps == "6") {
-                            document.getElementById("song0").style.display = "none";
-                            document.getElementById("song1").style.display = "none";
-                            document.getElementById("song2").style.display = "none";
-                            document.getElementById("song3").style.display = "";
-                            document.getElementById("song4").style.display = "";
-                            document.getElementById("song5").style.display = "";
-                            document.getElementById("song3").classList.add("fadeInAnimation");
-                            document.getElementById("song4").classList.add("fadeInAnimation");
-                            document.getElementById("song5").classList.add("fadeInAnimation");
-                            document.getElementById("song6").style.display = "none";
-                            document.getElementById("song7").style.display = "none";
-                            document.getElementById("song8").style.display = "none";
 
-                        }
-                        if (displayedMaps == "9") {
-                            document.getElementById("song0").style.display = "none";
-                            document.getElementById("song1").style.display = "none";
-                            document.getElementById("song2").style.display = "none";
-                            document.getElementById("song3").style.display = "none";
-                            document.getElementById("song4").style.display = "none";
-                            document.getElementById("song5").style.display = "none";
-                            document.getElementById("song6").style.display = "";
-                            document.getElementById("song7").style.display = "";
-                            document.getElementById("song8").style.display = "";
-                            document.getElementById("song6").classList.add("fadeInAnimation");
-                            document.getElementById("song7").classList.add("fadeInAnimation");
-                            document.getElementById("song8").classList.add("fadeInAnimation");
 
 
-
-
-                        }
-
-                    }
-
-                    function scoresDisplayed() {
-                        if (displayedMaps == "3") {
-                            document.getElementById("P1Map0").classList.add("fadeInAnimation");
-                            document.getElementById("P1Map1").classList.add("fadeInAnimation");
-                            document.getElementById("P1Map2").classList.add("fadeInAnimation");
-                            document.getElementById("P1Map0").style.display = "";
-                            document.getElementById("P1Map1").style.display = "";
-                            document.getElementById("P1Map2").style.display = "";
-                            document.getElementById("P2Map0").classList.add("fadeInAnimation");
-                            document.getElementById("P2Map1").classList.add("fadeInAnimation");
-                            document.getElementById("P2Map2").classList.add("fadeInAnimation");
-                            document.getElementById("P2Map0").style.display = "";
-                            document.getElementById("P2Map1").style.display = "";
-                            document.getElementById("P2Map2").style.display = "";
-                            document.getElementById("P3Map0").classList.add("fadeInAnimation");
-                            document.getElementById("P3Map1").classList.add("fadeInAnimation");
-                            document.getElementById("P3Map2").classList.add("fadeInAnimation");
-                            document.getElementById("P3Map0").style.display = "";
-                            document.getElementById("P3Map1").style.display = "";
-                            document.getElementById("P3Map2").style.display = "";
-                            document.getElementById("P4Map0").classList.add("fadeInAnimation");
-                            document.getElementById("P4Map1").classList.add("fadeInAnimation");
-                            document.getElementById("P4Map2").classList.add("fadeInAnimation");
-                            document.getElementById("P4Map0").style.display = "";
-                            document.getElementById("P4Map1").style.display = "";
-                            document.getElementById("P4Map2").style.display = "";
-
-
-                        }
-
-                        if (displayedMaps == "6") {
-                            document.getElementById("P1Map3").style.display = "";
-                            document.getElementById("P1Map4").style.display = "";
-                            document.getElementById("P1Map5").style.display = "";
-                            document.getElementById("P1Map3").classList.add("fadeInAnimation");
-                            document.getElementById("P1Map4").classList.add("fadeInAnimation");
-                            document.getElementById("P1Map5").classList.add("fadeInAnimation");
-                            document.getElementById("P2Map3").style.display = "";
-                            document.getElementById("P2Map4").style.display = "";
-                            document.getElementById("P2Map5").style.display = "";
-                            document.getElementById("P2Map3").classList.add("fadeInAnimation");
-                            document.getElementById("P2Map4").classList.add("fadeInAnimation");
-                            document.getElementById("P2Map5").classList.add("fadeInAnimation");
-                            document.getElementById("P3Map3").style.display = "";
-                            document.getElementById("P3Map4").style.display = "";
-                            document.getElementById("P3Map5").style.display = "";
-                            document.getElementById("P3Map3").classList.add("fadeInAnimation");
-                            document.getElementById("P3Map4").classList.add("fadeInAnimation");
-                            document.getElementById("P3Map5").classList.add("fadeInAnimation");
-                            document.getElementById("P4Map3").style.display = "";
-                            document.getElementById("P4Map4").style.display = "";
-                            document.getElementById("P4Map5").style.display = "";
-                            document.getElementById("P4Map3").classList.add("fadeInAnimation");
-                            document.getElementById("P4Map4").classList.add("fadeInAnimation");
-                            document.getElementById("P4Map5").classList.add("fadeInAnimation");
-
-                        }
-                        if (displayedMaps == "9") {
-                            document.getElementById("P1Map6").style.display = "";
-                            document.getElementById("P1Map7").style.display = "";
-                            document.getElementById("P1Map8").style.display = "";
-                            document.getElementById("P1Map6").classList.add("fadeInAnimation");
-                            document.getElementById("P1Map7").classList.add("fadeInAnimation");
-                            document.getElementById("P1Map8").classList.add("fadeInAnimation");
-                            document.getElementById("P2Map6").style.display = "";
-                            document.getElementById("P2Map7").style.display = "";
-                            document.getElementById("P2Map8").style.display = "";
-                            document.getElementById("P2Map6").classList.add("fadeInAnimation");
-                            document.getElementById("P2Map7").classList.add("fadeInAnimation");
-                            document.getElementById("P2Map8").classList.add("fadeInAnimation");
-                            document.getElementById("P3Map6").style.display = "";
-                            document.getElementById("P3Map7").style.display = "";
-                            document.getElementById("P3Map8").style.display = "";
-                            document.getElementById("P3Map6").classList.add("fadeInAnimation");
-                            document.getElementById("P3Map7").classList.add("fadeInAnimation");
-                            document.getElementById("P3Map8").classList.add("fadeInAnimation");
-                            document.getElementById("P4Map6").style.display = "";
-                            document.getElementById("P4Map7").style.display = "";
-                            document.getElementById("P4Map8").style.display = "";
-                            document.getElementById("P4Map6").classList.add("fadeInAnimation");
-                            document.getElementById("P4Map7").classList.add("fadeInAnimation");
-                            document.getElementById("P4Map8").classList.add("fadeInAnimation");
-
-
-
-
-                        }
-
-                    }
-                    //Map Count Sorting
-                    function mapCountSort() {
-                        if (mapCount == 1) {
-
-                            document.getElementById("song1").style.display = "none";
-                            document.getElementById("song2").style.display = "none";
-                            document.getElementById("song3").style.display = "none";
-                            document.getElementById("song4").style.display = "none";
-                            document.getElementById("song5").style.display = "none";
-                            document.getElementById("song6").style.display = "none";
-                            document.getElementById("song7").style.display = "none";
-                            document.getElementById("song8").style.display = "none";
-
-                        }
-                        if (mapCount == 2) {
-
-                            document.getElementById("song2").style.display = "none";
-                            document.getElementById("song3").style.display = "none";
-                            document.getElementById("song4").style.display = "none";
-                            document.getElementById("song5").style.display = "none";
-                            document.getElementById("song6").style.display = "none";
-                            document.getElementById("song7").style.display = "none";
-                            document.getElementById("song8").style.display = "none";
-
-                        }
-                        if (mapCount == 3) {
-
-                            document.getElementById("song3").style.display = "none";
-                            document.getElementById("song4").style.display = "none";
-                            document.getElementById("song5").style.display = "none";
-                            document.getElementById("song6").style.display = "none";
-                            document.getElementById("song7").style.display = "none";
-                            document.getElementById("song8").style.display = "none";
-                        }
-                        if (mapCount == 4) {
-
-                            document.getElementById("song4").style.display = "none";
-                            document.getElementById("song5").style.display = "none";
-                            document.getElementById("song6").style.display = "none";
-                            document.getElementById("song7").style.display = "none";
-                            document.getElementById("song8").style.display = "none";
-
-                        }
-                        if (mapCount == 5) {
-                            document.getElementById("song5").style.display = "none";
-                            document.getElementById("song6").style.display = "none";
-                            document.getElementById("song7").style.display = "none";
-                            document.getElementById("song8").style.display = "none";
-
-                        }
-                        if (mapCount == 6) {
-                            document.getElementById("song6").style.display = "none";
-                            document.getElementById("song7").style.display = "none";
-                            document.getElementById("song8").style.display = "none";
-                        }
-                        if (mapCount == 7) {
-                            document.getElementById("song7").style.display = "none";
-                            document.getElementById("song8").style.display = "none";
-
-                        }
-                        if (mapCount == 8) {
-                            document.getElementById("song8").style.display = "none";
-
-                        }
-
-                    }
-
-                    function scoreCountSort() {
-                        if (mapCount == 1) {
-
-                            document.getElementById("P1Map1").style.display = "none";
-                            document.getElementById("P1Map2").style.display = "none";
-                            document.getElementById("P1Map3").style.display = "none";
-                            document.getElementById("P1Map4").style.display = "none";
-                            document.getElementById("P1Map5").style.display = "none";
-                            document.getElementById("P1Map6").style.display = "none";
-                            document.getElementById("P1Map7").style.display = "none";
-                            document.getElementById("P1Map8").style.display = "none";
-
-                            document.getElementById("P2Map1").style.display = "none";
-                            document.getElementById("P2Map2").style.display = "none";
-                            document.getElementById("P2Map3").style.display = "none";
-                            document.getElementById("P2Map4").style.display = "none";
-                            document.getElementById("P2Map5").style.display = "none";
-                            document.getElementById("P2Map6").style.display = "none";
-                            document.getElementById("P2Map7").style.display = "none";
-                            document.getElementById("P2Map8").style.display = "none";
-
-                            document.getElementById("P3Map1").style.display = "none";
-                            document.getElementById("P3Map2").style.display = "none";
-                            document.getElementById("P3Map3").style.display = "none";
-                            document.getElementById("P3Map4").style.display = "none";
-                            document.getElementById("P3Map5").style.display = "none";
-                            document.getElementById("P3Map6").style.display = "none";
-                            document.getElementById("P3Map7").style.display = "none";
-                            document.getElementById("P3Map8").style.display = "none";
-
-                            document.getElementById("P4Map1").style.display = "none";
-                            document.getElementById("P4Map2").style.display = "none";
-                            document.getElementById("P4Map3").style.display = "none";
-                            document.getElementById("P4Map4").style.display = "none";
-                            document.getElementById("P4Map5").style.display = "none";
-                            document.getElementById("P4Map6").style.display = "none";
-                            document.getElementById("P4Map7").style.display = "none";
-                            document.getElementById("P4Map8").style.display = "none";
-
-                        }
-                        if (mapCount == 2) {
-
-                            document.getElementById("P1Map2").style.display = "none";
-                            document.getElementById("P1Map3").style.display = "none";
-                            document.getElementById("P1Map4").style.display = "none";
-                            document.getElementById("P1Map5").style.display = "none";
-                            document.getElementById("P1Map6").style.display = "none";
-                            document.getElementById("P1Map7").style.display = "none";
-                            document.getElementById("P1Map8").style.display = "none";
-
-                            document.getElementById("P2Map2").style.display = "none";
-                            document.getElementById("P2Map3").style.display = "none";
-                            document.getElementById("P2Map4").style.display = "none";
-                            document.getElementById("P2Map5").style.display = "none";
-                            document.getElementById("P2Map6").style.display = "none";
-                            document.getElementById("P2Map7").style.display = "none";
-                            document.getElementById("P2Map8").style.display = "none";
-
-                            document.getElementById("P3Map2").style.display = "none";
-                            document.getElementById("P3Map3").style.display = "none";
-                            document.getElementById("P3Map4").style.display = "none";
-                            document.getElementById("P3Map5").style.display = "none";
-                            document.getElementById("P3Map6").style.display = "none";
-                            document.getElementById("P3Map7").style.display = "none";
-                            document.getElementById("P3Map8").style.display = "none";
-
-                            document.getElementById("P4Map2").style.display = "none";
-                            document.getElementById("P4Map3").style.display = "none";
-                            document.getElementById("P4Map4").style.display = "none";
-                            document.getElementById("P4Map5").style.display = "none";
-                            document.getElementById("P4Map6").style.display = "none";
-                            document.getElementById("P4Map7").style.display = "none";
-                            document.getElementById("P4Map8").style.display = "none";
-
-                        }
-                        if (mapCount == 3) {
-
-                            document.getElementById("P1Map3").style.display = "none";
-                            document.getElementById("P1Map4").style.display = "none";
-                            document.getElementById("P1Map5").style.display = "none";
-                            document.getElementById("P1Map6").style.display = "none";
-                            document.getElementById("P1Map7").style.display = "none";
-                            document.getElementById("P1Map8").style.display = "none";
-
-                            document.getElementById("P2Map3").style.display = "none";
-                            document.getElementById("P2Map4").style.display = "none";
-                            document.getElementById("P2Map5").style.display = "none";
-                            document.getElementById("P2Map6").style.display = "none";
-                            document.getElementById("P2Map7").style.display = "none";
-                            document.getElementById("P2Map8").style.display = "none";
-
-                            document.getElementById("P3Map3").style.display = "none";
-                            document.getElementById("P3Map4").style.display = "none";
-                            document.getElementById("P3Map5").style.display = "none";
-                            document.getElementById("P3Map6").style.display = "none";
-                            document.getElementById("P3Map7").style.display = "none";
-                            document.getElementById("P3Map8").style.display = "none";
-
-                            document.getElementById("P4Map3").style.display = "none";
-                            document.getElementById("P4Map4").style.display = "none";
-                            document.getElementById("P4Map5").style.display = "none";
-                            document.getElementById("P4Map6").style.display = "none";
-                            document.getElementById("P4Map7").style.display = "none";
-                            document.getElementById("P4Map8").style.display = "none";
-                        }
-                        if (mapCount == 4) {
-
-                            document.getElementById("P1Map4").style.display = "none";
-                            document.getElementById("P1Map5").style.display = "none";
-                            document.getElementById("P1Map6").style.display = "none";
-                            document.getElementById("P1Map7").style.display = "none";
-                            document.getElementById("P1Map8").style.display = "none";
-
-                            document.getElementById("P2Map4").style.display = "none";
-                            document.getElementById("P2Map5").style.display = "none";
-                            document.getElementById("P2Map6").style.display = "none";
-                            document.getElementById("P2Map7").style.display = "none";
-                            document.getElementById("P2Map8").style.display = "none";
-
-                            document.getElementById("P3Map4").style.display = "none";
-                            document.getElementById("P3Map5").style.display = "none";
-                            document.getElementById("P3Map6").style.display = "none";
-                            document.getElementById("P3Map7").style.display = "none";
-                            document.getElementById("P3Map8").style.display = "none";
-
-                            document.getElementById("P4Map4").style.display = "none";
-                            document.getElementById("P4Map5").style.display = "none";
-                            document.getElementById("P4Map6").style.display = "none";
-                            document.getElementById("P4Map7").style.display = "none";
-                            document.getElementById("P4Map8").style.display = "none";
-
-                        }
-                        if (mapCount == 5) {
-                            document.getElementById("P1Map5").style.display = "none";
-                            document.getElementById("P1Map6").style.display = "none";
-                            document.getElementById("P1Map7").style.display = "none";
-                            document.getElementById("P1Map8").style.display = "none";
-
-                            document.getElementById("P2Map5").style.display = "none";
-                            document.getElementById("P2Map6").style.display = "none";
-                            document.getElementById("P2Map7").style.display = "none";
-                            document.getElementById("P2Map8").style.display = "none";
-
-                            document.getElementById("P3Map5").style.display = "none";
-                            document.getElementById("P3Map6").style.display = "none";
-                            document.getElementById("P3Map7").style.display = "none";
-                            document.getElementById("P3Map8").style.display = "none";
-
-                            document.getElementById("P4Map5").style.display = "none";
-                            document.getElementById("P4Map6").style.display = "none";
-                            document.getElementById("P4Map7").style.display = "none";
-                            document.getElementById("P4Map8").style.display = "none";
-
-                        }
-                        if (mapCount == 6) {
-                            document.getElementById("P1Map6").style.display = "none";
-                            document.getElementById("P1Map7").style.display = "none";
-                            document.getElementById("P1Map8").style.display = "none";
-
-                            document.getElementById("P2Map6").style.display = "none";
-                            document.getElementById("P2Map7").style.display = "none";
-                            document.getElementById("P2Map8").style.display = "none";
-
-                            document.getElementById("P3Map6").style.display = "none";
-                            document.getElementById("P3Map7").style.display = "none";
-                            document.getElementById("P3Map8").style.display = "none";
-
-                            document.getElementById("P4Map6").style.display = "none";
-                            document.getElementById("P4Map7").style.display = "none";
-                            document.getElementById("P4Map8").style.display = "none";
-                        }
-                        if (mapCount == 7) {
-                            document.getElementById("P1Map7").style.display = "none";
-                            document.getElementById("P1Map8").style.display = "none";
-
-                            document.getElementById("P2Map7").style.display = "none";
-                            document.getElementById("P2Map8").style.display = "none";
-
-                            document.getElementById("P3Map7").style.display = "none";
-                            document.getElementById("P3Map8").style.display = "none";
-
-                            document.getElementById("P4Map7").style.display = "none";
-                            document.getElementById("P4Map8").style.display = "none";
-
-                        }
-                        if (mapCount == 8) {
-                            document.getElementById("P1Map8").style.display = "none";
-                            document.getElementById("P2Map8").style.display = "none";
-                            document.getElementById("P3Map8").style.display = "none";
-                            document.getElementById("P4Map8").style.display = "none";
-
-                        }
-
-                    }
-
-                    function resetPositions() {
-
-                        document.getElementById("song0").style.display = "";
-                        document.getElementById("song0").classList.remove("fadeInAnimation");
-                        document.getElementById("song1").style.display = "";
-                        document.getElementById("song1").classList.remove("fadeInAnimation");
-                        document.getElementById("song2").style.display = "";
-                        document.getElementById("song2").classList.remove("fadeInAnimation");
-                        document.getElementById("song3").style.display = "";
-                        document.getElementById("song3").classList.remove("fadeInAnimation");
-                        document.getElementById("song4").style.display = "";
-                        document.getElementById("song4").classList.remove("fadeInAnimation");
-                        document.getElementById("song5").style.display = "";
-                        document.getElementById("song5").classList.remove("fadeInAnimation");
-                        document.getElementById("song6").style.display = "";
-                        document.getElementById("song6").classList.remove("fadeInAnimation");
-                        document.getElementById("song7").style.display = "";
-                        document.getElementById("song7").classList.remove("fadeInAnimation");
-                        document.getElementById("song8").style.display = "";
-                        document.getElementById("song8").classList.remove("fadeInAnimation");
-
-                    }
-
-                    function scoreResetPositions() {
-
-                        document.getElementById("P1Map0").style.display = "none";
-                        document.getElementById("P1Map1").style.display = "none";
-                        document.getElementById("P1Map2").style.display = "none";
-                        document.getElementById("P1Map3").style.display = "none";
-                        document.getElementById("P1Map4").style.display = "none";
-                        document.getElementById("P1Map5").style.display = "none";
-                        document.getElementById("P1Map6").style.display = "none";
-                        document.getElementById("P1Map7").style.display = "none";
-                        document.getElementById("P1Map8").style.display = "none";
-
-                        document.getElementById("P2Map0").style.display = "none";
-                        document.getElementById("P2Map1").style.display = "none";
-                        document.getElementById("P2Map2").style.display = "none";
-                        document.getElementById("P2Map3").style.display = "none";
-                        document.getElementById("P2Map4").style.display = "none";
-                        document.getElementById("P2Map5").style.display = "none";
-                        document.getElementById("P2Map6").style.display = "none";
-                        document.getElementById("P2Map7").style.display = "none";
-                        document.getElementById("P2Map8").style.display = "none";
-
-                        document.getElementById("P3Map0").style.display = "none";
-                        document.getElementById("P3Map1").style.display = "none";
-                        document.getElementById("P3Map2").style.display = "none";
-                        document.getElementById("P3Map3").style.display = "none";
-                        document.getElementById("P3Map4").style.display = "none";
-                        document.getElementById("P3Map5").style.display = "none";
-                        document.getElementById("P3Map6").style.display = "none";
-                        document.getElementById("P3Map7").style.display = "none";
-                        document.getElementById("P3Map8").style.display = "none";
-
-                        document.getElementById("P4Map0").style.display = "none";
-                        document.getElementById("P4Map1").style.display = "none";
-                        document.getElementById("P4Map2").style.display = "none";
-                        document.getElementById("P4Map3").style.display = "none";
-                        document.getElementById("P4Map4").style.display = "none";
-                        document.getElementById("P4Map5").style.display = "none";
-                        document.getElementById("P4Map6").style.display = "none";
-                        document.getElementById("P4Map7").style.display = "none";
-                        document.getElementById("P4Map8").style.display = "none";
-
-                    }
-
-                    //Song Names
-                    function namePush() {
-                        if (mapCount >= 1) {
-                            SongName.push(levelNames[0]);
-                            SongName0 = SongName.at(0);
-                            document.getElementById('SongName0').innerHTML = SongName0;
-                        }
-
-                        if (mapCount >= 2) {
-                            SongName.push(levelNames[1]);
-                            SongName1 = SongName.at(1);
-                            document.getElementById('SongName1').innerHTML = SongName1;
-                        }
-
-                        if (mapCount >= 3) {
-                            SongName.push(levelNames[2]);
-                            SongName2 = SongName.at(2);
-                            document.getElementById('SongName2').innerHTML = SongName2;
-                        }
-
-                        if (mapCount >= 4) {
-                            SongName.push(levelNames[3]);
-                            SongName3 = SongName.at(3);
-                            document.getElementById('SongName3').innerHTML = SongName3;
-                        }
-
-                        if (mapCount >= 5) {
-                            SongName.push(levelNames[4]);
-                            SongName4 = SongName.at(4);
-                            document.getElementById('SongName4').innerHTML = SongName4;
-                        }
-
-                        if (mapCount >= 6) {
-                            SongName.push(levelNames[5]);
-                            SongName5 = SongName.at(5);
-                            document.getElementById('SongName5').innerHTML = SongName5;
-                        }
-
-                        if (mapCount >= 7) {
-                            SongName.push(levelNames[6]);
-                            SongName6 = SongName.at(6);
-                            document.getElementById('SongName6').innerHTML = SongName6;
-                        }
-
-                        if (mapCount >= 8) {
-                            SongName.push(levelNames[7]);
-                            SongName7 = SongName.at(7);
-                            document.getElementById('SongName7').innerHTML = SongName7;
-                        }
-
-                        if (mapCount >= 9) {
-                            SongName.push(levelNames[8]);
-                            SongName8 = SongName.at(8);
-                            document.getElementById('SongName8').innerHTML = SongName8;
-                        }
-                    }
-
-                    //Song Artist
-
-                    function artistPush() {
-                        if (mapCount >= 1) {
-                            SongArtist.push(levelArtists[0]);
-                            SongArtist0 = SongArtist.at(0);
-                            document.getElementById('SongArtist0').innerHTML = SongArtist0;
-                        }
-
-                        if (mapCount >= 2) {
-                            SongArtist.push(levelArtists[1]);
-                            SongArtist1 = SongArtist.at(1);
-                            document.getElementById('SongArtist1').innerHTML = SongArtist1;
-                        }
-
-                        if (mapCount >= 3) {
-                            SongArtist.push(levelArtists[2]);
-                            SongArtist2 = SongArtist.at(2);
-                            document.getElementById('SongArtist2').innerHTML = SongArtist2;
-                        }
-
-                        if (mapCount >= 4) {
-                            SongArtist.push(levelArtists[3]);
-                            SongArtist3 = SongArtist.at(3);
-                            document.getElementById('SongArtist3').innerHTML = SongArtist3;
-                        }
-
-                        if (mapCount >= 5) {
-                            SongArtist.push(levelArtists[4]);
-                            SongArtist4 = SongArtist.at(4);
-                            document.getElementById('SongArtist4').innerHTML = SongArtist4;
-                        }
-
-                        if (mapCount >= 6) {
-                            SongArtist.push(levelArtists[5]);
-                            SongArtist5 = SongArtist.at(5);
-                            document.getElementById('SongArtist5').innerHTML = SongArtist5;
-                        }
-
-                        if (mapCount >= 7) {
-                            SongArtist.push(levelArtists[6]);
-                            SongArtist6 = SongArtist.at(6);
-                            document.getElementById('SongArtist6').innerHTML = SongArtist6;
-                        }
-
-                        if (mapCount >= 8) {
-                            SongArtist.push(levelArtists[7]);
-                            SongArtist7 = SongArtist.at(7);
-                            document.getElementById('SongArtist7').innerHTML = SongArtist7;
-                        }
-
-                        if (mapCount >= 9) {
-                            SongArtist.push(levelArtists[8]);
-                            SongArtist8 = SongArtist.at(8);
-                            document.getElementById('SongArtist8').innerHTML = SongArtist8;
-                        }
-                    }
-
-                    //Song Key
-                    function keyPush() {
-                        if (mapCount >= 1) {
-                            SongKey.push(levelIDs[0]);
-                            SongKey0 = SongKey.at(0);
-                            document.getElementById('SongKey0').innerHTML = SongKey0;
-                        }
-
-                        if (mapCount >= 2) {
-                            SongKey.push(levelIDs[1]);
-                            SongKey1 = SongKey.at(1);
-                            document.getElementById('SongKey1').innerHTML = SongKey1;
-                        }
-
-                        if (mapCount >= 3) {
-                            SongKey.push(levelIDs[2]);
-                            SongKey2 = SongKey.at(2);
-                            document.getElementById('SongKey2').innerHTML = SongKey2;
-                        }
-
-                        if (mapCount >= 4) {
-                            SongKey.push(levelIDs[3]);
-                            SongKey3 = SongKey.at(3);
-                            document.getElementById('SongKey3').innerHTML = SongKey3;
-                        }
-
-                        if (mapCount >= 5) {
-                            SongKey.push(levelIDs[4]);
-                            SongKey4 = SongKey.at(4);
-                            document.getElementById('SongKey4').innerHTML = SongKey4;
-                        }
-
-                        if (mapCount >= 6) {
-                            SongKey.push(levelIDs[5]);
-                            SongKey5 = SongKey.at(5);
-                            document.getElementById('SongKey5').innerHTML = SongKey5;
-                        }
-
-                        if (mapCount >= 7) {
-                            SongKey.push(levelIDs[6]);
-                            SongKey6 = SongKey.at(6);
-                            document.getElementById('SongKey6').innerHTML = SongKey6;
-                        }
-
-                        if (mapCount >= 8) {
-                            SongKey.push(levelIDs[7]);
-                            SongKey7 = SongKey.at(7);
-                            document.getElementById('SongKey7').innerHTML = SongKey7;
-                        }
-
-                        if (mapCount >= 9) {
-                            SongKey.push(levelIDs[8]);
-                            SongKey8 = SongKey.at(8);
-                            document.getElementById('SongKey8').innerHTML = SongKey8;
-                        }
-                    }
-
-                    // Song Mapper 
-                    function mapperPush() {
-                        if (mapCount >= 1) {
-                            SongMapper.push(levelMappers[0]);
-                            SongMapper0 = SongMapper.at(0);
-                            document.getElementById('SongMapper0').innerHTML = SongMapper0;
-                        }
-
-                        if (mapCount >= 2) {
-                            SongMapper.push(levelMappers[1]);
-                            SongMapper1 = SongMapper.at(1);
-                            document.getElementById('SongMapper1').innerHTML = SongMapper1;
-                        }
-
-                        if (mapCount >= 3) {
-                            SongMapper.push(levelMappers[2]);
-                            SongMapper2 = SongMapper.at(2);
-                            document.getElementById('SongMapper2').innerHTML = SongMapper2;
-                        }
-
-                        if (mapCount >= 4) {
-                            SongMapper.push(levelMappers[3]);
-                            SongMapper3 = SongMapper.at(3);
-                            document.getElementById('SongMapper3').innerHTML = SongMapper3;
-                        }
-
-                        if (mapCount >= 5) {
-                            SongMapper.push(levelMappers[4]);
-                            SongMapper4 = SongMapper.at(4);
-                            document.getElementById('SongMapper4').innerHTML = SongMapper4;
-                        }
-
-                        if (mapCount >= 6) {
-                            SongMapper.push(levelMappers[5]);
-                            SongMapper5 = SongMapper.at(5);
-                            document.getElementById('SongMapper5').innerHTML = SongMapper5;
-                        }
-
-                        if (mapCount >= 7) {
-                            SongMapper.push(levelMappers[6]);
-                            SongMapper6 = SongMapper.at(6);
-                            document.getElementById('SongMapper6').innerHTML = SongMapper6;
-                        }
-
-                        if (mapCount >= 8) {
-                            SongMapper.push(levelMappers[7]);
-                            SongMapper7 = SongMapper.at(7);
-                            document.getElementById('SongMapper7').innerHTML = SongMapper7;
-                        }
-
-                        if (mapCount >= 9) {
-                            SongMapper.push(levelMappers[8]);
-                            SongMapper8 = SongMapper.at(8);
-                            document.getElementById('SongMapper8').innerHTML = SongMapper8;
-                        }
-
-                    }
-
-                    // Song Diff
-                    function diffPush() {
-                        if (mapCount >= 1) {
-                            SongDiff.push(levelDiffs[0]);
-                            SongDiff0 = SongDiff.at(0);
-                            document.getElementById('SongDiff0').innerHTML = SongDiff0;
-                        }
-
-                        if (mapCount >= 2) {
-                            SongDiff.push(levelDiffs[1]);
-                            SongDiff1 = SongDiff.at(1);
-                            document.getElementById('SongDiff1').innerHTML = SongDiff1;
-                        }
-
-                        if (mapCount >= 3) {
-                            SongDiff.push(levelDiffs[2]);
-                            SongDiff2 = SongDiff.at(2);
-                            document.getElementById('SongDiff2').innerHTML = SongDiff2;
-                        }
-
-                        if (mapCount >= 4) {
-                            SongDiff.push(levelDiffs[3]);
-                            SongDiff3 = SongDiff.at(3);
-                            document.getElementById('SongDiff3').innerHTML = SongDiff3;
-                        }
-
-                        if (mapCount >= 5) {
-                            SongDiff.push(levelDiffs[4]);
-                            SongDiff4 = SongDiff.at(4);
-                            document.getElementById('SongDiff4').innerHTML = SongDiff4;
-                        }
-
-                        if (mapCount >= 6) {
-                            SongDiff.push(levelDiffs[5]);
-                            SongDiff5 = SongDiff.at(5);
-                            document.getElementById('SongDiff5').innerHTML = SongDiff5;
-                        }
-
-                        if (mapCount >= 7) {
-                            SongDiff.push(levelDiffs[6]);
-                            SongDiff6 = SongDiff.at(6);
-                            document.getElementById('SongDiff6').innerHTML = SongDiff6;
-                        }
-
-                        if (mapCount >= 8) {
-                            SongDiff.push(levelDiffs[7]);
-                            SongDiff7 = SongDiff.at(7);
-                            document.getElementById('SongDiff7').innerHTML = SongDiff7;
-                        }
-
-                        if (mapCount >= 9) {
-                            SongDiff.push(levelDiffs[8]);
-                            SongDiff8 = SongDiff.at(8);
-                            document.getElementById('SongDiff8').innerHTML = SongDiff8;
-                        }
-
-                    }
-                    // Song Cover
-                    function coverPush() {
-                        if (mapCount >= 1) {
-                            document.getElementById('songCover0').src = "https://na.cdn.beatsaver.com/" +
-                                levelHashesLower.at(0) + ".jpg";
-                        }
-
-                        if (mapCount >= 2) {
-                            document.getElementById('songCover1').src = "https://na.cdn.beatsaver.com/" +
-                                levelHashesLower.at(1) + ".jpg";
-                        }
-
-                        if (mapCount >= 3) {
-                            document.getElementById('songCover2').src = "https://na.cdn.beatsaver.com/" +
-                                levelHashesLower.at(2) + ".jpg";
-                        }
-
-                        if (mapCount >= 4) {
-                            document.getElementById('songCover3').src = "https://na.cdn.beatsaver.com/" +
-                                levelHashesLower.at(3) + ".jpg";
-                        }
-
-                        if (mapCount >= 5) {
-                            document.getElementById('songCover4').src = "https://na.cdn.beatsaver.com/" +
-                                levelHashesLower.at(4) + ".jpg";
-                        }
-
-                        if (mapCount >= 6) {
-                            document.getElementById('songCover5').src = "https://na.cdn.beatsaver.com/" +
-                                levelHashesLower.at(5) + ".jpg";
-                        }
-
-                        if (mapCount >= 7) {
-                            document.getElementById('songCover6').src = "https://na.cdn.beatsaver.com/" +
-                                levelHashesLower.at(6) + ".jpg";
-                        }
-
-                        if (mapCount >= 8) {
-                            document.getElementById('songCover7').src = "https://na.cdn.beatsaver.com/" +
-                                levelHashesLower.at(7) + ".jpg";
-                        }
-
-                        if (mapCount >= 9) {
-                            document.getElementById('songCover8').src = "https://na.cdn.beatsaver.com/" +
-                                levelHashesLower.at(8) + ".jpg";
-                        }
-
-
-                    }
-
-                    function noteCountPush() {
-                        if (mapCount >= 1) {
-                            SongNoteCount.push(numNotes[0]);
-                            SongNoteCount0 = SongNoteCount.at(0);
-                            document.getElementById('SongNoteCount0').innerHTML = SongNoteCount0;
-                        }
-
-                        if (mapCount >= 2) {
-                            SongNoteCount.push(numNotes[1]);
-                            SongNoteCount1 = SongNoteCount.at(1);
-                            document.getElementById('SongNoteCount1').innerHTML = SongNoteCount1;
-                        }
-
-                        if (mapCount >= 3) {
-                            SongNoteCount.push(numNotes[2]);
-                            SongNoteCount2 = SongNoteCount.at(2);
-                            document.getElementById('SongNoteCount2').innerHTML = SongNoteCount2;
-                        }
-
-                        if (mapCount >= 4) {
-                            SongNoteCount.push(numNotes[3]);
-                            SongNoteCount3 = SongNoteCount.at(3);
-                            document.getElementById('SongNoteCount3').innerHTML = SongNoteCount3;
-                        }
-
-                        if (mapCount >= 5) {
-                            SongNoteCount.push(numNotes[4]);
-                            SongNoteCount4 = SongNoteCount.at(4);
-                            document.getElementById('SongNoteCount4').innerHTML = SongNoteCount4;
-                        }
-
-                        if (mapCount >= 6) {
-                            SongNoteCount.push(numNotes[5]);
-                            SongNoteCount5 = SongNoteCount.at(5);
-                            document.getElementById('SongNoteCount5').innerHTML = SongNoteCount5;
-                        }
-
-                        if (mapCount >= 7) {
-                            SongNoteCount.push(numNotes[6]);
-                            SongNoteCount6 = SongNoteCount.at(6);
-                            document.getElementById('SongNoteCount6').innerHTML = SongNoteCount6;
-                        }
-
-                        if (mapCount >= 8) {
-                            SongNoteCount.push(numNotes[7]);
-                            SongNoteCount7 = SongNoteCount.at(7);
-                            document.getElementById('SongNoteCount7').innerHTML = SongNoteCount7;
-                        }
-
-                        if (mapCount >= 9) {
-                            SongNoteCount.push(numNotes[8]);
-                            SongNoteCount8 = SongNoteCount.at(8);
-                            document.getElementById('SongNoteCount8').innerHTML = SongNoteCount8;
-                        }
-
-                    }
 
 
                 }
 
+                setTimeout(function () {
+                    resetPositions();
+                    namePush();
+                    artistPush();
+                    keyPush();
+                    mapperPush();
+                    diffPush();
+                    coverPush();
+                    mapsDisplayed();
+                    mapCountSort();
+                    pickOrBan();
 
+                                        
+                    scoreDefaultPositions();
+                   scoresShown();
+                    scoreCountingSort();
+
+                }, 2000);
 
             })
+
+
+
+
             .catch(err => {
                 console.log(err)
             })
     }
 
     function pickOrBan() {
+        console.log("Running pickOrBan");
 
 
         if (Map0 != "default") {
@@ -2217,6 +1376,828 @@
 
 
     }
+
+
+    function mapsDisplayed() {
+        console.log("Running mapsDisplayed");
+        if (displayedMaps == "3") {
+            document.getElementById("song0").classList.add("fadeInAnimation");
+            document.getElementById("song1").classList.add("fadeInAnimation");
+            document.getElementById("song2").classList.add("fadeInAnimation");
+            document.getElementById("song0").style.display = "";
+            document.getElementById("song1").style.display = "";
+            document.getElementById("song2").style.display = "";
+            document.getElementById("song3").style.display = "none";
+            document.getElementById("song4").style.display = "none";
+            document.getElementById("song5").style.display = "none";
+            document.getElementById("song6").style.display = "none";
+            document.getElementById("song7").style.display = "none";
+            document.getElementById("song8").style.display = "none";
+
+
+        }
+
+        if (displayedMaps == "6") {
+            document.getElementById("song0").style.display = "none";
+            document.getElementById("song1").style.display = "none";
+            document.getElementById("song2").style.display = "none";
+            document.getElementById("song3").style.display = "";
+            document.getElementById("song4").style.display = "";
+            document.getElementById("song5").style.display = "";
+            document.getElementById("song3").classList.add("fadeInAnimation");
+            document.getElementById("song4").classList.add("fadeInAnimation");
+            document.getElementById("song5").classList.add("fadeInAnimation");
+            document.getElementById("song6").style.display = "none";
+            document.getElementById("song7").style.display = "none";
+            document.getElementById("song8").style.display = "none";
+
+        }
+        if (displayedMaps == "9") {
+            document.getElementById("song0").style.display = "none";
+            document.getElementById("song1").style.display = "none";
+            document.getElementById("song2").style.display = "none";
+            document.getElementById("song3").style.display = "none";
+            document.getElementById("song4").style.display = "none";
+            document.getElementById("song5").style.display = "none";
+            document.getElementById("song6").style.display = "";
+            document.getElementById("song7").style.display = "";
+            document.getElementById("song8").style.display = "";
+            document.getElementById("song6").classList.add("fadeInAnimation");
+            document.getElementById("song7").classList.add("fadeInAnimation");
+            document.getElementById("song8").classList.add("fadeInAnimation");
+
+
+
+
+        }
+
+    }
+
+    function scoresShown() {
+        console.log("Running scoresDisplayed");
+        if (displayedMaps == "3") {
+            document.getElementById("P1Map0").classList.add("fadeInAnimation");
+            document.getElementById("P1Map1").classList.add("fadeInAnimation");
+            document.getElementById("P1Map2").classList.add("fadeInAnimation");
+            document.getElementById("P1Map0").style.display = "";
+            document.getElementById("P1Map1").style.display = "";
+            document.getElementById("P1Map2").style.display = "";
+            document.getElementById("P2Map0").classList.add("fadeInAnimation");
+            document.getElementById("P2Map1").classList.add("fadeInAnimation");
+            document.getElementById("P2Map2").classList.add("fadeInAnimation");
+            document.getElementById("P2Map0").style.display = "";
+            document.getElementById("P2Map1").style.display = "";
+            document.getElementById("P2Map2").style.display = "";
+            document.getElementById("P3Map0").classList.add("fadeInAnimation");
+            document.getElementById("P3Map1").classList.add("fadeInAnimation");
+            document.getElementById("P3Map2").classList.add("fadeInAnimation");
+            document.getElementById("P3Map0").style.display = "";
+            document.getElementById("P3Map1").style.display = "";
+            document.getElementById("P3Map2").style.display = "";
+            document.getElementById("P4Map0").classList.add("fadeInAnimation");
+            document.getElementById("P4Map1").classList.add("fadeInAnimation");
+            document.getElementById("P4Map2").classList.add("fadeInAnimation");
+            document.getElementById("P4Map0").style.display = "";
+            document.getElementById("P4Map1").style.display = "";
+            document.getElementById("P4Map2").style.display = "";
+
+
+        }
+
+        if (displayedMaps == "6") {
+            document.getElementById("P1Map3").style.display = "";
+            document.getElementById("P1Map4").style.display = "";
+            document.getElementById("P1Map5").style.display = "";
+            document.getElementById("P1Map3").classList.add("fadeInAnimation");
+            document.getElementById("P1Map4").classList.add("fadeInAnimation");
+            document.getElementById("P1Map5").classList.add("fadeInAnimation");
+            document.getElementById("P2Map3").style.display = "";
+            document.getElementById("P2Map4").style.display = "";
+            document.getElementById("P2Map5").style.display = "";
+            document.getElementById("P2Map3").classList.add("fadeInAnimation");
+            document.getElementById("P2Map4").classList.add("fadeInAnimation");
+            document.getElementById("P2Map5").classList.add("fadeInAnimation");
+            document.getElementById("P3Map3").style.display = "";
+            document.getElementById("P3Map4").style.display = "";
+            document.getElementById("P3Map5").style.display = "";
+            document.getElementById("P3Map3").classList.add("fadeInAnimation");
+            document.getElementById("P3Map4").classList.add("fadeInAnimation");
+            document.getElementById("P3Map5").classList.add("fadeInAnimation");
+            document.getElementById("P4Map3").style.display = "";
+            document.getElementById("P4Map4").style.display = "";
+            document.getElementById("P4Map5").style.display = "";
+            document.getElementById("P4Map3").classList.add("fadeInAnimation");
+            document.getElementById("P4Map4").classList.add("fadeInAnimation");
+            document.getElementById("P4Map5").classList.add("fadeInAnimation");
+
+        }
+        if (displayedMaps == "9") {
+            document.getElementById("P1Map6").style.display = "";
+            document.getElementById("P1Map7").style.display = "";
+            document.getElementById("P1Map8").style.display = "";
+            document.getElementById("P1Map6").classList.add("fadeInAnimation");
+            document.getElementById("P1Map7").classList.add("fadeInAnimation");
+            document.getElementById("P1Map8").classList.add("fadeInAnimation");
+            document.getElementById("P2Map6").style.display = "";
+            document.getElementById("P2Map7").style.display = "";
+            document.getElementById("P2Map8").style.display = "";
+            document.getElementById("P2Map6").classList.add("fadeInAnimation");
+            document.getElementById("P2Map7").classList.add("fadeInAnimation");
+            document.getElementById("P2Map8").classList.add("fadeInAnimation");
+            document.getElementById("P3Map6").style.display = "";
+            document.getElementById("P3Map7").style.display = "";
+            document.getElementById("P3Map8").style.display = "";
+            document.getElementById("P3Map6").classList.add("fadeInAnimation");
+            document.getElementById("P3Map7").classList.add("fadeInAnimation");
+            document.getElementById("P3Map8").classList.add("fadeInAnimation");
+            document.getElementById("P4Map6").style.display = "";
+            document.getElementById("P4Map7").style.display = "";
+            document.getElementById("P4Map8").style.display = "";
+            document.getElementById("P4Map6").classList.add("fadeInAnimation");
+            document.getElementById("P4Map7").classList.add("fadeInAnimation");
+            document.getElementById("P4Map8").classList.add("fadeInAnimation");
+
+
+
+
+        }
+
+    }
+    //Map Count Sorting
+    function mapCountSort() {
+        console.log("Running mapCountSort");
+        if (mapCount == 1) {
+
+            document.getElementById("song1").style.display = "none";
+            document.getElementById("song2").style.display = "none";
+            document.getElementById("song3").style.display = "none";
+            document.getElementById("song4").style.display = "none";
+            document.getElementById("song5").style.display = "none";
+            document.getElementById("song6").style.display = "none";
+            document.getElementById("song7").style.display = "none";
+            document.getElementById("song8").style.display = "none";
+
+        }
+        if (mapCount == 2) {
+
+            document.getElementById("song2").style.display = "none";
+            document.getElementById("song3").style.display = "none";
+            document.getElementById("song4").style.display = "none";
+            document.getElementById("song5").style.display = "none";
+            document.getElementById("song6").style.display = "none";
+            document.getElementById("song7").style.display = "none";
+            document.getElementById("song8").style.display = "none";
+
+        }
+        if (mapCount == 3) {
+
+            document.getElementById("song3").style.display = "none";
+            document.getElementById("song4").style.display = "none";
+            document.getElementById("song5").style.display = "none";
+            document.getElementById("song6").style.display = "none";
+            document.getElementById("song7").style.display = "none";
+            document.getElementById("song8").style.display = "none";
+        }
+        if (mapCount == 4) {
+
+            document.getElementById("song4").style.display = "none";
+            document.getElementById("song5").style.display = "none";
+            document.getElementById("song6").style.display = "none";
+            document.getElementById("song7").style.display = "none";
+            document.getElementById("song8").style.display = "none";
+
+        }
+        if (mapCount == 5) {
+            document.getElementById("song5").style.display = "none";
+            document.getElementById("song6").style.display = "none";
+            document.getElementById("song7").style.display = "none";
+            document.getElementById("song8").style.display = "none";
+
+        }
+        if (mapCount == 6) {
+            document.getElementById("song6").style.display = "none";
+            document.getElementById("song7").style.display = "none";
+            document.getElementById("song8").style.display = "none";
+        }
+        if (mapCount == 7) {
+            document.getElementById("song7").style.display = "none";
+            document.getElementById("song8").style.display = "none";
+
+        }
+        if (mapCount == 8) {
+            document.getElementById("song8").style.display = "none";
+
+        }
+
+    }
+
+    function scoreCountingSort() {
+        console.log("Running scoreCountSort");
+        if (mapCount == 1) {
+
+            document.getElementById("P1Map1").style.display = "none";
+            document.getElementById("P1Map2").style.display = "none";
+            document.getElementById("P1Map3").style.display = "none";
+            document.getElementById("P1Map4").style.display = "none";
+            document.getElementById("P1Map5").style.display = "none";
+            document.getElementById("P1Map6").style.display = "none";
+            document.getElementById("P1Map7").style.display = "none";
+            document.getElementById("P1Map8").style.display = "none";
+
+            document.getElementById("P2Map1").style.display = "none";
+            document.getElementById("P2Map2").style.display = "none";
+            document.getElementById("P2Map3").style.display = "none";
+            document.getElementById("P2Map4").style.display = "none";
+            document.getElementById("P2Map5").style.display = "none";
+            document.getElementById("P2Map6").style.display = "none";
+            document.getElementById("P2Map7").style.display = "none";
+            document.getElementById("P2Map8").style.display = "none";
+
+            document.getElementById("P3Map1").style.display = "none";
+            document.getElementById("P3Map2").style.display = "none";
+            document.getElementById("P3Map3").style.display = "none";
+            document.getElementById("P3Map4").style.display = "none";
+            document.getElementById("P3Map5").style.display = "none";
+            document.getElementById("P3Map6").style.display = "none";
+            document.getElementById("P3Map7").style.display = "none";
+            document.getElementById("P3Map8").style.display = "none";
+
+            document.getElementById("P4Map1").style.display = "none";
+            document.getElementById("P4Map2").style.display = "none";
+            document.getElementById("P4Map3").style.display = "none";
+            document.getElementById("P4Map4").style.display = "none";
+            document.getElementById("P4Map5").style.display = "none";
+            document.getElementById("P4Map6").style.display = "none";
+            document.getElementById("P4Map7").style.display = "none";
+            document.getElementById("P4Map8").style.display = "none";
+
+        }
+        if (mapCount == 2) {
+
+            document.getElementById("P1Map2").style.display = "none";
+            document.getElementById("P1Map3").style.display = "none";
+            document.getElementById("P1Map4").style.display = "none";
+            document.getElementById("P1Map5").style.display = "none";
+            document.getElementById("P1Map6").style.display = "none";
+            document.getElementById("P1Map7").style.display = "none";
+            document.getElementById("P1Map8").style.display = "none";
+
+            document.getElementById("P2Map2").style.display = "none";
+            document.getElementById("P2Map3").style.display = "none";
+            document.getElementById("P2Map4").style.display = "none";
+            document.getElementById("P2Map5").style.display = "none";
+            document.getElementById("P2Map6").style.display = "none";
+            document.getElementById("P2Map7").style.display = "none";
+            document.getElementById("P2Map8").style.display = "none";
+
+            document.getElementById("P3Map2").style.display = "none";
+            document.getElementById("P3Map3").style.display = "none";
+            document.getElementById("P3Map4").style.display = "none";
+            document.getElementById("P3Map5").style.display = "none";
+            document.getElementById("P3Map6").style.display = "none";
+            document.getElementById("P3Map7").style.display = "none";
+            document.getElementById("P3Map8").style.display = "none";
+
+            document.getElementById("P4Map2").style.display = "none";
+            document.getElementById("P4Map3").style.display = "none";
+            document.getElementById("P4Map4").style.display = "none";
+            document.getElementById("P4Map5").style.display = "none";
+            document.getElementById("P4Map6").style.display = "none";
+            document.getElementById("P4Map7").style.display = "none";
+            document.getElementById("P4Map8").style.display = "none";
+
+        }
+        if (mapCount == 3) {
+
+            document.getElementById("P1Map3").style.display = "none";
+            document.getElementById("P1Map4").style.display = "none";
+            document.getElementById("P1Map5").style.display = "none";
+            document.getElementById("P1Map6").style.display = "none";
+            document.getElementById("P1Map7").style.display = "none";
+            document.getElementById("P1Map8").style.display = "none";
+
+            document.getElementById("P2Map3").style.display = "none";
+            document.getElementById("P2Map4").style.display = "none";
+            document.getElementById("P2Map5").style.display = "none";
+            document.getElementById("P2Map6").style.display = "none";
+            document.getElementById("P2Map7").style.display = "none";
+            document.getElementById("P2Map8").style.display = "none";
+
+            document.getElementById("P3Map3").style.display = "none";
+            document.getElementById("P3Map4").style.display = "none";
+            document.getElementById("P3Map5").style.display = "none";
+            document.getElementById("P3Map6").style.display = "none";
+            document.getElementById("P3Map7").style.display = "none";
+            document.getElementById("P3Map8").style.display = "none";
+
+            document.getElementById("P4Map3").style.display = "none";
+            document.getElementById("P4Map4").style.display = "none";
+            document.getElementById("P4Map5").style.display = "none";
+            document.getElementById("P4Map6").style.display = "none";
+            document.getElementById("P4Map7").style.display = "none";
+            document.getElementById("P4Map8").style.display = "none";
+        }
+        if (mapCount == 4) {
+
+            document.getElementById("P1Map4").style.display = "none";
+            document.getElementById("P1Map5").style.display = "none";
+            document.getElementById("P1Map6").style.display = "none";
+            document.getElementById("P1Map7").style.display = "none";
+            document.getElementById("P1Map8").style.display = "none";
+
+            document.getElementById("P2Map4").style.display = "none";
+            document.getElementById("P2Map5").style.display = "none";
+            document.getElementById("P2Map6").style.display = "none";
+            document.getElementById("P2Map7").style.display = "none";
+            document.getElementById("P2Map8").style.display = "none";
+
+            document.getElementById("P3Map4").style.display = "none";
+            document.getElementById("P3Map5").style.display = "none";
+            document.getElementById("P3Map6").style.display = "none";
+            document.getElementById("P3Map7").style.display = "none";
+            document.getElementById("P3Map8").style.display = "none";
+
+            document.getElementById("P4Map4").style.display = "none";
+            document.getElementById("P4Map5").style.display = "none";
+            document.getElementById("P4Map6").style.display = "none";
+            document.getElementById("P4Map7").style.display = "none";
+            document.getElementById("P4Map8").style.display = "none";
+
+        }
+        if (mapCount == 5) {
+            document.getElementById("P1Map5").style.display = "none";
+            document.getElementById("P1Map6").style.display = "none";
+            document.getElementById("P1Map7").style.display = "none";
+            document.getElementById("P1Map8").style.display = "none";
+
+            document.getElementById("P2Map5").style.display = "none";
+            document.getElementById("P2Map6").style.display = "none";
+            document.getElementById("P2Map7").style.display = "none";
+            document.getElementById("P2Map8").style.display = "none";
+
+            document.getElementById("P3Map5").style.display = "none";
+            document.getElementById("P3Map6").style.display = "none";
+            document.getElementById("P3Map7").style.display = "none";
+            document.getElementById("P3Map8").style.display = "none";
+
+            document.getElementById("P4Map5").style.display = "none";
+            document.getElementById("P4Map6").style.display = "none";
+            document.getElementById("P4Map7").style.display = "none";
+            document.getElementById("P4Map8").style.display = "none";
+
+        }
+        if (mapCount == 6) {
+            document.getElementById("P1Map6").style.display = "none";
+            document.getElementById("P1Map7").style.display = "none";
+            document.getElementById("P1Map8").style.display = "none";
+
+            document.getElementById("P2Map6").style.display = "none";
+            document.getElementById("P2Map7").style.display = "none";
+            document.getElementById("P2Map8").style.display = "none";
+
+            document.getElementById("P3Map6").style.display = "none";
+            document.getElementById("P3Map7").style.display = "none";
+            document.getElementById("P3Map8").style.display = "none";
+
+            document.getElementById("P4Map6").style.display = "none";
+            document.getElementById("P4Map7").style.display = "none";
+            document.getElementById("P4Map8").style.display = "none";
+        }
+        if (mapCount == 7) {
+            document.getElementById("P1Map7").style.display = "none";
+            document.getElementById("P1Map8").style.display = "none";
+
+            document.getElementById("P2Map7").style.display = "none";
+            document.getElementById("P2Map8").style.display = "none";
+
+            document.getElementById("P3Map7").style.display = "none";
+            document.getElementById("P3Map8").style.display = "none";
+
+            document.getElementById("P4Map7").style.display = "none";
+            document.getElementById("P4Map8").style.display = "none";
+
+        }
+        if (mapCount == 8) {
+            document.getElementById("P1Map8").style.display = "none";
+            document.getElementById("P2Map8").style.display = "none";
+            document.getElementById("P3Map8").style.display = "none";
+            document.getElementById("P4Map8").style.display = "none";
+
+        }
+
+    }
+
+    function resetPositions() {
+        console.log("Running resetPositions");
+
+        document.getElementById("song0").style.display = "";
+        document.getElementById("song0").classList.remove("fadeInAnimation");
+        document.getElementById("song1").style.display = "";
+        document.getElementById("song1").classList.remove("fadeInAnimation");
+        document.getElementById("song2").style.display = "";
+        document.getElementById("song2").classList.remove("fadeInAnimation");
+        document.getElementById("song3").style.display = "";
+        document.getElementById("song3").classList.remove("fadeInAnimation");
+        document.getElementById("song4").style.display = "";
+        document.getElementById("song4").classList.remove("fadeInAnimation");
+        document.getElementById("song5").style.display = "";
+        document.getElementById("song5").classList.remove("fadeInAnimation");
+        document.getElementById("song6").style.display = "";
+        document.getElementById("song6").classList.remove("fadeInAnimation");
+        document.getElementById("song7").style.display = "";
+        document.getElementById("song7").classList.remove("fadeInAnimation");
+        document.getElementById("song8").style.display = "";
+        document.getElementById("song8").classList.remove("fadeInAnimation");
+
+    }
+
+    function scoreDefaultPositions() {
+        console.log("Running scoreDefaultPositions");
+        document.getElementById("P1Map0").style.display = "none";
+        document.getElementById("P1Map1").style.display = "none";
+        document.getElementById("P1Map2").style.display = "none";
+        document.getElementById("P1Map3").style.display = "none";
+        document.getElementById("P1Map4").style.display = "none";
+        document.getElementById("P1Map5").style.display = "none";
+        document.getElementById("P1Map6").style.display = "none";
+        document.getElementById("P1Map7").style.display = "none";
+        document.getElementById("P1Map8").style.display = "none";
+
+        document.getElementById("P2Map0").style.display = "none";
+        document.getElementById("P2Map1").style.display = "none";
+        document.getElementById("P2Map2").style.display = "none";
+        document.getElementById("P2Map3").style.display = "none";
+        document.getElementById("P2Map4").style.display = "none";
+        document.getElementById("P2Map5").style.display = "none";
+        document.getElementById("P2Map6").style.display = "none";
+        document.getElementById("P2Map7").style.display = "none";
+        document.getElementById("P2Map8").style.display = "none";
+
+        document.getElementById("P3Map0").style.display = "none";
+        document.getElementById("P3Map1").style.display = "none";
+        document.getElementById("P3Map2").style.display = "none";
+        document.getElementById("P3Map3").style.display = "none";
+        document.getElementById("P3Map4").style.display = "none";
+        document.getElementById("P3Map5").style.display = "none";
+        document.getElementById("P3Map6").style.display = "none";
+        document.getElementById("P3Map7").style.display = "none";
+        document.getElementById("P3Map8").style.display = "none";
+
+        document.getElementById("P4Map0").style.display = "none";
+        document.getElementById("P4Map1").style.display = "none";
+        document.getElementById("P4Map2").style.display = "none";
+        document.getElementById("P4Map3").style.display = "none";
+        document.getElementById("P4Map4").style.display = "none";
+        document.getElementById("P4Map5").style.display = "none";
+        document.getElementById("P4Map6").style.display = "none";
+        document.getElementById("P4Map7").style.display = "none";
+        document.getElementById("P4Map8").style.display = "none";
+
+    }
+
+    //Song Names
+    function namePush() {
+        console.log("Running namePush");
+        if (mapCount >= 1) {
+            SongName.push(levelNames[0]);
+            SongName0 = SongName.at(0);
+            document.getElementById('SongName0').innerHTML = SongName0;
+        }
+
+        if (mapCount >= 2) {
+            SongName.push(levelNames[1]);
+            SongName1 = SongName.at(1);
+            document.getElementById('SongName1').innerHTML = SongName1;
+        }
+
+        if (mapCount >= 3) {
+            SongName.push(levelNames[2]);
+            SongName2 = SongName.at(2);
+            document.getElementById('SongName2').innerHTML = SongName2;
+        }
+
+        if (mapCount >= 4) {
+            SongName.push(levelNames[3]);
+            SongName3 = SongName.at(3);
+            document.getElementById('SongName3').innerHTML = SongName3;
+        }
+
+        if (mapCount >= 5) {
+            SongName.push(levelNames[4]);
+            SongName4 = SongName.at(4);
+            document.getElementById('SongName4').innerHTML = SongName4;
+        }
+
+        if (mapCount >= 6) {
+            SongName.push(levelNames[5]);
+            SongName5 = SongName.at(5);
+            document.getElementById('SongName5').innerHTML = SongName5;
+        }
+
+        if (mapCount >= 7) {
+            SongName.push(levelNames[6]);
+            SongName6 = SongName.at(6);
+            document.getElementById('SongName6').innerHTML = SongName6;
+        }
+
+        if (mapCount >= 8) {
+            SongName.push(levelNames[7]);
+            SongName7 = SongName.at(7);
+            document.getElementById('SongName7').innerHTML = SongName7;
+        }
+
+        if (mapCount >= 9) {
+            SongName.push(levelNames[8]);
+            SongName8 = SongName.at(8);
+            document.getElementById('SongName8').innerHTML = SongName8;
+        }
+    }
+
+    //Song Artist
+
+    function artistPush() {
+        console.log("Running artistPush");
+        if (mapCount >= 1) {
+            SongArtist.push(levelArtists[0]);
+            SongArtist0 = SongArtist.at(0);
+            document.getElementById('SongArtist0').innerHTML = SongArtist0;
+        }
+
+        if (mapCount >= 2) {
+            SongArtist.push(levelArtists[1]);
+            SongArtist1 = SongArtist.at(1);
+            document.getElementById('SongArtist1').innerHTML = SongArtist1;
+        }
+
+        if (mapCount >= 3) {
+            SongArtist.push(levelArtists[2]);
+            SongArtist2 = SongArtist.at(2);
+            document.getElementById('SongArtist2').innerHTML = SongArtist2;
+        }
+
+        if (mapCount >= 4) {
+            SongArtist.push(levelArtists[3]);
+            SongArtist3 = SongArtist.at(3);
+            document.getElementById('SongArtist3').innerHTML = SongArtist3;
+        }
+
+        if (mapCount >= 5) {
+            SongArtist.push(levelArtists[4]);
+            SongArtist4 = SongArtist.at(4);
+            document.getElementById('SongArtist4').innerHTML = SongArtist4;
+        }
+
+        if (mapCount >= 6) {
+            SongArtist.push(levelArtists[5]);
+            SongArtist5 = SongArtist.at(5);
+            document.getElementById('SongArtist5').innerHTML = SongArtist5;
+        }
+
+        if (mapCount >= 7) {
+            SongArtist.push(levelArtists[6]);
+            SongArtist6 = SongArtist.at(6);
+            document.getElementById('SongArtist6').innerHTML = SongArtist6;
+        }
+
+        if (mapCount >= 8) {
+            SongArtist.push(levelArtists[7]);
+            SongArtist7 = SongArtist.at(7);
+            document.getElementById('SongArtist7').innerHTML = SongArtist7;
+        }
+
+        if (mapCount >= 9) {
+            SongArtist.push(levelArtists[8]);
+            SongArtist8 = SongArtist.at(8);
+            document.getElementById('SongArtist8').innerHTML = SongArtist8;
+        }
+    }
+
+    //Song Key
+    function keyPush() {
+        console.log("Running keyPush");
+        if (mapCount >= 1) {
+            SongKey.push(levelIDs[0]);
+            SongKey0 = SongKey.at(0);
+            document.getElementById('SongKey0').innerHTML = SongKey0;
+        }
+
+        if (mapCount >= 2) {
+            SongKey.push(levelIDs[1]);
+            SongKey1 = SongKey.at(1);
+            document.getElementById('SongKey1').innerHTML = SongKey1;
+        }
+
+        if (mapCount >= 3) {
+            SongKey.push(levelIDs[2]);
+            SongKey2 = SongKey.at(2);
+            document.getElementById('SongKey2').innerHTML = SongKey2;
+        }
+
+        if (mapCount >= 4) {
+            SongKey.push(levelIDs[3]);
+            SongKey3 = SongKey.at(3);
+            document.getElementById('SongKey3').innerHTML = SongKey3;
+        }
+
+        if (mapCount >= 5) {
+            SongKey.push(levelIDs[4]);
+            SongKey4 = SongKey.at(4);
+            document.getElementById('SongKey4').innerHTML = SongKey4;
+        }
+
+        if (mapCount >= 6) {
+            SongKey.push(levelIDs[5]);
+            SongKey5 = SongKey.at(5);
+            document.getElementById('SongKey5').innerHTML = SongKey5;
+        }
+
+        if (mapCount >= 7) {
+            SongKey.push(levelIDs[6]);
+            SongKey6 = SongKey.at(6);
+            document.getElementById('SongKey6').innerHTML = SongKey6;
+        }
+
+        if (mapCount >= 8) {
+            SongKey.push(levelIDs[7]);
+            SongKey7 = SongKey.at(7);
+            document.getElementById('SongKey7').innerHTML = SongKey7;
+        }
+
+        if (mapCount >= 9) {
+            SongKey.push(levelIDs[8]);
+            SongKey8 = SongKey.at(8);
+            document.getElementById('SongKey8').innerHTML = SongKey8;
+        }
+    }
+
+    // Song Mapper 
+    function mapperPush() {
+        console.log("Running mapperPush");
+        if (mapCount >= 1) {
+            SongMapper.push(levelMappers[0]);
+            SongMapper0 = SongMapper.at(0);
+            document.getElementById('SongMapper0').innerHTML = SongMapper0;
+        }
+
+        if (mapCount >= 2) {
+            SongMapper.push(levelMappers[1]);
+            SongMapper1 = SongMapper.at(1);
+            document.getElementById('SongMapper1').innerHTML = SongMapper1;
+        }
+
+        if (mapCount >= 3) {
+            SongMapper.push(levelMappers[2]);
+            SongMapper2 = SongMapper.at(2);
+            document.getElementById('SongMapper2').innerHTML = SongMapper2;
+        }
+
+        if (mapCount >= 4) {
+            SongMapper.push(levelMappers[3]);
+            SongMapper3 = SongMapper.at(3);
+            document.getElementById('SongMapper3').innerHTML = SongMapper3;
+        }
+
+        if (mapCount >= 5) {
+            SongMapper.push(levelMappers[4]);
+            SongMapper4 = SongMapper.at(4);
+            document.getElementById('SongMapper4').innerHTML = SongMapper4;
+        }
+
+        if (mapCount >= 6) {
+            SongMapper.push(levelMappers[5]);
+            SongMapper5 = SongMapper.at(5);
+            document.getElementById('SongMapper5').innerHTML = SongMapper5;
+        }
+
+        if (mapCount >= 7) {
+            SongMapper.push(levelMappers[6]);
+            SongMapper6 = SongMapper.at(6);
+            document.getElementById('SongMapper6').innerHTML = SongMapper6;
+        }
+
+        if (mapCount >= 8) {
+            SongMapper.push(levelMappers[7]);
+            SongMapper7 = SongMapper.at(7);
+            document.getElementById('SongMapper7').innerHTML = SongMapper7;
+        }
+
+        if (mapCount >= 9) {
+            SongMapper.push(levelMappers[8]);
+            SongMapper8 = SongMapper.at(8);
+            document.getElementById('SongMapper8').innerHTML = SongMapper8;
+        }
+
+    }
+
+    // Song Diff
+    function diffPush() {
+        console.log("Running diffPush");
+        if (mapCount >= 1) {
+            SongDiff.push(levelDiffs[0]);
+            SongDiff0 = SongDiff.at(0);
+            document.getElementById('SongDiff0').innerHTML = SongDiff0;
+        }
+
+        if (mapCount >= 2) {
+            SongDiff.push(levelDiffs[1]);
+            SongDiff1 = SongDiff.at(1);
+            document.getElementById('SongDiff1').innerHTML = SongDiff1;
+        }
+
+        if (mapCount >= 3) {
+            SongDiff.push(levelDiffs[2]);
+            SongDiff2 = SongDiff.at(2);
+            document.getElementById('SongDiff2').innerHTML = SongDiff2;
+        }
+
+        if (mapCount >= 4) {
+            SongDiff.push(levelDiffs[3]);
+            SongDiff3 = SongDiff.at(3);
+            document.getElementById('SongDiff3').innerHTML = SongDiff3;
+        }
+
+        if (mapCount >= 5) {
+            SongDiff.push(levelDiffs[4]);
+            SongDiff4 = SongDiff.at(4);
+            document.getElementById('SongDiff4').innerHTML = SongDiff4;
+        }
+
+        if (mapCount >= 6) {
+            SongDiff.push(levelDiffs[5]);
+            SongDiff5 = SongDiff.at(5);
+            document.getElementById('SongDiff5').innerHTML = SongDiff5;
+        }
+
+        if (mapCount >= 7) {
+            SongDiff.push(levelDiffs[6]);
+            SongDiff6 = SongDiff.at(6);
+            document.getElementById('SongDiff6').innerHTML = SongDiff6;
+        }
+
+        if (mapCount >= 8) {
+            SongDiff.push(levelDiffs[7]);
+            SongDiff7 = SongDiff.at(7);
+            document.getElementById('SongDiff7').innerHTML = SongDiff7;
+        }
+
+        if (mapCount >= 9) {
+            SongDiff.push(levelDiffs[8]);
+            SongDiff8 = SongDiff.at(8);
+            document.getElementById('SongDiff8').innerHTML = SongDiff8;
+        }
+
+    }
+    // Song Cover
+    function coverPush() {
+        console.log("Running coverPush");
+        if (mapCount >= 1) {
+            document.getElementById('songCover0').src = "https://na.cdn.beatsaver.com/" +
+                levelHashesLower.at(0) + ".jpg";
+        }
+
+        if (mapCount >= 2) {
+            document.getElementById('songCover1').src = "https://na.cdn.beatsaver.com/" +
+                levelHashesLower.at(1) + ".jpg";
+        }
+
+        if (mapCount >= 3) {
+            document.getElementById('songCover2').src = "https://na.cdn.beatsaver.com/" +
+                levelHashesLower.at(2) + ".jpg";
+        }
+
+        if (mapCount >= 4) {
+            document.getElementById('songCover3').src = "https://na.cdn.beatsaver.com/" +
+                levelHashesLower.at(3) + ".jpg";
+        }
+
+        if (mapCount >= 5) {
+            document.getElementById('songCover4').src = "https://na.cdn.beatsaver.com/" +
+                levelHashesLower.at(4) + ".jpg";
+        }
+
+        if (mapCount >= 6) {
+            document.getElementById('songCover5').src = "https://na.cdn.beatsaver.com/" +
+                levelHashesLower.at(5) + ".jpg";
+        }
+
+        if (mapCount >= 7) {
+            document.getElementById('songCover6').src = "https://na.cdn.beatsaver.com/" +
+                levelHashesLower.at(6) + ".jpg";
+        }
+
+        if (mapCount >= 8) {
+            document.getElementById('songCover7').src = "https://na.cdn.beatsaver.com/" +
+                levelHashesLower.at(7) + ".jpg";
+        }
+
+        if (mapCount >= 9) {
+            document.getElementById('songCover8').src = "https://na.cdn.beatsaver.com/" +
+                levelHashesLower.at(8) + ".jpg";
+        }
+
+
+    }
+
 
 
     connect();
