@@ -13,29 +13,102 @@
 </head>
 
 <style>
-    
-    body {
-        font-family: Montserrat;
-        font-size: 15px;
-        line-height: 20px;
+    body,
+    html {
+        background-color: #EBECF0;
+    }
+
+    body,
+    p,
+    input,
+    select,
+    textarea,
+    button {
+        font-family: 'Montserrat', sans-serif;
+        letter-spacing: -0.2px;
+        font-size: 16px;
+    }
+
+    div,
+    p {
+        color: #BABECC;
+        text-shadow: 1px 1px 1px #FFF;
+    }
+
+
+    form {
+        padding: 16px;
+        width: 16px*20;
+        margin: 0 auto;
+    }
+
+    .segment {
+        padding: 16px*2 0;
+        text-align: center;
+    }
+
+    button,
+    input {
+        border: 0;
+        outline: 0;
+        font-size: 16px;
+        border-radius: 16px*20;
+        padding: 16px;
+        background-color: EBECF0;
+        text-shadow: 1px 1px 0 #FFF;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 16px*1.5;
+        width: 100%;
     }
 
     input {
-        font-family: Montserrat;
-        font-size: 15px;
-        line-height: 20px;
+        margin-right: 16px/2;
+        box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
+        width: 10%;
+        box-sizing: border-box;
+        transition: all 0.2s ease-in-out;
+        appearance: none;
+        -webkit-appearance: none;
+
     }
 
-    option {
-        font-family: Montserrat;
-        font-size: 15px;
-        line-height: 20px;
+    .number {
+        width: 3%;
     }
 
     button {
-        font-family: Montserrat;
-        font-size: 15px;
-        line-height: 20px
+        color: #61677C;
+        font-weight: bold;
+        box-shadow: -5px -5px 20px #FFF, 5px 5px 20px #BABECC;
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    .unit {
+        border-radius: 16px/2;
+        line-height: 0;
+        width: 16px*3;
+        height: 16px*3;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 16px/2;
+        font-size: 16px*1.2;
+    }
+
+    select {
+        height: 2.0em;
+        line-height: 2;
+    }
+
+    .input-group {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
     }
 
     .pickbanText {
@@ -44,25 +117,65 @@
 </style>
 
 <body>
-    Player 1 SSID: <input type="text" id="p1SSID" value = "76561198117409561"><br>
-    Player 2 SSID: <input type="text" id="p2SSID" value = "76561198321316302"><br>
-    Player 3 SSID: <input type="text" id="p3SSID" value = "76561198082797048"><br>
-    Player 4 SSID: <input type="text" id="p4SSID" value = "76561198875564214"><br>
+    Player 1 SSID: <input type="text" id="p1SSID" value="76561198117409561"><br>
+    Player 2 SSID: <input type="text" id="p2SSID" value="76561198321316302"><br>
+    Player 3 SSID: <input type="text" id="p3SSID" value="76561198082797048"><br>
+    Player 4 SSID: <input type="text" id="p4SSID" value="76561198875564214"><br>
     <br>
     <!--  Coordinator Name: <input type="text" id="coordName"><br> -->
-    Caster 1:<input type="text" id="caster1" value ="Caster 1"><br>
-    Caster 2:<input type="text" id="caster2" value ="Caster 2"><br>
+    Caster 1: <input type="text" id="caster1" value="Caster 1"><br>
+    Caster 2: <input type="text" id="caster2" value="Caster 2"><br>
     <br>
     Team 1: <select id="team1">
-        <option value="longhorn">Longhorn</option>
-        <option value="michigan">Michigan</option>
-        <option value="ucberkeley">UC Berkeley</option>
-    </select> Score: <input type="number" id="team1Score" value="0" min="0" max="5"><br>
+        <option value="ArsenalAdjacent">Arsenal Adjacent (P)</option>
+        <option value="ucberkeley">Cal Esports (P)</option>
+        <option value="Tech">Tech Esports (P)</option>
+        <option value="SJSU">SJSU Esports (P/BS)</option>
+        <option value="Leftovers">The Leftovers (P)</option>
+        <option value="IlliniBlack">Illini Black (P)</option>
+        <option value="IlliniBlue">Illini Blue (P)</option>
+        <option value="IlliniOrange">Illini Orange (P/BS)</option>
+        <option value="IlliniWhite">Illini White (P)</option>
+        <option value="IlliniD1">Illini D1 (BS)</option>
+        <option value="Gauchos">Gauchos (BS)</option>
+        <option value="UAF">UAF Esports (BS)</option>
+        <option value="CSUF">CSUF Esports (BS)</option>
+        <option value="OCE">Oklahoma Esports (BS)</option>
+        <option value="ChargerBlue">Charger Blue (BS)</option>
+        <option value="UCDavis">UC Davis (BS)</option>
+        <option value="SUNY">SUNY PSU (BS)</option>
+        <option value="UCEsports">UC Esports (BS)</option>
+        <option value="Stevens">Stevens Esports (BS)</option>
+        <option value="TNTech">TNTech (BS)</option>
+        <option value="Beatcats">Beatcats (BS)</option>
+        <option value="UTDallas">UT Dallas (BS)</option>
+        <option value="GeorgiaTech">Georgia Tech (BS)</option>
+    </select> Score: <input type="number" class="number" id="team1Score" value="0" min="0" max="5"><br>
     Team 2: <select id="team2">
-        <option value="longhorn">Longhorn</option>
-        <option value="michigan">Michigan</option>
-        <option value="ucberkeley">UC Berkeley</option>
-    </select> Score: <input type="number" id="team2Score" value="0" min="0" max="5"><br>
+        <option value="ArsenalAdjacent">Arsenal Adjacent (P)</option>
+        <option value="ucberkeley">Cal Esports (P)</option>
+        <option value="Tech">Tech Esports (P)</option>
+        <option value="SJSU">SJSU Esports (P/BS)</option>
+        <option value="Leftovers">The Leftovers (P)</option>
+        <option value="IlliniBlack">Illini Black (P)</option>
+        <option value="IlliniBlue">Illini Blue (P)</option>
+        <option value="IlliniOrange">Illini Orange (P/BS)</option>
+        <option value="IlliniWhite">Illini White (P)</option>
+        <option value="IlliniD1">Illini D1 (BS)</option>
+        <option value="Gauchos">Gauchos (BS)</option>
+        <option value="UAF">UAF Esports (BS)</option>
+        <option value="CSUF">CSUF Esports (BS)</option>
+        <option value="OCE">Oklahoma Esports (BS)</option>
+        <option value="ChargerBlue">Charger Blue (BS)</option>
+        <option value="UCDavis">UC Davis (BS)</option>
+        <option value="SUNY">SUNY PSU (BS)</option>
+        <option value="UC">UC Esports (BS)</option>
+        <option value="Stevens">Stevens Esports (BS)</option>
+        <option value="TNTech">TNTech (BS)</option>
+        <option value="Beatcats">Beatcats (BS)</option>
+        <option value="UTDallas">UT Dallas (BS)</option>
+        <option value="GeorgiaTech">Georgia Tech (BS)</option>
+    </select> Score: <input type="number" class="number" id="team2Score" value="0" min="0" max="5"><br>
     Best of: <select id="bestof">
         <option value="bo3">3</option>
         <option value="bo5">5</option>
@@ -135,7 +248,7 @@
         <option value="6">4-6</option>
         <option value="9">7-9</option>
     </select>
-    <br>
+    <br> <br>
     <button id="SendButton">Send Data</button>
     <span id="team1Selection"></span>
     <span id="team2Selection"></span>
@@ -301,15 +414,15 @@
 
 
             }
-        
 
 
-        var messageString = JSON.stringify(messageData);
 
-        console.log(messageString);
+            var messageString = JSON.stringify(messageData);
 
-        sock.send(messageString);
-    }
+            console.log(messageString);
+
+            sock.send(messageString);
+        }
 
     }
     connect();
