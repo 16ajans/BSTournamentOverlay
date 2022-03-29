@@ -17,8 +17,8 @@
 		left: 160px;
 		top: 3px;
 		position: absolute;
-		width: 300px;
-		inline-size: 300px;
+		width: 360px;
+		inline-size: 360px;
 		overflow-wrap: break-word;
 		z-index: 25;
 
@@ -31,11 +31,11 @@
 		font-size: 60.17px;
 		font-weight: 700;
 		line-height: 83.32px;
-		inline-size: 300px;
+		inline-size: 360px;
 		overflow-wrap: break-word;
 		right: 160px;
 		top: 3px;
-		width: 300px;
+		width: 360px;
 		position: absolute;
 		z-index: 26;
 		text-align: right;
@@ -43,7 +43,7 @@
 	}
 
 	#RightImage {
-		left: 1769px;
+		right: 7px;
 		top: 13px;
 		position: absolute;
 		width: 145px;
@@ -77,6 +77,25 @@
 		left: 0;
 		top: 0;
 	}
+
+
+	.RoundInfo {
+		background-color: rgba(0, 0, 0, 0.0);
+		font-family: Matamata;
+		color: #ffffff;
+		font-size: 40px;
+		font-weight: 700;
+		line-height: 50px;
+		inline-size: 400px;
+		overflow-wrap: none;
+		right: 10px;
+		bottom: 10px;
+		width: 500px;
+		position: absolute;
+		z-index: 26;
+		text-align: right;
+
+	}
 </style>
 <html>
 
@@ -107,6 +126,11 @@
 		<img id="bestOfImage" src="images/bestof/unselected.png">
 
 	</div>
+
+	<div class = "RoundInfo">
+		<span id="roundInfoText"></span>
+	</div>
+	
 
 
 
@@ -140,6 +164,8 @@
 					team1Score = data.Data.Team1Score;
 					team2Score = data.Data.Team2Score;
 					bestof = data.Data.BestOf;
+					roundInfo = data.Data.RoundInfo;
+                	roundInfoText.innerText = roundInfo;
 					console.log(bestof + team1Score + team2Score);
 					var team1Info = {
 						"ArsenalAdjacent": {
@@ -207,7 +233,7 @@
 							"logo": "images/UCDavis.png"
 						},
 						"SUNY": {
-							"name": "SUNY Plattsburgh Esports",
+							"name": "SUNY Plattsburgh",
 							"logo": "images/SUNY.png"
 						},
 						"UCEsports": {
@@ -231,8 +257,12 @@
 							"logo": "images/UTDallas.png"
 						},
 						"GeorgiaTech": {
-							"name": "GGeorgia Tech",
+							"name": "Georgia Tech",
 							"logo": "images/GeorgiaTech.png"
+						},
+						"EmptyTeam": {
+							"name": " ",
+							"logo": "images/EmptyTeam.png"
 						},
 					}
 					var team2Info = {
@@ -325,8 +355,12 @@
 							"logo": "images/UTDallas.png"
 						},
 						"GeorgiaTech": {
-							"name": "GGeorgia Tech",
+							"name": "Georgia Tech",
 							"logo": "images/GeorgiaTech.png"
+						},
+						"EmptyTeam": {
+							"name": " ",
+							"logo": "images/EmptyTeam.png"
 						},
 					}
 

@@ -15,7 +15,7 @@
 <style>
     body,
     html {
-        background-color: #EBECF0;
+        background-color: rgb(34, 34, 34);
     }
 
     body,
@@ -27,6 +27,8 @@
         font-family: 'Montserrat', sans-serif;
         letter-spacing: -0.2px;
         font-size: 16px;
+        color: white;
+        
     }
 
     div,
@@ -55,7 +57,6 @@
         border-radius: 16px*20;
         padding: 16px;
         background-color: EBECF0;
-        text-shadow: 1px 1px 0 #FFF;
     }
 
     label {
@@ -66,7 +67,8 @@
 
     input {
         margin-right: 16px/2;
-        box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
+        background:rgb(48, 48, 48);
+        box-shadow: inset 2px 2px 5px #444444, inset -5px -5px 10px rgb(48, 48, 48);
         width: 10%;
         box-sizing: border-box;
         transition: all 0.2s ease-in-out;
@@ -82,9 +84,10 @@
     button {
         color: #61677C;
         font-weight: bold;
-        box-shadow: -5px -5px 20px #FFF, 5px 5px 20px #BABECC;
+        box-shadow: -5px -5px 20px rgb(0, 0, 0), 5px 5px 20px #000000;
         transition: all 0.2s ease-in-out;
         cursor: pointer;
+        background:rgb(48, 48, 48);
         font-weight: 600;
     }
 
@@ -103,6 +106,7 @@
     select {
         height: 2.0em;
         line-height: 2;
+        background:rgb(48, 48, 48);
     }
 
     .input-group {
@@ -127,15 +131,15 @@
     Caster 2: <input type="text" id="caster2" value="Caster 2"><br>
     <br>
     Team 1: <select id="team1">
-        <option value="ArsenalAdjacent">Arsenal Adjacent (P)</option>
+      <!--  <option value="ArsenalAdjacent">Arsenal Adjacent (P)</option>
         <option value="ucberkeley">Cal Esports (P)</option>
         <option value="Tech">Tech Esports (P)</option>
         <option value="SJSU">SJSU Esports (P/BS)</option>
         <option value="Leftovers">The Leftovers (P)</option>
         <option value="IlliniBlack">Illini Black (P)</option>
-        <option value="IlliniBlue">Illini Blue (P)</option>
+        <option value="IlliniBlue">Illini Blue (P)</option>-->
         <option value="IlliniOrange">Illini Orange (P/BS)</option>
-        <option value="IlliniWhite">Illini White (P)</option>
+      <!--  <option value="IlliniWhite">Illini White (P)</option> -->
         <option value="IlliniD1">Illini D1 (BS)</option>
         <option value="Gauchos">Gauchos (BS)</option>
         <option value="UAF">UAF Esports (BS)</option>
@@ -143,24 +147,25 @@
         <option value="OCE">Oklahoma Esports (BS)</option>
         <option value="ChargerBlue">Charger Blue (BS)</option>
         <option value="UCDavis">UC Davis (BS)</option>
-        <option value="SUNY">SUNY PSU (BS)</option>
+        <option value="SUNY">SUNY Plattsburgh (BS)</option>
         <option value="UCEsports">UC Esports (BS)</option>
         <option value="Stevens">Stevens Esports (BS)</option>
         <option value="TNTech">TNTech (BS)</option>
         <option value="Beatcats">Beatcats (BS)</option>
         <option value="UTDallas">UT Dallas (BS)</option>
         <option value="GeorgiaTech">Georgia Tech (BS)</option>
+        <option value="EmptyTeam">Empty</option>
     </select> Score: <input type="number" class="number" id="team1Score" value="0" min="0" max="5"><br>
     Team 2: <select id="team2">
-        <option value="ArsenalAdjacent">Arsenal Adjacent (P)</option>
+      <!--  <option value="ArsenalAdjacent">Arsenal Adjacent (P)</option>
         <option value="ucberkeley">Cal Esports (P)</option>
         <option value="Tech">Tech Esports (P)</option>
         <option value="SJSU">SJSU Esports (P/BS)</option>
         <option value="Leftovers">The Leftovers (P)</option>
         <option value="IlliniBlack">Illini Black (P)</option>
-        <option value="IlliniBlue">Illini Blue (P)</option>
+        <option value="IlliniBlue">Illini Blue (P)</option>-->
         <option value="IlliniOrange">Illini Orange (P/BS)</option>
-        <option value="IlliniWhite">Illini White (P)</option>
+      <!--  <option value="IlliniWhite">Illini White (P)</option> -->
         <option value="IlliniD1">Illini D1 (BS)</option>
         <option value="Gauchos">Gauchos (BS)</option>
         <option value="UAF">UAF Esports (BS)</option>
@@ -168,13 +173,14 @@
         <option value="OCE">Oklahoma Esports (BS)</option>
         <option value="ChargerBlue">Charger Blue (BS)</option>
         <option value="UCDavis">UC Davis (BS)</option>
-        <option value="SUNY">SUNY PSU (BS)</option>
+        <option value="SUNY">SUNY Plattsburgh (BS)</option>
         <option value="UC">UC Esports (BS)</option>
         <option value="Stevens">Stevens Esports (BS)</option>
         <option value="TNTech">TNTech (BS)</option>
         <option value="Beatcats">Beatcats (BS)</option>
         <option value="UTDallas">UT Dallas (BS)</option>
         <option value="GeorgiaTech">Georgia Tech (BS)</option>
+        <option value="EmptyTeam">Empty</option>
     </select> Score: <input type="number" class="number" id="team2Score" value="0" min="0" max="5"><br>
     Best of: <select id="bestof">
         <option value="bo3">3</option>
@@ -182,9 +188,12 @@
         <option value="bo7">7</option>
         <option value="bo9">9</option>
     </select><br>
+
+    Round Info: <input type="text" id="roundInfo" value="Default Round"><br><br>
+
     Map Pool: <select id="mapPoolID">
-        <option value="332">Ghilo Moment (332)</option>
-        <option value="336">Div. 2 (336)</option>
+        <option value="336">CVRE Div. 1 (336)</option>
+        <option value="332">CVRE Div. 2 (332)</option>
         <option value="338">Best Map Pool (338)</option>
         <option value="339">Season 8 Quals (339)</option>
     </select><br>
@@ -382,6 +391,8 @@
             var caster2Name = document.getElementById("caster2");
             var team1Score = document.getElementById("team1Score");
             var team2Score = document.getElementById("team2Score");
+            var roundInfoText = document.getElementById("roundInfo");
+            console.log(roundInfo.innerHTML);
             var messageData = {
                 "Event": "MatchData",
                 "Data": {
@@ -396,6 +407,7 @@
                     "BestOf": bestofSelection.innerHTML,
                     "Team1Score": team1Score.value,
                     "Team2Score": team2Score.value,
+                    "RoundInfo": roundInfoText.value,
                     "MapPool": mapPoolSelection.innerHTML,
                     "Map0": map0Selection.innerHTML,
                     "Map1": map1Selection.innerHTML,
