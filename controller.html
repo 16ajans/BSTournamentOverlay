@@ -84,7 +84,7 @@
     button {
         color: #61677C;
         font-weight: bold;
-        box-shadow: -5px -5px 20px rgb(0, 0, 0), 5px 5px 20px #000000;
+        box-shadow: 5px 5px 20px rgb(0, 0, 0);
         transition: all 0.2s ease-in-out;
         cursor: pointer;
         background:rgb(48, 48, 48);
@@ -259,6 +259,7 @@
     </select>
     <br> <br>
     <button id="SendButton">Send Data</button>
+    <button id="SendStatsButton">Send Data + Get Stats</button>
     <span id="team1Selection"></span>
     <span id="team2Selection"></span>
     <span id="bestofSelection"></span>
@@ -392,7 +393,6 @@
             var team1Score = document.getElementById("team1Score");
             var team2Score = document.getElementById("team2Score");
             var roundInfoText = document.getElementById("roundInfo");
-            console.log(roundInfo.innerHTML);
             var messageData = {
                 "Event": "MatchData",
                 "Data": {
@@ -419,6 +419,67 @@
                     "Map7": map7Selection.innerHTML,
                     "Map8": map8Selection.innerHTML,
                     "DisplayedMaps": displayedMapsSelection.innerHTML,
+                    "StatsUpdate": 0,
+                }
+
+
+
+
+
+            }
+
+
+
+            var messageString = JSON.stringify(messageData);
+
+            console.log(messageString);
+
+            sock.send(messageString);
+        }
+
+
+
+        var button = document.getElementById("SendStatsButton");
+        button.onclick = function (e) {
+            teamListUpdate();
+            bestofUpdate();
+            mapUpdate();
+            var p1ScoreID = document.getElementById("p1SSID");
+            var p2ScoreID = document.getElementById("p2SSID");
+            var p3ScoreID = document.getElementById("p3SSID");
+            var p4ScoreID = document.getElementById("p4SSID");
+            var caster1Name = document.getElementById("caster1");
+            var caster2Name = document.getElementById("caster2");
+            var team1Score = document.getElementById("team1Score");
+            var team2Score = document.getElementById("team2Score");
+            var roundInfoText = document.getElementById("roundInfo");
+            var messageData = {
+                "Event": "MatchData",
+                "Data": {
+                    "P1": p1ScoreID.value,
+                    "P2": p2ScoreID.value,
+                    "P3": p3ScoreID.value,
+                    "P4": p4ScoreID.value,
+                    "Team1": team1Selection.innerHTML,
+                    "Team2": team2Selection.innerHTML,
+                    "Caster1": caster1Name.value,
+                    "Caster2": caster2Name.value,
+                    "BestOf": bestofSelection.innerHTML,
+                    "Team1Score": team1Score.value,
+                    "Team2Score": team2Score.value,
+                    "RoundInfo": roundInfoText.value,
+                    "MapPool": mapPoolSelection.innerHTML,
+                    "Map0": map0Selection.innerHTML,
+                    "Map1": map1Selection.innerHTML,
+                    "Map2": map2Selection.innerHTML,
+                    "Map3": map3Selection.innerHTML,
+                    "Map4": map4Selection.innerHTML,
+                    "Map5": map5Selection.innerHTML,
+                    "Map6": map6Selection.innerHTML,
+                    "Map7": map7Selection.innerHTML,
+                    "Map8": map8Selection.innerHTML,
+                    "DisplayedMaps": displayedMapsSelection.innerHTML,
+                    "StatsUpdate": 1,
                 }
 
 

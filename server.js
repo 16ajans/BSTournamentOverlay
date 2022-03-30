@@ -240,6 +240,14 @@ server.on('connection', function (socket) {
                     console.log(err)
                 })
             mapPoolUpdate();
+
+            if (data.Data.StatsUpdate == 0) {
+                console.log("Not sending stats");
+            }
+
+                
+                if (data.Data.StatsUpdate == 1) {
+                    console.log("Sending Stats");
             setTimeout(function () {
                 P1accFinder();
                 P2accFinder();
@@ -501,9 +509,9 @@ server.on('connection', function (socket) {
 
 
             }, 5000);
-
         }
-
+        }
+    
 
         // Setting p1 ssid & p2 ssid 
     });

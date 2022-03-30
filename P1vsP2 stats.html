@@ -111,24 +111,27 @@
         }
 
         .SongInfo {
-            background-color: rgba(0, 0, 0, 0.0);
+            position: fixed;
+            bottom: 10px;
+            left: 760px;
+            background-color: rgba(0, 0, 0, 0.5);
             text-align: center;
-            font-family: 'Matamata';
+            font-family: 'Montserrat';
+        font-weight: 600; 
+        font-style: normal;
             overflow-wrap: break-word;
             overflow: hidden;
             color: rgb(255, 255, 255);
             width: 400px;
             height: 150px;
             line-height: 20px;
-            text-shadow: 2px 2px #000000
+            text-shadow: 6px 6px 8px #000000;
         }
-
-
 
         .SongArtist {
             position: relative;
             text-align: center;
-            top: -10px;
+            top: 0px;
             z-index: 1;
             font-size: 25px;
         }
@@ -140,6 +143,7 @@
             z-index: -1;
             font-size: 30px;
             line-height: 30px;
+            height: 70px;
             width: 399.99px;
             overflow-wrap: normal;
 
@@ -150,7 +154,7 @@
         .SongDiff {
             position: absolute;
             text-align: right;
-            top: -10px;
+            top: -15px;
             right: 15px;
             z-index: 2;
             font-size: 25px;
@@ -161,7 +165,7 @@
         .SongKey {
             position: absolute;
             text-align: left;
-            top: -5px;
+            top: -15px;
             left: 15px;
             z-index: 2;
             font-size: 20px;
@@ -188,8 +192,8 @@
             width: 400px;
             height: 400px;
             z-index: -4;
-            filter: blur(8px);
-            -webkit-filter: blur(8px);
+            filter: blur(8px) brightness(80%);
+            -webkit-filter: blur(8px), brightness(80%);
 
         }
 
@@ -265,14 +269,16 @@
             left: 10px;
             background-color: rgba(0, 0, 0, 0.0);
             text-align: center;
-            font-family: 'Matamata';
+            font-family: 'Montserrat';
+        font-weight: 600; 
+        font-style: normal;
             overflow-wrap: break-word;
             overflow: hidden;
             color: rgb(255, 255, 255);
             width: 400px;
             height: 150px;
             line-height: 20px;
-            text-shadow: 2px 2px #000000
+            text-shadow: 6px 6px 8px #000000;
         }
 
         .casterName {

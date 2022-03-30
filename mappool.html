@@ -4,6 +4,9 @@
 
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@700&family=Montserrat&family=Share+Tech&display=swap" rel="stylesheet">
 </head>
 <style>
     @font-face {
@@ -11,6 +14,7 @@
         /*a name to be used later*/
         src: url('Matamata-Bold.otf');
         /*URL to font*/
+        
     }
 
     .casterInfo {
@@ -19,7 +23,9 @@
         left: 10px;
         background-color: rgba(0, 0, 0, 0.0);
         text-align: center;
-        font-family: 'Matamata';
+        font-family: 'Montserrat';
+        font-weight: 600; 
+        font-style: normal;
         overflow-wrap: break-word;
         overflow: hidden;
         color: rgb(255, 255, 255);
@@ -51,21 +57,25 @@
         border-radius: 25px;
         font-size: 60px;
         line-height: 70px;
-        font-family: 'Matamata';
-        text-shadow: 2px 2px #000000
+        font-family: 'Montserrat';
+        font-weight: 600; 
+        font-style: normal;
+        text-shadow: 0 0 3px #000000;
     }
 
     .SongInfo {
         background-color: rgba(0, 0, 0, 0.0);
         text-align: center;
-        font-family: 'Matamata';
+        font-family: 'Montserrat';
+        font-weight: 600; 
+        font-style: normal;
         overflow-wrap: break-word;
         overflow: hidden;
         color: rgb(255, 255, 255);
         width: 400px;
         height: 150px;
         line-height: 20px;
-        text-shadow: 2px 2px #000000
+        text-shadow: 6px 6px 8px #000000;
     }
 
 
@@ -73,7 +83,7 @@
     .SongArtist {
         position: relative;
         text-align: center;
-        top: -10px;
+        top: 0px;
         z-index: 1;
         font-size: 25px;
     }
@@ -95,10 +105,10 @@
     .SongDiff {
         position: absolute;
         text-align: right;
-        top: -10px;
+        top: -15px;
         right: 15px;
         z-index: 2;
-        font-size: 25px;
+        font-size: 20px;
 
 
     }
@@ -106,7 +116,7 @@
     .SongKey {
         position: absolute;
         text-align: left;
-        top: -5px;
+        top: -15px;
         left: 15px;
         z-index: 2;
         font-size: 20px;
@@ -133,8 +143,8 @@
         width: 400px;
         height: 400px;
         z-index: -4;
-        filter: blur(8px);
-        -webkit-filter: blur(8px);
+        filter: blur(8px) brightness(80%);
+        -webkit-filter: blur(8px), brightness(80%);
 
     }
 
