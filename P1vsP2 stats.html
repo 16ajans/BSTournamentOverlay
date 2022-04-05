@@ -19,7 +19,9 @@
         }
 
         .Displayed {
-            font-family: 'Matamata';
+            font-family: 'Montserrat';
+        font-weight: 600; 
+        font-style: normal;
             color: rgb(255, 255, 255);
         }
 
@@ -65,7 +67,7 @@
         .P1PlayerInfo {
             position: fixed;
             bottom: 730;
-            right: 965;
+            right: 950;
             width: 400px;
             height: 100px;
             padding: 10px;
@@ -78,7 +80,7 @@
         .P2PlayerInfo {
             position: fixed;
             bottom: 730;
-            left: 965px;
+            left: 950px;
             width: 400px;
             height: 100px;
             padding: 10px;
@@ -98,17 +100,6 @@
 
         }
 
-        .P1Image {
-            display: block;
-            float: right;
-            padding: 0px;
-        }
-
-        .P2Image {
-            display: block;
-            float: left;
-            padding: 0px;
-        }
 
         .SongInfo {
             position: fixed;
@@ -150,28 +141,27 @@
 
 
         }
-
         .SongDiff {
-            position: absolute;
-            text-align: right;
-            top: -15px;
-            right: 15px;
-            z-index: 2;
-            font-size: 25px;
+        position: absolute;
+        text-align: right;
+        top: -15px;
+        right: 15px;
+        z-index: 2;
+        font-size: 20px;
 
 
-        }
+    }
 
-        .SongKey {
-            position: absolute;
-            text-align: left;
-            top: -15px;
-            left: 15px;
-            z-index: 2;
-            font-size: 20px;
+    .SongKey {
+        position: absolute;
+        text-align: left;
+        top: -15px;
+        left: 15px;
+        z-index: 2;
+        font-size: 20px;
 
 
-        }
+    }
 
         .SongMapper {
             position: absolute;
@@ -1016,7 +1006,7 @@
                     SongDiff = [];
                     SongHash = [];
 
-                    setTimeout(function () {
+                   // setTimeout(function () {
                         resetPositions();
                     scoreResetPositions();
                     namePush();
@@ -1030,7 +1020,7 @@
                     mapCountSort();
                     scoreCountSort();
                     pickOrBan();
-            }, 1000);
+           // }, 1000);
 
                     
 

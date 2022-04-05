@@ -11,7 +11,7 @@ const server = new WebSocket.Server({
 
 
 
-var P1Name = 'Player 1';
+ P1Name = 'Player 1';
 var P2Name = 'Player 2';
 var P3Name = 'Player 3';
 var P4Name = 'Player 4';
@@ -249,6 +249,7 @@ server.on('connection', function (socket) {
                 if (data.Data.StatsUpdate == 1) {
                     console.log("Sending Stats");
             setTimeout(function () {
+                scoreWipe();
                 P1accFinder();
                 P2accFinder();
                 if (P3ScoreSaber != "") {
@@ -1256,4 +1257,118 @@ function P4accFinder() {
                 console.log(err)
             })
     }
+}
+
+function scoreWipe() {
+
+              P1Map0Score = "0";
+              P1Map0Acc = "0";
+              P1Map0Misses = "0";
+              P1Map1Score = "0";
+              P1Map1Acc = "0";
+              P1Map1Misses = "0";
+              P1Map2Score = "0";
+              P1Map2Acc = "0";
+              P1Map2Misses = "0";
+              P1Map3Score = "0";
+              P1Map3Acc = "0";
+              P1Map3Misses = "0";
+              P1Map4Score = "0";
+              P1Map4Acc = "0";
+              P1Map4Misses = "0";
+              P1Map5Score = "0";
+              P1Map5Acc = "0";
+              P1Map5Misses = "0";
+              P1Map6Score = "0";
+              P1Map6Acc = "0";
+              P1Map6Misses = "0";
+              P1Map7Score = "0";
+              P1Map7Acc = "0";
+              P1Map7Misses = "0";
+              P1Map8Score = "0";
+              P1Map8Acc = "0";
+              P1Map8Misses = "0";
+              P2Map0Score = "0";
+              P2Map0Acc = "0";
+              P2Map0Misses = "0";
+              P2Map1Score = "0";
+              P2Map1Acc = "0";
+              P2Map1Misses = "0";
+              P2Map2Score = "0";
+              P2Map2Acc = "0";
+              P2Map2Misses = "0";
+              P2Map3Score = "0";
+              P2Map3Acc = "0";
+              P2Map3Misses = "0";
+              P2Map4Score = "0";
+              P2Map4Acc = "0";
+              P2Map4Misses = "0";
+              P2Map5Score = "0";
+              P2Map5Acc = "0";
+              P2Map5Misses = "0";
+              P2Map6Score = "0";
+              P2Map6Acc = "0";
+              P2Map6Misses = "0";
+              P2Map7Score = "0";
+              P2Map7Acc = "0";
+              P2Map7Misses = "0";
+              P2Map8Score = "0";
+              P2Map8Acc = "0";
+              P2Map8Misses = "0";
+              P3Map0Score = "0";
+              P3Map0Acc = "0";
+              P3Map0Misses = "0";
+              P3Map1Score = "0";
+              P3Map1Acc = "0";
+              P3Map1Misses = "0";
+              P3Map2Score = "0";
+              P3Map2Acc = "0";
+              P3Map2Misses = "0";
+              P3Map3Score = "0";
+              P3Map3Acc = "0";
+              P3Map3Misses = "0";
+              P3Map4Score = "0";
+              P3Map4Acc = "0";
+              P3Map4Misses = "0";
+              P3Map5Score = "0";
+              P3Map5Acc = "0";
+              P3Map5Misses = "0";
+              P3Map6Score = "0";
+              P3Map6Acc = "0";
+              P3Map6Misses = "0";
+              P3Map7Score = "0";
+              P3Map7Acc = "0";
+              P3Map7Misses = "0";
+              P3Map8Score = "0";
+              P3Map8Acc = "0";
+              P3Map8Misses = "0";
+              P4Map0Score = "0";
+              P4Map0Acc = "0";
+              P4Map0Misses = "0";
+              P4Map1Score = "0";
+              P4Map1Acc = "0";
+              P4Map1Misses = "0";
+              P4Map2Score = "0";
+              P4Map2Acc = "0";
+              P4Map2Misses = "0";
+              P4Map3Score = "0";
+              P4Map3Acc = "0";
+              P4Map3Misses = "0";
+              P4Map4Score = "0";
+              P4Map4Acc = "0";
+              P4Map4Misses = "0";
+              P4Map5Score = "0";
+              P4Map5Acc = "0";
+              P4Map5Misses = "0";
+              P4Map6Score = "0";
+              P4Map6Acc = "0";
+              P4Map6Misses = "0";
+              P4Map7Score = "0";
+              P4Map7Acc = "0";
+              P4Map7Misses = "0";
+              P4Map8Score = "0";
+              P4Map8Acc = "0";
+              P4Map8Misses = "0";
+              console.log("Scores wiped");
+
 }
