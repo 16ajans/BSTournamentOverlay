@@ -6,6 +6,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Heebo:wght@700&family=Montserrat&family=Share+Tech&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
 
     <style>
         @font-face {
@@ -17,8 +19,8 @@
 
         .Displayed {
             font-family: 'Montserrat';
-        font-weight: 600; 
-        font-style: normal;
+            font-weight: 600;
+            font-style: normal;
             color: rgb(255, 255, 255);
         }
 
@@ -130,8 +132,8 @@
             background-color: rgba(0, 0, 0, 0.5);
             text-align: center;
             font-family: 'Montserrat';
-        font-weight: 600; 
-        font-style: normal;
+            font-weight: 600;
+            font-style: normal;
             overflow-wrap: break-word;
             overflow: hidden;
             color: rgb(255, 255, 255);
@@ -206,7 +208,7 @@
             height: 400px;
             z-index: -4;
             filter: blur(8px) brightness(80%);
-        -webkit-filter: blur(8px), brightness(80%);
+            -webkit-filter: blur(8px), brightness(80%);
 
         }
 
@@ -218,8 +220,8 @@
             background-color: rgba(0, 0, 0, 0.0);
             text-align: center;
             font-family: 'Montserrat';
-        font-weight: 600; 
-        font-style: normal;
+            font-weight: 600;
+            font-style: normal;
             overflow-wrap: break-word;
             overflow: hidden;
             color: rgb(255, 255, 255);
@@ -238,10 +240,27 @@
             line-height: 70px;
             width: 399.99px;
         }
+
+        .bg {
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: -1;
+        }
+
+        .animationFadeOut {
+            animation: fadeOut;
+            animation-duration: 0.5s;
+        }
     </style>
 </head>
 
 <body>
+
+    <div class=bg id="P1Miss1v1"> <img id="P1Miss1v1" src="images/miss/P1Miss 1v1.png"></div>
+    <div class=bg><img id="P2Miss1v1" src="images/miss/P2Miss 1v1.png"></div>
+
     <div class=P1PlayerInfo>
         <h1 id="P1Name" class="Displayed PlayerName left">Player 1</h1>
         <img id="P1pfp" src="images/noprofilepic.png" class="P1Image pfpimg">
@@ -249,7 +268,7 @@
 
 
     </div>
-    <div class="P1ScoringInfo">
+    <div class="P1ScoringInfo" id="P1ScoringInfo">
         <h2 id="P1Combo" class="Displayed Combo right">0x</h2>
         <h2 id="P1Acc" class="Displayed Acc right">100.00%</h2>
         <h2 id="P1Misses" class="Displayed MissText right">0 misses</h2>
@@ -260,7 +279,7 @@
         <h1 id="P2Name" class="Displayed PlayerName right">Player 2</h1>
         <img id="P2pfp" src="images/noprofilepic.png" class="P2Image pfpimg">
     </div>
-    <div class="P2ScoringInfo">
+    <div class="P2ScoringInfo" id="P2ScoringInfo">
         <h2 id="P2Combo" class="Displayed Combo left">0x</h2>
         <h2 id="P2Acc" class="Displayed Acc left">100.00%</h2>
         <h2 id="P2Misses" class="Displayed MissText left">0 misses</h2>
@@ -308,12 +327,21 @@
 
     var coordinatorName = '';
 
+
+    var P1MissNew = 0;
+    var P1MissOld = 0;
+
+    var P2MissNew = 0;
+    var P2MissOld = 0;
+
     //var TAsock = new WebSocket("ws://beatsaber.networkauditor.org:10157");
     //var TAsock = new WebSocket("ws://ta.asodev.net:10157");
     console.log("connecting");
     var TAsock = new WebSocket("ws://beatsaber.networkauditor.org:10157");
     TAsock.onopen = function (event) {
         console.log("*hacker voice* I'm in.");
+        document.getElementById("P1Miss1v1").style.display = "none";
+        document.getElementById("P2Miss1v1").style.display = "none";
     };
 
     TAsock.onmessage = async function (event) {
@@ -346,43 +374,44 @@
                         P2Combo.innerText = "0x";
                     }
 
-                    if (playerData.UserId == P1ScoreSaber || playerdata.UserId == P2ScoreSaber) {
-
-                        console.log(matchData);
-                        var LevelHash = matchData.SelectedLevel.LevelId.split("custom_level_")[1];
-
-                        var difficultyNames = {
-                            "0": "Easy",
-                            "1": "Normal",
-                            "2": "Hard",
-                            "3": "Expert",
-                            "4": 'Expert+',
-                        }
-                        fetch(`https://api.beatsaver.com/maps/hash/${LevelHash}`)
-                            .then(response => {
-                                return response.json()
-                            })
-                            .then(data => {
-                                console.log(data);
-                                // Do stuff here
-                                SongName.innerText = data.name;
-                                SongArtist.innerText = data.metadata.songAuthorName;
-                                SongKey.innerText = data.id;
-                                SongMapper.innerText = data.metadata.levelAuthorName;
-                                SongDiff.innerText = difficultyNames[matchData.SelectedDifficulty];
-                                //For image use lower case hash (.toLowerCase) or something
-                                lowerHash = LevelHash.toLowerCase();
-                                console.log(lowerHash);
 
 
-                                document.getElementById('songCover').src = "https://na.cdn.beatsaver.com/" +
-                                    lowerHash + ".jpg"
+                    console.log(matchData);
+                    var LevelHash = matchData.SelectedLevel.LevelId.split("custom_level_")[1];
 
-                            })
-                            .catch(err => {
-                                console.log(err)
-                            })
+
+                    var difficultyNames = {
+                        "0": "Easy",
+                        "1": "Normal",
+                        "2": "Hard",
+                        "3": "Expert",
+                        "4": 'Expert+',
                     }
+                    fetch(`https://api.beatsaver.com/maps/hash/${LevelHash}`)
+                        .then(response => {
+                            return response.json()
+                        })
+                        .then(data => {
+                            console.log(data);
+                            // Do stuff here
+                            SongName.innerText = data.metadata.songName;
+                            SongArtist.innerText = data.metadata.songAuthorName;
+                            SongKey.innerText = data.id;
+                            SongMapper.innerText = data.metadata.levelAuthorName;
+                            SongDiff.innerText = difficultyNames[matchData.SelectedDifficulty];
+                            //For image use lower case hash (.toLowerCase) or something
+                            lowerHash = LevelHash.toLowerCase();
+                            console.log(lowerHash);
+
+
+                            document.getElementById('songCover').src = "https://na.cdn.beatsaver.com/" +
+                                lowerHash + ".jpg"
+
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        })
+
 
                 }
             }
@@ -391,32 +420,91 @@
                 if (jsonObj.SpecificPacket.SpecificPacket.Type == 1) {
                     var playerData = jsonObj.SpecificPacket.SpecificPacket.ChangedObject;
                     var playerId = playerData.UserId;
+                    var StreamDelayMs = jsonObj.SpecificPacket.SpecificPacket.ChangedObject.StreamDelayMs
+
+
+
 
                     if (playerId == P1ScoreSaber) {
-                        P1Misses.innerText = playerData.Misses + " misses";
+                        setTimeout(() => {
+                                P1Misses.innerText = playerData.Misses + " misses";
+                                P1MissNew = playerData.Misses;
+                                if (P1MissOld != P1MissNew) {
+
+                                    document.getElementById("P1Miss1v1").style.display = "";
+                                    document.getElementById("P1Miss1v1").classList.add("animationFadeOut");
+                                    setTimeout(() => {
+                                        document.getElementById("P1Miss1v1").classList.remove(
+                                            "animationFadeOut");
+                                        document.getElementById("P1Miss1v1").style.display = "none";
+                                    }, 500);
+
+                                    P1MissOld = P1MissNew;
+                                }
+
+                            },
+                            StreamDelayMs);
+
                         //P1Score.style.fontSize = 20 + playerData.Misses + "px";
                     }
 
                     if (playerId == P2ScoreSaber) {
-                        P2Misses.innerText = playerData.Misses + " misses";
+                        setTimeout(() => {
+                                P2Misses.innerText = playerData.Misses + " misses";
+                                P2MissNew = playerData.Misses;
+                                if (P2MissOld != P2MissNew) {
+
+                                    document.getElementById("P2Miss1v1").style.display = "";
+                                    document.getElementById("P2Miss1v1").classList.add("animationFadeOut");
+                                    setTimeout(() => {
+                                        document.getElementById("P2Miss1v1").classList.remove(
+                                            "animationFadeOut");
+                                        document.getElementById("P2Miss1v1").style.display = "none";
+                                    }, 500);
+
+                                    P2MissOld = P2MissNew;
+                                }
+
+
+                            },
+                            StreamDelayMs);
                     }
 
                     if (playerId == P1ScoreSaber) {
-                        P1Combo.innerText = playerData.Combo + "x";
+
+                        setTimeout(() => {
+                                P1Combo.innerText = playerData.Combo + "x";
+                            },
+                            StreamDelayMs);
+
                     }
                     if (playerId == P2ScoreSaber) {
-                        P2Combo.innerText = playerData.Combo + "x";
+                        setTimeout(() => {
+                                P2Combo.innerText = playerData.Combo + "x";
+                            },
+                            StreamDelayMs);
+
                     }
 
                     if (playerId == P1ScoreSaber) {
                         //P1Acc.innerText = playerData.Accuracy * 100 + "%";
                         //P1Score.style.fontSize = 20 + playerData.Misses + "px";
-                        P1Acc.innerText = (Math.round(playerData.Accuracy * 100 * 100) / 100).toFixed(2) + "%";
+                        setTimeout(() => {
+                                P1Acc.innerText = (Math.round(playerData.Accuracy * 100 * 100) / 100)
+                                    .toFixed(2) + "%";
+                            },
+                            StreamDelayMs);
+
+
                     }
 
                     if (playerId == P2ScoreSaber) {
 
-                        P2Acc.innerText = (Math.round(playerData.Accuracy * 100 * 100) / 100).toFixed(2) + "%";
+                        setTimeout(() => {
+                                P2Acc.innerText = (Math.round(playerData.Accuracy * 100 * 100) / 100)
+                                    .toFixed(2) + "%";
+                            },
+                            StreamDelayMs);
                     }
                 }
             }
@@ -452,22 +540,41 @@
                 P4ScoreSaber = data.Data.P4;
                 coordinatorName = data.Data.CoordinatorName;
 
+
+                document.getElementById("P1ScoringInfo").style.display = "";
+                document.getElementById("P2ScoringInfo").style.display = "";
+
+                if (/^\d/.test(P1ScoreSaber) == false) {
+
+                    console.log("P1 is a Quest user");
+                    document.getElementById("P1ScoringInfo").style.display = "none";
+                    P1Name.innerText = data.Data.P1;
+                }
+
+                if (/^\d/.test(P2ScoreSaber) == false) {
+
+                    console.log("P2 is a Quest user");
+                    document.getElementById("P2ScoringInfo").style.display = "none";
+                    P2Name.innerText = data.Data.P2;
+                }
+
+
                 document.getElementById('P1pfp').src = "https://cdn.scoresaber.com/avatars/" + P1ScoreSaber +
-                        ".jpg";
-                        P1ScoreSaber = '' + P1ScoreSaber;
+                    ".jpg";
+                P1ScoreSaber = '' + P1ScoreSaber;
                 if (P1ScoreSaber.startsWith("765") == false) {
                     document.getElementById('P1pfp').src = "https://cdn.scoresaber.com/avatars/oculus.png";
-                } 
-                    
-                
+                }
+
+
                 document.getElementById('P2pfp').src = "https://cdn.scoresaber.com/avatars/" + P2ScoreSaber +
-                        ".jpg";
-                        P2ScoreSaber = '' + P2ScoreSaber;
-                        if (P2ScoreSaber.startsWith("765") == false) {
+                    ".jpg";
+                P2ScoreSaber = '' + P2ScoreSaber;
+                if (P2ScoreSaber.startsWith("765") == false) {
                     document.getElementById('P2pfp').src = "https://cdn.scoresaber.com/avatars/oculus.png";
-                } 
-                    
-                
+                }
+
+
                 fetch(`https://new.scoresaber.com/api/player/${P1ScoreSaber}/full`)
                     .then(response => {
                         return response.json()
