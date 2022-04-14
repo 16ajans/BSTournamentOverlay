@@ -1,108 +1,112 @@
 <!DOCTYPE html>
-<style>
-	@font-face {
-		font-family: 'Matamata';
-		/*a name to be used later*/
-		src: url('Matamata-Bold.otf');
-		/*URL to font*/
-	}
-
-	.team1 {
-		background-color: rgba(0, 0, 0, 0.0);
-		font-family: 'Montserrat';
-        font-weight: 600; 
-        font-style: normal;
-		color: #ffffff;
-		font-size: 53px;
-		font-weight: 700;
-		line-height: 83.32px;
-		left: 160px;
-		top: 3px;
-		position: absolute;
-		width: 360px;
-		inline-size: 360px;
-		overflow-wrap: break-word;
-		z-index: 25;
-
-	}
-
-	.team2 {
-		background-color: rgba(0, 0, 0, 0.0);
-		font-family: 'Montserrat';
-        font-weight: 600; 
-        font-style: normal;
-		color: #ffffff;
-		font-size: 53px;
-		font-weight: 700;
-		line-height: 83.32px;
-		inline-size: 360px;
-		overflow-wrap: break-word;
-		right: 160px;
-		top: 3px;
-		width: 360px;
-		position: absolute;
-		z-index: 26;
-		text-align: right;
-
-	}
-
-	#RightImage {
-		right: 7px;
-		top: 13px;
-		position: absolute;
-		width: 145px;
-		height: 145px;
-		z-index: 5;
-	}
-
-	#LeftImage {
-		left: 7px;
-		top: 13px;
-		position: absolute;
-		width: 145px;
-		height: 145px;
-		padding: 0px;
-		z-index: 5;
-	}
-
-	.bg {
-		height: 100%;
-		position: absolute;
-		left: 0;
-		top: 0;
-		z-index: -1;
-
-	}
-
-	.Scores {
-		height: 100%;
-		z-index: 3;
-		position: absolute;
-		left: 0;
-		top: 0;
-	}
 
 
-	.RoundInfo {
-		background-color: rgba(0, 0, 0, 0.0);
-		font-family: 'Montserrat';
-        font-weight: 600; 
-        font-style: normal;
-		color: #ffffff;
-		font-size: 40px;
-		font-weight: 700;
-		line-height: 50px;
-		inline-size: 400px;
-		overflow-wrap: none;
-		right: 10px;
-		bottom: 10px;
-		width: 500px;
-		position: absolute;
-		z-index: 26;
-		text-align: right;
+<head>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Heebo:wght@700&family=Montserrat&family=Share+Tech&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
-	}
-</style>
+	<style>
+		.team1 {
+			background-color: rgba(0, 0, 0, 0.0);
+			font-family: 'Montserrat';
+			font-weight: 600;
+			font-style: normal;
+			color: #ffffff;
+			font-size: 53px;
+			font-weight: 700;
+			line-height: 83.32px;
+			left: 160px;
+			top: 3px;
+			position: absolute;
+			width: 360px;
+			inline-size: 360px;
+			overflow-wrap: break-word;
+			z-index: 25;
+
+		}
+
+		.team2 {
+			background-color: rgba(0, 0, 0, 0.0);
+			font-family: 'Montserrat';
+			font-weight: 600;
+			font-style: normal;
+			color: #ffffff;
+			font-size: 53px;
+			font-weight: 700;
+			line-height: 83.32px;
+			inline-size: 360px;
+			overflow-wrap: break-word;
+			right: 160px;
+			top: 3px;
+			width: 360px;
+			position: absolute;
+			z-index: 26;
+			text-align: right;
+
+		}
+
+		#RightImage {
+			right: 7px;
+			top: 13px;
+			position: absolute;
+			width: 145px;
+			height: 145px;
+			z-index: 5;
+		}
+
+		#LeftImage {
+			left: 7px;
+			top: 13px;
+			position: absolute;
+			width: 145px;
+			height: 145px;
+			padding: 0px;
+			z-index: 5;
+		}
+
+		.bg {
+			height: 100%;
+			position: absolute;
+			left: 0;
+			top: 0;
+			z-index: -1;
+
+		}
+
+		.Scores {
+			height: 100%;
+			z-index: 3;
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+
+
+		.RoundInfo {
+			background-color: rgba(0, 0, 0, 0.0);
+			font-family: 'Montserrat';
+			font-weight: 600;
+			font-style: normal;
+			color: #ffffff;
+			font-size: 40px;
+			font-weight: 700;
+			line-height: 50px;
+			inline-size: 400px;
+			overflow-wrap: none;
+			right: 10px;
+			bottom: 10px;
+			width: 500px;
+			position: absolute;
+			z-index: 26;
+			text-align: right;
+
+		}
+	</style>
+</head>
 <html>
 
 <body>
@@ -133,10 +137,10 @@
 
 	</div>
 
-	<div class = "RoundInfo">
+	<div class="RoundInfo">
 		<span id="roundInfoText"></span>
 	</div>
-	
+
 
 
 
@@ -171,7 +175,7 @@
 					team2Score = data.Data.Team2Score;
 					bestof = data.Data.BestOf;
 					roundInfo = data.Data.RoundInfo;
-                	roundInfoText.innerText = roundInfo;
+					roundInfoText.innerText = roundInfo;
 					console.log(bestof + team1Score + team2Score);
 					var team1Info = {
 						"ArsenalAdjacent": {
@@ -281,6 +285,26 @@
 						"Miami": {
 							"name": "Miami Maelstrom",
 							"logo": "images/Miami.png"
+						},
+						"SJSU": {
+							"name": "SJSU Esports",
+							"logo": "images/SJSU.png"
+						},
+						"Crimson": {
+							"name": "Crimson Gaming",
+							"logo": "images/Crimson.png"
+						},
+						"CalA": {
+							"name": "Cal Esports A",
+							"logo": "images/UCBerkeley.png"
+						},
+						"CalB": {
+							"name": "Cal Esports B",
+							"logo": "images/UCBerkeley.png"
+						},
+						"CalC": {
+							"name": "Cal Esports C",
+							"logo": "images/UCBerkeley.png"
 						},
 						"EmptyTeam": {
 							"name": " ",
@@ -396,6 +420,30 @@
 							"name": "Miami Maelstrom",
 							"logo": "images/Miami.png"
 						},
+						"SJSU": {
+							"name": "SJSU Esports",
+							"logo": "images/SJSU.png"
+						},
+						"Crimson": {
+							"name": "Crimson Gaming",
+							"logo": "images/Crimson.png"
+						},
+						"CalA": {
+							"name": "Cal Esports A",
+							"logo": "images/UCBerkeley.png"
+						},
+						"CalB": {
+							"name": "Cal Esports B",
+							"logo": "images/UCBerkeley.png"
+						},
+						"CalC": {
+							"name": "Cal Esports C",
+							"logo": "images/UCBerkeley.png"
+						},
+
+
+
+						
 						"EmptyTeam": {
 							"name": " ",
 							"logo": "images/EmptyTeam.png"

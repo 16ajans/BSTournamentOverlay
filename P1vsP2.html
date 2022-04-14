@@ -10,13 +10,6 @@
 
 
     <style>
-        @font-face {
-            font-family: 'Matamata';
-            /*a name to be used later*/
-            src: url('Matamata-Bold.otf');
-            /*URL to font*/
-        }
-
         .Displayed {
             font-family: 'Montserrat';
             font-weight: 600;
@@ -253,6 +246,20 @@
             animation: fadeOut;
             animation-duration: 0.5s;
         }
+        .ConnectionStatus {
+            position: absolute;
+            bottom: 5;
+            left: 800;
+            background-color: rgba(0, 0, 0, 0.0);
+            font-family: 'Montserrat';
+            font-weight: 600;
+            font-style: normal;
+            text-align: center;
+            color: rgb(255, 255, 255);
+            font-size: 15px;
+            text-shadow: 6px 6px 8px #000000;
+
+        }
     </style>
 </head>
 
@@ -271,7 +278,7 @@
     <div class="P1ScoringInfo" id="P1ScoringInfo">
         <h2 id="P1Combo" class="Displayed Combo right">0x</h2>
         <h2 id="P1Acc" class="Displayed Acc right">100.00%</h2>
-        <h2 id="P1Misses" class="Displayed MissText right">0 misses</h2>
+        <h2 id="P1Misses" class="Displayed MissText right" style="display:none;">0 misses</h2>
 
     </div>
 
@@ -282,9 +289,9 @@
     <div class="P2ScoringInfo" id="P2ScoringInfo">
         <h2 id="P2Combo" class="Displayed Combo left">0x</h2>
         <h2 id="P2Acc" class="Displayed Acc left">100.00%</h2>
-        <h2 id="P2Misses" class="Displayed MissText left">0 misses</h2>
+        <h2 id="P2Misses" class="Displayed MissText left" style="display:none;">0 misses</h2>
     </div>
-    <div class="SongInfo" style="border-radius:25px;">
+    <div class="SongInfo" id="SongInfo" style="border-radius:25px;">
         <p id="SongArtist" class="SongArtist">Artist</p>
         <p id="SongName" class="SongName">Song Name</p>
         <img id="songCover" src="images/nosongcover.png" class="SongCover">
@@ -297,6 +304,11 @@
         <span id="caster1Name" class="casterName">Caster 1</span><br>
         <span id="caster2Name" class="casterName">Caster 2</span>
 
+
+    </div>
+    <div class ="ConnectionStatus" id = "ConnectionStatus">
+        <h1 id = "ConnectionController">Connecting to control panel...</h1>
+        <h1 id = "ConnectionTA">Connecting to TournamentAssistant...</h1>
 
     </div>
 </body>
@@ -334,14 +346,24 @@
     var P2MissNew = 0;
     var P2MissOld = 0;
 
+    document.getElementById("P1ScoringInfo").style.display = "none";
+    document.getElementById("P2ScoringInfo").style.display = "none";
+    document.getElementById("SongInfo").style.display = "none";
+
+    setTimeout(() => {
+        document.getElementById("ConnectionTA").style.display = "none";
+    }, 10000);
+
     //var TAsock = new WebSocket("ws://beatsaber.networkauditor.org:10157");
     //var TAsock = new WebSocket("ws://ta.asodev.net:10157");
-    console.log("connecting");
+    console.log("connecting to TA");
     var TAsock = new WebSocket("ws://beatsaber.networkauditor.org:10157");
     TAsock.onopen = function (event) {
         console.log("*hacker voice* I'm in.");
-        document.getElementById("P1Miss1v1").style.display = "none";
-        document.getElementById("P2Miss1v1").style.display = "none";
+        document.getElementById("P1ScoringInfo").style.display = "";
+        document.getElementById("P2ScoringInfo").style.display = "";
+        document.getElementById("SongInfo").style.display = "";
+        document.getElementById("ConnectionTA").style.display = "none";
     };
 
     TAsock.onmessage = async function (event) {
@@ -356,21 +378,21 @@
 
             if (jsonObj.SpecificPacket.Type == 6) { // MatchLevelChanged
                 var matchData = jsonObj.SpecificPacket.ChangedObject;
-
+                matchData.StreamDelayMs = 0;
 
 
 
                 for (var i = 0; i < matchData.Players.length; i++) {
                     var playerData = matchData.Players[i];
                     if (playerData.UserId == P1ScoreSaber) {
-                        P1Misses.innerText = '0 misses';
-                        P1Acc.innerText = '00.00%';
+                        //      P1Misses.innerText = '0 misses';
+                        P1Acc.innerText = '100.00%';
                         P1Combo.innertext = "0x";
                     }
 
                     if (playerData.UserId == P2ScoreSaber) {
-                        P2Misses.innerText = '0 misses';
-                        P2Acc.innerText = '00.00%';
+                        //     P2Misses.innerText = '0 misses';
+                        P2Acc.innerText = '100.00%';
                         P2Combo.innerText = "0x";
                     }
 
@@ -427,20 +449,20 @@
 
                     if (playerId == P1ScoreSaber) {
                         setTimeout(() => {
-                                P1Misses.innerText = playerData.Misses + " misses";
-                                P1MissNew = playerData.Misses;
-                                if (P1MissOld != P1MissNew) {
-
-                                    document.getElementById("P1Miss1v1").style.display = "";
-                                    document.getElementById("P1Miss1v1").classList.add("animationFadeOut");
-                                    setTimeout(() => {
-                                        document.getElementById("P1Miss1v1").classList.remove(
-                                            "animationFadeOut");
-                                        document.getElementById("P1Miss1v1").style.display = "none";
-                                    }, 500);
-
-                                    P1MissOld = P1MissNew;
-                                }
+                                //   P1Misses.innerText = playerData.Misses + " misses";
+                                //   P1MissNew = playerData.Misses;
+                                //   if (P1MissOld != P1MissNew) {
+                                //
+                                //       document.getElementById("P1Miss1v1").style.display = "";
+                                //       document.getElementById("P1Miss1v1").classList.add("animationFadeOut");
+                                //       setTimeout(() => {
+                                //           document.getElementById("P1Miss1v1").classList.remove(
+                                //               "animationFadeOut");
+                                //           document.getElementById("P1Miss1v1").style.display = "none";
+                                //       }, 500);
+                                //
+                                //       P1MissOld = P1MissNew;
+                                //   }
 
                             },
                             StreamDelayMs);
@@ -450,20 +472,20 @@
 
                     if (playerId == P2ScoreSaber) {
                         setTimeout(() => {
-                                P2Misses.innerText = playerData.Misses + " misses";
-                                P2MissNew = playerData.Misses;
-                                if (P2MissOld != P2MissNew) {
-
-                                    document.getElementById("P2Miss1v1").style.display = "";
-                                    document.getElementById("P2Miss1v1").classList.add("animationFadeOut");
-                                    setTimeout(() => {
-                                        document.getElementById("P2Miss1v1").classList.remove(
-                                            "animationFadeOut");
-                                        document.getElementById("P2Miss1v1").style.display = "none";
-                                    }, 500);
-
-                                    P2MissOld = P2MissNew;
-                                }
+                                //    P2Misses.innerText = playerData.Misses + " misses";
+                                //   P2MissNew = playerData.Misses;
+                                //   if (P2MissOld != P2MissNew) {
+                                //
+                                //       document.getElementById("P2Miss1v1").style.display = "";
+                                //       document.getElementById("P2Miss1v1").classList.add("animationFadeOut");
+                                //       setTimeout(() => {
+                                //           document.getElementById("P2Miss1v1").classList.remove(
+                                //               "animationFadeOut");
+                                //           document.getElementById("P2Miss1v1").style.display = "none";
+                                //       }, 500);
+                                //
+                                //       P2MissOld = P2MissNew;
+                                //   }
 
 
                             },
@@ -516,6 +538,10 @@
         sock = new WebSocket("ws://localhost:1337");
         sock.onopen = function () {
             console.log("Connected to BSTournamentHelper");
+            document.getElementById("P1Miss1v1").style.display = "none";
+            document.getElementById("P2Miss1v1").style.display = "none";
+            document.getElementById("ConnectionController").style.display = "none";
+
         };
 
         sock.onclose = function (e) {
@@ -540,7 +566,6 @@
                 P4ScoreSaber = data.Data.P4;
                 coordinatorName = data.Data.CoordinatorName;
 
-
                 document.getElementById("P1ScoringInfo").style.display = "";
                 document.getElementById("P2ScoringInfo").style.display = "";
 
@@ -549,6 +574,7 @@
                     console.log("P1 is a Quest user");
                     document.getElementById("P1ScoringInfo").style.display = "none";
                     P1Name.innerText = data.Data.P1;
+
                 }
 
                 if (/^\d/.test(P2ScoreSaber) == false) {
@@ -606,6 +632,30 @@
                 caster2 = data.Data.Caster2;
                 caster1Name.innerText = caster1;
                 caster2Name.innerText = caster2;
+
+
+
+                if (data.Data.NameOverride == true) {
+                    setTimeout(() => {
+
+
+                        if (data.Data.P1Name != "") {
+                            P1Name.innerText = data.Data.P1Name;
+                        }
+                        if (data.Data.P2Name != "") {
+                            P2Name.innerText = data.Data.P2Name;
+                        }
+                        if (data.Data.P3Name != "") {
+                            P3Name.innerText = data.Data.P3Name;
+                        }
+                        if (data.Data.P4Name != "") {
+                            P4Name.innerText = data.Data.P4Name;
+                        }
+                    }, 500);
+                }
+
+
+
 
                 //  fetch(`https://new.scoresaber.com/api/player/${P3ScoreSaber}/full`)
                 //         .then(response => {

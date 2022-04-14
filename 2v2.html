@@ -9,13 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
     <style>
-        @font-face {
-            font-family: 'Matamata';
-            /*a name to be used later*/
-            src: url('Matamata-Bold.otf');
-            /*URL to font*/
-        }
-
         .Displayed {
             font-family: 'Montserrat';
             font-weight: 600;
@@ -71,7 +64,7 @@
             bottom: 375;
             right: 965;
             width: 500px;
-            height: 180px;
+            height: 230px;
             padding: 10px;
             margin: 0px;
             background-color: rgba(0, 0, 0, 0.0);
@@ -95,7 +88,7 @@
             bottom: 375;
             right: 435;
             width: 500px;
-            height: 180px;
+            height: 230px;
             padding: 10px;
             margin: 0px;
             background-color: rgba(0, 0, 0, 0.0);
@@ -119,7 +112,7 @@
             bottom: -27;
             right: 965;
             width: 500px;
-            height: 180px;
+            height: 230px;
             padding: 10px;
             margin: 0px;
             background-color: rgba(0, 0, 0, 0.0);
@@ -143,7 +136,7 @@
             bottom: -27;
             right: 435;
             width: 500px;
-            height: 180px;
+            height: 230px;
             padding: 10px;
             margin: 0px;
             background-color: rgba(0, 0, 0, 0.0);
@@ -319,6 +312,19 @@
             text-shadow: 6px 6px 8px #000000;
 
         }
+        .ConnectionStatus {
+            position: absolute;
+            bottom: 300;
+            left: 975;
+            background-color: rgba(0, 0, 0, 0.0);
+            font-family: 'Montserrat';
+            font-weight: 600;
+            font-style: normal;
+            color: rgb(255, 255, 255);
+            font-size: 15px;
+            text-shadow: 6px 6px 8px #000000;
+
+        }
 
         .bg {
             height: 100%;
@@ -348,6 +354,7 @@
         <img id="P1pfp" src="images/noprofilepic.png" class="P1Image pfpimg">
     </div>
     <div class="P1ScoringInfo" id="P1ScoringInfo">
+        <h2 id="P1Combo" class="Displayed Combo right">0x</h2>
         <h2 id="P1Acc" class="Displayed Acc right">100.00%</h2>
     </div>
 
@@ -356,6 +363,7 @@
         <img id="P2pfp" src="images/noprofilepic.png" class="P2Image pfpimg">
     </div>
     <div class="P2ScoringInfo" id="P2ScoringInfo">
+        <h2 id="P2Combo" class="Displayed Combo left">0x</h2>
         <h2 id="P2Acc" class="Displayed Acc left">100.00%</h2>
     </div>
 
@@ -364,6 +372,7 @@
         <img id="P3pfp" src="images/noprofilepic.png" class="P1Image pfpimg">
     </div>
     <div class="P3ScoringInfo" id="P3ScoringInfo">
+        <h2 id="P3Combo" class="Displayed Combo right">0x</h2>
         <h2 id="P3Acc" class="Displayed Acc right">100.00%</h2>
     </div>
 
@@ -372,16 +381,21 @@
         <img id="P4pfp" src="images/noprofilepic.png" class="P2Image pfpimg">
     </div>
     <div class="P4ScoringInfo" id="P4ScoringInfo">
+        <h2 id="P4Combo" class="Displayed Combo left">0x</h2>
         <h2 id="P4Acc" class="Displayed Acc left">100.00%</h2>
+    </div>
+
+    <div class ="ConnectionStatus" id = "ConnectionStatus">
+        <h1 id = "ConnectionController">Connecting to control panel...</h1>
+        <h1 id = "ConnectionTA">Connecting to TournamentAssistant...</h1>
+
     </div>
 
 
 
 
 
-
-
-    <div class="SongInfo" style="border-radius:25px;">
+    <div class="SongInfo" id="SongInfo" style="border-radius:25px;">
         <p id="SongArtist" class="SongArtist">Artist</p>
         <p id="SongName" class="SongName">Song Name</p>
         <img id="songCover" src="images/nosongcover.png" class="SongCover">
@@ -397,11 +411,11 @@
 
     </div>
 
-    <div class="team1Accuracy">
+    <div class="team1Accuracy" id="team1Accuracy">
         <span id="team1Acc">100.00%</span>
     </div>
 
-    <div class="team2Accuracy">
+    <div class="team2Accuracy" id="team2Accuracy">
         <span id="team2Acc">100.00%</span>
     </div>
 </body>
@@ -459,16 +473,39 @@
     var P4MissNew = 0;
     var P4MissOld = 0;
 
+
+
+    document.getElementById("P1ScoringInfo").style.display = "none";
+    document.getElementById("P2ScoringInfo").style.display = "none";
+    document.getElementById("P3ScoringInfo").style.display = "none";
+    document.getElementById("P4ScoringInfo").style.display = "none";
+    document.getElementById("team1Accuracy").style.display = "none";
+    document.getElementById("team2Accuracy").style.display = "none";
+    document.getElementById("SongInfo").style.display = "none";
+    
+    setTimeout(() => {
+        document.getElementById("ConnectionTA").style.display = "none";
+    }, 10000);
+
+
+    console.log("connecting to TA...");
     //var TAsock = new WebSocket("ws://beatsaber.networkauditor.org:10157");
     //var TAsock = new WebSocket("ws://ta.asodev.net:10157");
-    console.log("connecting");
     var TAsock = new WebSocket("ws://beatsaber.networkauditor.org:10157");
     TAsock.onopen = function (event) {
+
+        document.getElementById("P1ScoringInfo").style.display = "";
+        document.getElementById("P2ScoringInfo").style.display = "";
+        document.getElementById("P3ScoringInfo").style.display = "";
+        document.getElementById("P4ScoringInfo").style.display = "";
+        document.getElementById("team1Accuracy").style.display = "";
+        document.getElementById("team2Accuracy").style.display = "";
+        document.getElementById("SongInfo").style.display = "";
+        document.getElementById("ConnectionTA").style.display = "none";
+
+
         console.log("*hacker voice* I'm in.");
-        document.getElementById("P1Miss2v2").style.display = "none";
-        document.getElementById("P2Miss2v2").style.display = "none";
-        document.getElementById("P3Miss2v2").style.display = "none";
-        document.getElementById("P4Miss2v2").style.display = "none";
+
     };
 
     TAsock.onmessage = async function (event) {
@@ -490,18 +527,18 @@
                 for (var i = 0; i < matchData.Players.length; i++) {
                     var playerData = matchData.Players[i];
                     if (playerData.UserId == P1ScoreSaber) {
-                        P1Acc.innerText = '00.00%';
+                        P1Acc.innerText = '100.00%';
                     }
 
                     if (playerData.UserId == P2ScoreSaber) {
-                        P2Acc.innerText = '00.00%';
+                        P2Acc.innerText = '100.00%';
                     }
                     if (playerData.UserId == P3ScoreSaber) {
-                        P3Acc.innerText = '00.00%';
+                        P3Acc.innerText = '100.00%';
                     }
 
                     if (playerData.UserId == P4ScoreSaber) {
-                        P4Acc.innerText = '00.00%';
+                        P4Acc.innerText = '100.00%';
                     }
 
                     if (playerData.UserId == P1ScoreSaber || playerdata.UserId == P2ScoreSaber) {
@@ -520,25 +557,24 @@
                     var StreamDelayMs = jsonObj.SpecificPacket.SpecificPacket.ChangedObject.StreamDelayMs
 
                     if (playerId == P1ScoreSaber) {
-                        //P1Acc.innerText = playerData.Accuracy * 100 + "%";
                         //P1Score.style.fontSize = 20 + playerData.Misses + "px";
                         setTimeout(() => {
                                 p1RawAcc = playerData.Accuracy;
                                 P1Acc.innerText = (Math.round(p1RawAcc * 100 * 100) / 100).toFixed(2) + "%";
-                                P1MissNew = playerData.Misses;
-                                if (P1MissOld != P1MissNew) {
-
-                                    document.getElementById("P1Miss2v2").style.display = "";
-                                    document.getElementById("P1Miss2v2").classList.add("animationFadeOut");
-                                    setTimeout(() => {
-                                        document.getElementById("P1Miss2v2").classList.remove(
-                                            "animationFadeOut");
-                                        document.getElementById("P1Miss2v2").style.display = "none";
-                                    }, 500);
-
-                                    P1MissOld = P1MissNew;
-                                }
-
+                                // P1MissNew = playerData.Misses;
+                                // if (P1MissOld != P1MissNew) {
+                                //
+                                //     document.getElementById("P1Miss2v2").style.display = "";
+                                //     document.getElementById("P1Miss2v2").classList.add("animationFadeOut");
+                                //     setTimeout(() => {
+                                //         document.getElementById("P1Miss2v2").classList.remove(
+                                //             "animationFadeOut");
+                                //         document.getElementById("P1Miss2v2").style.display = "none";
+                                //     }, 500);
+                                //
+                                //     P1MissOld = P1MissNew;
+                                // }
+                                //
 
 
                             },
@@ -551,19 +587,19 @@
                         setTimeout(() => {
                                 p2RawAcc = playerData.Accuracy;
                                 P2Acc.innerText = (Math.round(p2RawAcc * 100 * 100) / 100).toFixed(2) + "%";
-                                P2MissNew = playerData.Misses;
-                                if (P2MissOld != P2MissNew) {
-
-                                    document.getElementById("P2Miss2v2").style.display = "";
-                                    document.getElementById("P2Miss2v2").classList.add("animationFadeOut");
-                                    setTimeout(() => {
-                                        document.getElementById("P2Miss2v2").classList.remove(
-                                            "animationFadeOut");
-                                        document.getElementById("P2Miss2v2").style.display = "none";
-                                    }, 500);
-
-                                    P2MissOld = P2MissNew;
-                                }
+                                // P2MissNew = playerData.Misses;
+                                // if (P2MissOld != P2MissNew) {
+                                //
+                                //     document.getElementById("P2Miss2v2").style.display = "";
+                                //     document.getElementById("P2Miss2v2").classList.add("animationFadeOut");
+                                //     setTimeout(() => {
+                                //         document.getElementById("P2Miss2v2").classList.remove(
+                                //             "animationFadeOut");
+                                //         document.getElementById("P2Miss2v2").style.display = "none";
+                                //     }, 500);
+                                //
+                                //     P2MissOld = P2MissNew;
+                                // }
 
                             },
                             StreamDelayMs);
@@ -573,19 +609,19 @@
                                 p3RawAcc = playerData.Accuracy;
                                 P3Acc.innerText = (Math.round(p3RawAcc * 100 * 100) / 100).toFixed(2) + "%";
 
-                                P3MissNew = playerData.Misses;
-                                if (P3MissOld != P3MissNew) {
-
-                                    document.getElementById("P3Miss2v2").style.display = "";
-                                    document.getElementById("P3Miss2v2").classList.add("animationFadeOut");
-                                    setTimeout(() => {
-                                        document.getElementById("P3Miss2v2").classList.remove(
-                                            "animationFadeOut");
-                                        document.getElementById("P3Miss2v2").style.display = "none";
-                                    }, 500);
-
-                                    P3MissOld = P3MissNew;
-                                }
+                                //  P3MissNew = playerData.Misses;
+                                //  if (P3MissOld != P3MissNew) {
+                                //
+                                //      document.getElementById("P3Miss2v2").style.display = "";
+                                //      document.getElementById("P3Miss2v2").classList.add("animationFadeOut");
+                                //      setTimeout(() => {
+                                //          document.getElementById("P3Miss2v2").classList.remove(
+                                //              "animationFadeOut");
+                                //          document.getElementById("P3Miss2v2").style.display = "none";
+                                //      }, 500);
+                                //
+                                //      P3MissOld = P3MissNew;
+                                //  }
                             },
                             StreamDelayMs);
                     }
@@ -593,19 +629,19 @@
                         setTimeout(() => {
                                 p4RawAcc = playerData.Accuracy;
                                 P4Acc.innerText = (Math.round(p4RawAcc * 100 * 100) / 100).toFixed(2) + "%";
-                                P4MissNew = playerData.Misses;
-                                if (P4MissOld != P4MissNew) {
-
-                                    document.getElementById("P4Miss2v2").style.display = "";
-                                    document.getElementById("P4Miss2v2").classList.add("animationFadeOut");
-                                    setTimeout(() => {
-                                        document.getElementById("P4Miss2v2").classList.remove(
-                                            "animationFadeOut");
-                                        document.getElementById("P4Miss2v2").style.display = "none";
-                                    }, 500);
-
-                                    P4MissOld = P4MissNew;
-                                }
+                                //  P4MissNew = playerData.Misses;
+                                //  if (P4MissOld != P4MissNew) {
+                                //
+                                //      document.getElementById("P4Miss2v2").style.display = "";
+                                //      document.getElementById("P4Miss2v2").classList.add("animationFadeOut");
+                                //      setTimeout(() => {
+                                //          document.getElementById("P4Miss2v2").classList.remove(
+                                //              "animationFadeOut");
+                                //          document.getElementById("P4Miss2v2").style.display = "none";
+                                //      }, 500);
+                                //
+                                //      P4MissOld = P4MissNew;
+                                //  }
                             },
                             StreamDelayMs);
                     }
@@ -627,7 +663,12 @@
 
         sock = new WebSocket("ws://localhost:1337");
         sock.onopen = function () {
-            console.log("Connected to BSTournamentHelper");
+            document.getElementById("P1Miss2v2").style.display = "none";
+            document.getElementById("P2Miss2v2").style.display = "none";
+            document.getElementById("P3Miss2v2").style.display = "none";
+            document.getElementById("P4Miss2v2").style.display = "none";
+            document.getElementById("ConnectionController").style.display = "none";
+
         };
 
         sock.onclose = function (e) {
@@ -663,6 +704,8 @@
                     console.log("P1 is a Quest user");
                     document.getElementById("P1ScoringInfo").style.display = "none";
                     P1Name.innerText = data.Data.P1;
+                    document.getElementById("team1Accuracy").style.display = "none";
+
                 }
 
                 if (/^\d/.test(P2ScoreSaber) == false) {
@@ -670,12 +713,14 @@
                     console.log("P2 is a Quest user");
                     document.getElementById("P2ScoringInfo").style.display = "none";
                     P2Name.innerText = data.Data.P2;
+                    document.getElementById("team2Accuracy").style.display = "none";
                 }
                 if (/^\d/.test(P3ScoreSaber) == false) {
 
                     console.log("P3 is a Quest user");
                     document.getElementById("P3ScoringInfo").style.display = "none";
                     P3Name.innerText = data.Data.P3;
+                    document.getElementById("team1Accuracy").style.display = "none";
                 }
 
                 if (/^\d/.test(P4ScoreSaber) == false) {
@@ -683,6 +728,7 @@
                     console.log("P2 is a Quest user");
                     document.getElementById("P4ScoringInfo").style.display = "none";
                     P4Name.innerText = data.Data.P4;
+                    document.getElementById("team2Accuracy").style.display = "none";
                 }
 
 
@@ -775,6 +821,27 @@
                     .catch(err => {
                         console.log(err)
                     })
+
+                if (data.Data.NameOverride == true) {
+                    setTimeout(() => {
+
+
+                        if (data.Data.P1Name != "") {
+                            P1Name.innerText = data.Data.P1Name;
+                        }
+                        if (data.Data.P2Name != "") {
+                            P2Name.innerText = data.Data.P2Name;
+                        }
+                        if (data.Data.P3Name != "") {
+                            P3Name.innerText = data.Data.P3Name;
+                        }
+                        if (data.Data.P4Name != "") {
+                            P4Name.innerText = data.Data.P4Name;
+                        }
+                    }, 1000);
+                }
+
+
             }
 
 

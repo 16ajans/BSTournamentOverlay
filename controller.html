@@ -65,7 +65,7 @@
         width: 100%;
     }
 
-    input {
+    .input {
         margin-right: 16px/2;
         background: rgb(48, 48, 48);
         box-shadow: inset 2px 2px 5px #444444, inset -5px -5px 10px rgb(48, 48, 48);
@@ -74,6 +74,12 @@
         transition: all 0.2s ease-in-out;
         appearance: none;
         -webkit-appearance: none;
+
+    }
+    .long {
+
+        width: 15%;
+
 
     }
 
@@ -121,17 +127,26 @@
 </style>
 
 <body>
-    Player 1 SSID: <input type="text" id="p1SSID" value="76561198117409561"> Player 3 SSID: <input type="text"
-        id="p3SSID" value="1723118904401557">(Team 1)<br> <br>
-    Player 2 SSID: <input type="text" id="p2SSID" value="76561198103113271"> Player 4 SSID: <input type="text"
-        id="p4SSID" value="2657138211032529"> (Team 2)<br>
+    (Team 1) Player 1 SSID: <input type="text" class = "input" id="p1SSID" value="76561198117409561"> (Team 2) Player 2 SSID: <input type="text" class = "input" id="p2SSID" value="76561198103113271"> <br>
+    (Team 1)Player 3 SSID: <input type="text" class = "input" id="p3SSID" value="1723118904401557"> (Team 2) Player 4 SSID: <input type="text" class = "input" id="p4SSID" value="2657138211032529"><br> 
+    
+    <label for="chkBox">
+        <input type="checkbox" id="chkBox" onclick="ShowHideDiv(this)" />
+        Name override?
+    </label>
+    <div id="dvBox" style="display: none">
+        (Team 1) Player 1 Name: <input type="text" class = "input" id="p1Name" value=""> (Team 2) Player 2 Name: <input type="text" class = "input" id="p2Name" value=""> <br>
+    (Team 1)Player 3 Name: <input type="text" class = "input" id="p3Name" value=""> (Team 2) Player 4 Name: <input type="text" class = "input" id="p4Name" value=""><br>
+    </div>
+    <br>
+     
     <br>
     Make sure to run Send Data + Get Stats when players change!!
     <br>
     <br>
     <!--  Coordinator Name: <input type="text" id="coordName"><br> -->
-    Caster 1: <input type="text" id="caster1" value="Caster 1"><br>
-    Caster 2: <input type="text" id="caster2" value="Caster 2"><br>
+    Caster 1: <input type="text" id="caster1" class = "input" value="Caster 1"><br>
+    Caster 2: <input type="text" id="caster2" class = "input" value="Caster 2"><br>
     <br>
     Team 1: <select id="team1">
         <!--  <option value="ArsenalAdjacent">Arsenal Adjacent (P)</option>
@@ -155,14 +170,19 @@
         <option value="Stevens">Stevens Esports (BS)</option>
         <option value="TNTech">TNTech (BS)</option>
         <option value="Beatcats">Beatcats (BS)</option>
-        <option value="UTDallas">UT Dallas Longhorns(BS)</option>
+        <option value="UTDallas">UT Dallas Longhorns (BS)</option>
         <option value="GeorgiaTech">Georgia Tech (BS)</option>
         <option value="OntarioTech">Ontario Tech (BS)</option>
         <option value="DePaul">DePaul Esports (BS)</option>
         <option value="Akron">Akron Esports (BS)</option>
         <option value="Miami">Miami Maelstorm (BS)</option>
+        <option value="SJSU">SJSU Esports (BS)</option>
+        <option value="Crimson">Crimson (BS)</option>
+        <option value="CalA">Cal Esports A (BS)</option>
+        <option value="CalB">Cal Esports B (BS)</option>
+        <option value="CalC">Cal Esports C (BS)</option>
         <option value="EmptyTeam">Empty</option>
-    </select> Score: <input type="number" class="number" id="team1Score" value="0" min="0" max="5"><br>
+    </select> Score: <input type="number" class = "input" class="number" id="team1Score" value="0" min="0" max="5"><br>
     Team 2: <select id="team2">
         <!--  <option value="ArsenalAdjacent">Arsenal Adjacent (P)</option>
         <option value="ucberkeley">Cal Esports (P)</option>
@@ -191,8 +211,13 @@
         <option value="DePaul">DePaul Esports (BS)</option>
         <option value="Akron">Akron Esports (BS)</option>
         <option value="Miami">Miami Maelstorm (BS)</option>
+        <option value="SJSU">SJSU Esports (BS)</option>
+        <option value="Crimson">Crimson (BS)</option>
+        <option value="CalA">Cal Esports A (BS)</option>
+        <option value="CalB">Cal Esports B (BS)</option>
+        <option value="CalC">Cal Esports C (BS)</option>
         <option value="EmptyTeam">Empty</option>
-    </select> Score: <input type="number" class="number" id="team2Score" value="0" min="0" max="5"><br>
+    </select> Score: <input type="number" class = "input" class="number" id="team2Score" value="0" min="0" max="5"><br>
     Best of: <select id="bestof">
         <option value="bo3">3</option>
         <option value="bo5">5</option>
@@ -200,7 +225,7 @@
         <option value="bo9">9</option>
     </select><br>
 
-    Round Info: <input type="text" id="roundInfo" value="Default Round"><br><br>
+    Round Info: <input type="text"  class = "input long" id="roundInfo" value="Season 8 Div. # Round #"><br><br>
 
     Map Pool: <select id="mapPoolID">
         <option value="336">CVRE Div. 1 (336)</option>
@@ -292,6 +317,13 @@
     </div>
 </body>
 <script>
+
+function ShowHideDiv(chkBox) {
+        var dvBox = document.getElementById("dvBox");
+        dvBox.style.display = chkBox.checked ? "block" : "none";
+    }
+
+    
     function teamListUpdate() {
         var e1 = document.getElementById("team1");
         var team1Selection = e1.options[e1.selectedIndex].value;
@@ -432,6 +464,11 @@
                     "Map8": map8Selection.innerHTML,
                     "DisplayedMaps": displayedMapsSelection.innerHTML,
                     "StatsUpdate": 0,
+                    "NameOverride": chkBox.checked,
+                    "P1Name": p1Name.value,
+                    "P2Name": p2Name.value,
+                    "P3Name": p3Name.value,
+                    "P4Name": p4Name.value,
                 }
 
 
@@ -492,6 +529,11 @@
                     "Map8": map8Selection.innerHTML,
                     "DisplayedMaps": displayedMapsSelection.innerHTML,
                     "StatsUpdate": 1,
+                    "NameOverride": chkBox.checked,
+                    "P1Name": p1Name.value,
+                    "P2Name": p2Name.value,
+                    "P3Name": p3Name.value,
+                    "P4Name": p4Name.value,
                 }
 
 
