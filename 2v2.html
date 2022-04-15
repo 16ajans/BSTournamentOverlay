@@ -482,7 +482,7 @@
     document.getElementById("team1Accuracy").style.display = "none";
     document.getElementById("team2Accuracy").style.display = "none";
     document.getElementById("SongInfo").style.display = "none";
-    
+
     setTimeout(() => {
         document.getElementById("ConnectionTA").style.display = "none";
     }, 10000);
@@ -560,6 +560,7 @@
                         //P1Score.style.fontSize = 20 + playerData.Misses + "px";
                         setTimeout(() => {
                                 p1RawAcc = playerData.Accuracy;
+                                P1Combo.innerText = playerData.Combo + "x";
                                 P1Acc.innerText = (Math.round(p1RawAcc * 100 * 100) / 100).toFixed(2) + "%";
                                 // P1MissNew = playerData.Misses;
                                 // if (P1MissOld != P1MissNew) {
@@ -586,6 +587,7 @@
                     if (playerId == P2ScoreSaber) {
                         setTimeout(() => {
                                 p2RawAcc = playerData.Accuracy;
+                                P2Combo.innerText = playerData.Combo + "x";
                                 P2Acc.innerText = (Math.round(p2RawAcc * 100 * 100) / 100).toFixed(2) + "%";
                                 // P2MissNew = playerData.Misses;
                                 // if (P2MissOld != P2MissNew) {
@@ -607,6 +609,7 @@
                     if (playerId == P3ScoreSaber) {
                         setTimeout(() => {
                                 p3RawAcc = playerData.Accuracy;
+                                P3Combo.innerText = playerData.Combo + "x";
                                 P3Acc.innerText = (Math.round(p3RawAcc * 100 * 100) / 100).toFixed(2) + "%";
 
                                 //  P3MissNew = playerData.Misses;
@@ -628,6 +631,7 @@
                     if (playerId == P4ScoreSaber) {
                         setTimeout(() => {
                                 p4RawAcc = playerData.Accuracy;
+                                P4Combo.innerText = playerData.Combo + "x";
                                 P4Acc.innerText = (Math.round(p4RawAcc * 100 * 100) / 100).toFixed(2) + "%";
                                 //  P4MissNew = playerData.Misses;
                                 //  if (P4MissOld != P4MissNew) {
@@ -661,7 +665,7 @@
 
     function connect() {
 
-        sock = new WebSocket("ws://localhost:1337");
+        sock = new WebSocket("ws://localhost:13379");
         sock.onopen = function () {
             document.getElementById("P1Miss2v2").style.display = "none";
             document.getElementById("P2Miss2v2").style.display = "none";
@@ -698,6 +702,8 @@
                 document.getElementById("P2ScoringInfo").style.display = "";
                 document.getElementById("P3ScoringInfo").style.display = "";
                 document.getElementById("P4ScoringInfo").style.display = "";
+                document.getElementById("team1Accuracy").style.display = "";
+                document.getElementById("team2Accuracy").style.display = "";
 
                 if (/^\d/.test(P1ScoreSaber) == false) {
 

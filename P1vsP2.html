@@ -535,7 +535,7 @@
 
     function connect() {
 
-        sock = new WebSocket("ws://localhost:1337");
+        sock = new WebSocket("ws://localhost:13379");
         sock.onopen = function () {
             console.log("Connected to BSTournamentHelper");
             document.getElementById("P1Miss1v1").style.display = "none";

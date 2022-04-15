@@ -181,6 +181,7 @@
         <option value="CalA">Cal Esports A (BS)</option>
         <option value="CalB">Cal Esports B (BS)</option>
         <option value="CalC">Cal Esports C (BS)</option>
+        <option value="Nolan">Nolan (BS)</option>
         <option value="EmptyTeam">Empty</option>
     </select> Score: <input type="number" class = "input" class="number" id="team1Score" value="0" min="0" max="5"><br>
     Team 2: <select id="team2">
@@ -201,7 +202,7 @@
         <option value="ChargerBlue">Charger Blue (BS)</option>
         <option value="UCDavis">UC Davis (BS)</option>
         <option value="SUNY">SUNY Plattsburgh (BS)</option>
-        <option value="UC">UC Esports (BS)</option>
+        <option value="UCEsports">UC Esports (BS)</option>
         <option value="Stevens">Stevens Esports (BS)</option>
         <option value="TNTech">TNTech (BS)</option>
         <option value="Beatcats">Beatcats (BS)</option>
@@ -216,6 +217,7 @@
         <option value="CalA">Cal Esports A (BS)</option>
         <option value="CalB">Cal Esports B (BS)</option>
         <option value="CalC">Cal Esports C (BS)</option>
+        <option value="Nolan">Nolan (BS)</option>
         <option value="EmptyTeam">Empty</option>
     </select> Score: <input type="number" class = "input" class="number" id="team2Score" value="0" min="0" max="5"><br>
     Best of: <select id="bestof">
@@ -406,7 +408,7 @@ function ShowHideDiv(chkBox) {
 
     function connect() {
 
-        sock = new WebSocket("ws://localhost:1337");
+        sock = new WebSocket("ws:127.0.0.1:13379");
         sock.onopen = function () {
             console.log("Connected to BSTournamentHelper");
         };
