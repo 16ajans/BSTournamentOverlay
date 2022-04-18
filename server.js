@@ -3,7 +3,7 @@ const WebSocket = require('ws');
 const fetch = require('node-fetch');
 
 const server = new WebSocket.Server({
-    port: 13379
+    port: 1337
 });
 
 

@@ -408,7 +408,8 @@ function ShowHideDiv(chkBox) {
 
     function connect() {
 
-        sock = new WebSocket("ws:127.0.0.1:13379");
+        sock = new WebSocket("ws://localhost:1337");
+        console.log("Attempting to connect to control panel");
         sock.onopen = function () {
             console.log("Connected to BSTournamentHelper");
         };

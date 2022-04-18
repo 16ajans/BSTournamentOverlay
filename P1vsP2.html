@@ -62,7 +62,8 @@
 
         .P1ScoringInfo {
             position: fixed;
-            bottom: 180;
+            bottom: 120;
+            /* Originally bottom: 180 */
             right: 965;
             width: 500px;
             height: 180px;
@@ -86,7 +87,7 @@
 
         .P2ScoringInfo {
             position: fixed;
-            bottom: 180;
+            bottom: 120;
             right: 435;
             width: 500px;
             height: 180px;
@@ -249,7 +250,7 @@
         .ConnectionStatus {
             position: absolute;
             bottom: 5;
-            left: 800;
+            left: 1300;
             background-color: rgba(0, 0, 0, 0.0);
             font-family: 'Montserrat';
             font-weight: 600;
@@ -535,7 +536,7 @@
 
     function connect() {
 
-        sock = new WebSocket("ws://localhost:13379");
+        sock = new WebSocket("ws://localhost:1337");
         sock.onopen = function () {
             console.log("Connected to BSTournamentHelper");
             document.getElementById("P1Miss1v1").style.display = "none";
