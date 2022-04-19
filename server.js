@@ -143,8 +143,12 @@ function calcMaxScore(noteCount) {
     num += noteCount * i;
     return num * 115;
 }
-
-
+var P1ScoreSaber = '';
+var P2ScoreSaber = '';
+var P3ScoreSaber = '';
+var P4ScoreSaber = '';
+var Team1 = '';
+var Team2 = '';
 
 
 let sockets = [];
@@ -161,10 +165,9 @@ server.on('connection', function (socket) {
         // Check for event called PlayerIDs
 
 
-        var P1ScoreSaber = '';
-        var P2ScoreSaber = '';
-        var P3ScoreSaber = '';
-        var P4ScoreSaber = '';
+
+
+        var mapCount = 0;
 
 
 
@@ -176,17 +179,37 @@ server.on('connection', function (socket) {
 
 
 
-        if (data.Event == "MatchData") {
-            P1ScoreSaber = data.Data.P1;
-            P2ScoreSaber = data.Data.P2;
-            P3ScoreSaber = data.Data.P3;
-            P4ScoreSaber = data.Data.P4;
+        if (data.Event == "ControllerData") {
+            console.log("Recieved ControllerData")
+            console.log(data);
+            P1 = data.Data.P1;
+            P2 = data.Data.P2;
+            P3 = data.Data.P3;
+            P4 = data.Data.P4;
             MapPool = data.Data.MapPool + '';
-            var mapCount = 0;
+            Team1 = data.Data.Team1;
+            console.log(Team1);
+            Team2 = data.Data.Team2;
 
+            if (P1 != "") {
+                P1ScoreSaber = teamInfo[Team1][P1].SSID;
+            }
 
+            if (P2 != "") {
+                P2ScoreSaber = teamInfo[Team2][P2].SSID;
+            }
+            if (P3 != "") {
+                P3ScoreSaber = teamInfo[Team1][P3].SSID;
+            }
+            if (P4 != "") {
+                P4ScoreSaber = teamInfo[Team2][P4].SSID;
+            }
+            console.log(P1ScoreSaber);
+            console.log(P2ScoreSaber);
+            console.log(P3ScoreSaber);
+            console.log(P4ScoreSaber);
 
-
+            sourceUpdate();
 
 
 
@@ -753,10 +776,87 @@ server.on('connection', function (socket) {
 
                 }, 5000);
             }
+
+
+            //
+            var messageData = {
+                "Event": "MatchData",
+                "Data": {
+                    "P1": P1ScoreSaber,
+                    "P2": P2ScoreSaber,
+                    "P3": P3ScoreSaber,
+                    "P4": P4ScoreSaber,
+                    "Team1": data.Data.Team1,
+                    "Team2": data.Data.Team1,
+                    "Caster1": data.Data.Caster1,
+                    "Caster2": data.Data.Caster2,
+                    "BestOf": data.Data.BestOf,
+                    "Team1Score": data.Data.Team1Score,
+                    "Team2Score": data.Data.Team2Score,
+                    "RoundInfo": data.Data.RoundInfo,
+                    "MapPool": data.Data.MapPool,
+                    "Map0": data.Data.Map0,
+                    "Map1": data.Data.Map1,
+                    "Map2": data.Data.Map2,
+                    "Map3": data.Data.Map3,
+                    "Map4": data.Data.Map4,
+                    "Map5": data.Data.Map5,
+                    "Map6": data.Data.Map6,
+                    "Map7": data.Data.Map7,
+                    "Map8": data.Data.Map8,
+                    "DisplayedMaps": data.Data.DisplayedMaps,
+                    "StatsUpdate": data.Data.StatsUpdate,
+                    "NameOverride": data.Data.NameOverride,
+                    "P1Name": data.Data.P1Name,
+                    "P2Name": data.Data.P2Name,
+                    "P3Name": data.Data.P3Name,
+                    "P4Name": data.Data.P4Name,
+                }
+            }
+
+
+
+            var messageString = JSON.stringify(messageData);
+
+            console.log("Sending MatchData");
+            console.log(messageString);
+            sockets.forEach(s => s.send(messageString));
+
+
+
+
         }
 
 
-        // Setting p1 ssid & p2 ssid 
+        if (data.Event == "ControllerTeamData") {
+            console.log("Recieved ControllerTeamData")
+            console.log(data);
+
+            Team1 = data.Data.Team1;
+            Team2 = data.Data.Team2;
+
+
+            const team1Players = Object.keys(teamInfo[Team1]);
+            console.log(team1Players);
+            const team2Players = Object.keys(teamInfo[Team2]);
+            console.log(team2Players);
+
+            var messageData = {
+                "Event": "TeamPlayers",
+                "Data": {
+                    "Team1": team1Players,
+                    "Team2": team2Players,
+                }
+            }
+            var messageString = JSON.stringify(messageData);
+
+            console.log("Sending TeamPlayers");
+            console.log(messageString);
+            sockets.forEach(s => s.send(messageString));
+        }
+
+
+
     });
 
     socket.on('close', function () {
@@ -1613,4 +1713,548 @@ function scoreWipe() {
     P4Map8Misses = "0";
     console.log("Scores wiped");
 
+}
+
+
+
+// Holy crap lois its the list of every single fucking player in the league
+
+// here we go
+
+
+var teamInfo = {
+
+    "Beatcats": {
+        "DoctusPi": {
+            "SSID": "76561198103113271",
+            "channelName": "avatreides"
+        },
+        "Punitive": {
+            "SSID": "1723118904401557",
+            "channelName": "punitiverph"
+        },
+        "SuperStache9709": {
+            "SSID": "76561198096152393",
+            "channelName": "superstache9709"
+        },
+        "Egg Time": {
+            "SSID": "76561198117409561",
+            "channelName": "egg_time_"
+        },
+    },
+    "IlliniOrange": {
+        "Benjo": {
+            "SSID": "Benjo",
+            "channelName": ""
+        },
+        "Nelson16": {
+            "SSID": "2389030471126836",
+            "channelName": ""
+        },
+        "Renrut1304": {
+            "SSID": "76561198327977222",
+            "channelName": ""
+        },
+        "InProgress": {
+            "SSID": "76561198180733791",
+            "channelName": ""
+        },
+        "BoscoStixs": {
+            "SSID": "76561198346397884",
+            "channelName": ""
+        },
+    },
+
+    "IlliniD1": {
+        "The_Computerizer": {
+            "SSID": "The_Computerizer",
+            "channelName": "the_computerizer"
+        },
+
+    },
+
+    "ucberkeley": {
+        "vcninc": {
+            "SSID": "76561198082405957",
+            "channelName": ""
+        },
+        "Sc2ad": {
+            "SSID": "Sc2ad",
+            "channelName": ""
+        },
+        "100 gecs": {
+            "SSID": "76561198186628623",
+            "channelName": ""
+        },
+    },
+
+
+    "Gauchos": {
+        "cfelton02": {
+            "SSID": "4765259963499245",
+            "channelName": "cfelton02"
+        },
+    },
+    "UAF": {
+        "Fryoxes": {
+            "SSID": "76561198093733509",
+            "channelName": ""
+        },
+        "Replacement": {
+            "SSID": "Replacement",
+            "channelName": ""
+        },
+        "ArcticSpider": {
+            "SSID": "ArcticSpider",
+            "channelName": ""
+        },
+        "Vivcos": {
+            "SSID": "Vivcos",
+            "channelName": ""
+        },
+        "killpopvixen": {
+            "SSID": "76561198075543723",
+            "channelName": ""
+        },
+    },
+    "CSUF": {
+        "RobNHood": {
+            "SSID": "76561198875564214",
+            "channelName": "robnhood2000"
+        },
+    },
+    "OCE": {
+        "BoneBot": {
+            "SSID": "2890698244283056",
+            "channelName": ""
+        },
+        "Shadowdark": {
+            "SSID": "76561198170118605",
+            "channelName": ""
+        },
+        "frostbit912": {
+            "SSID": "76561198100038676",
+            "channelName": ""
+        },
+        "HeroOfTime": {
+            "SSID": "76561198256832206",
+            "channelName": ""
+        },
+        "fireburningblue": {
+            "SSID": "76561198086274067",
+            "channelName": ""
+        },
+    },
+    "ChargerBlue": {
+        "Arentavian": {
+            "SSID": "Arentavian",
+            "channelName": "arentavian"
+        },
+        "Nocturnal Ghost": {
+            "SSID": "Nocturnal Ghost",
+            "channelName": ""
+        },
+        "JeremiahHR133": {
+            "SSID": "76561198376675778",
+            "channelName": "jeremiahhr"
+        },
+        "Wheres_my_pants": {
+            "SSID": "Wheres_my_pants",
+            "channelName": ""
+        },
+    },
+    "UCDavis": {
+        "Ecal": {
+            "SSID": "76561198122900561",
+            "channelName": ""
+        },
+        "jeprose": {
+            "SSID": "76561198252901294",
+            "channelName": ""
+        },
+        "tomwick707": {
+            "SSID": "76561198147938990",
+            "channelName": ""
+        },
+        "timmie": {
+            "SSID": "76561198367036671",
+            "channelName": ""
+        },
+    },
+    "SUNY": {
+        "$MJustin": {
+            "SSID": "76561198255621372",
+            "channelName": ""
+        },
+    },
+    "UCEsports": {
+        "$MakoCho": {
+            "SSID": "76561198308893404",
+            "channelName": "makocho_"
+        },
+        "$Lyrunis": {
+            "SSID": "76561198187120155",
+            "channelName": "Lyrunis"
+        },
+    },
+    "Stevens": {
+        "Astrais": {
+            "SSID": "2092178757563532",
+            "channelName": "Astrais_"
+        },
+    },
+    "TNTech": {
+        "TheKingOfNowhere": {
+            "SSID": "TheKingOfNowhere",
+            "channelName": ""
+        },
+        "D W": {
+            "SSID": "Ð W",
+            "channelName": ""
+        },
+        "Sky": {
+            "SSID": "Sky",
+            "channelName": ""
+        },
+    },
+    "Longhorns": {
+        "Bootleg_Cars": {
+            "SSID": "76561198048182406",
+            "channelName": ""
+        },
+        "Xmpo": {
+            "SSID": "76561198212831695",
+            "channelName": "xmpo"
+        },
+        "vbob100": {
+            "SSID": "76561198172264582",
+            "channelName": "vbob1000"
+        },
+    },
+    "GeorgiaTech": {
+        "AKSKL": {
+            "SSID": "76561198158077485",
+            "channelName": ""
+        },
+        "Rovio": {
+            "SSID": "76561198066978261",
+            "channelName": ""
+        },
+        "Elioc997472": {
+            "SSID": "Elioc997472",
+            "channelName": ""
+        },
+        "energy999": {
+            "SSID": "76561198172264582",
+            "channelName": ""
+        },
+    },
+    "OntarioTech": {
+        "EJ": {
+            "SSID": "76561198321316302",
+            "channelName": ""
+        },
+    },
+    "DePaul": {
+        "HankDeTank": {
+            "SSID": "76561198085563627",
+            "channelName": ""
+        },
+        "johnathini": {
+            "SSID": "johnathini",
+            "channelName": "johnathini1"
+        },
+        "Jilly70": {
+            "SSID": "Jilly70",
+            "channelName": "vexfulfolly"
+        },
+    },
+    "Akron": {
+        "Civil Wrongz": {
+            "SSID": "76561198852398613",
+            "channelName": "civil_wrongz"
+        },
+        "Yrene": {
+            "SSID": "76561198139728158",
+            "channelName": "yr3ne"
+        },
+        "Jax": {
+            "SSID": "76561198121632304",
+            "channelName": ""
+        },
+    },
+    "Miami": {
+        "SlimSchmidty": {
+            "SSID": "76561198117306274",
+            "channelName": ""
+        },
+        "ChiefHookerRed": {
+            "SSID": "3268941496561526",
+            "channelName": ""
+        },
+        "t1tans5": {
+            "SSID": "76561198076536340",
+            "channelName": ""
+        },
+    },
+    "SJSU": {
+        "Camsqu": {
+            "SSID": "76561198067531725",
+            "channelName": "camsqu"
+        },
+        "Ferret": {
+            "SSID": "76561198796337172",
+            "channelName": ""
+        },
+        "Ulmnh": {
+            "SSID": "76561198096021868",
+            "channelName": "ulmnh"
+        },
+        "Bladeskillz": {
+            "SSID": "76561198166522772",
+            "channelName": "bladeskillz"
+        },
+    },
+    "CrimsonA": {
+        "Amor": {
+            "SSID": "Amor",
+            "channelName": ""
+        },
+        "pangolin": {
+            "SSID": "76561198997234072",
+            "channelName": ""
+        },
+        "Nightly": {
+            "SSID": "76561198164519068",
+            "channelName": ""
+        },
+        "Sojx": {
+            "SSID": "76561198317479231",
+            "channelName": ""
+        },
+        "SebassTehFish": {
+            "SSID": "76561198113737580",
+            "channelName": ""
+        },
+    },
+    "CrimsonB": {
+        "Harrison": {
+            "SSID": "76561198121340513",
+            "channelName": ""
+        },
+        "DogsOnStage": {
+            "SSID": "76561198127395609",
+            "channelName": ""
+        },
+        "nic": {
+            "SSID": "76561198092291978",
+            "channelName": ""
+        },
+        "Fanfrantic": {
+            "SSID": "Fanfrantic",
+            "channelName": ""
+        },
+    },
+    "CalA": {
+        "Lavender": {
+            "SSID": "Lavender",
+            "channelName": ""
+        },
+        "bunnybear": {
+            "SSID": "bunnybear",
+            "channelName": ""
+        },
+        "Nate Young": {
+            "SSID": "Nate Young",
+            "channelName": ""
+        },
+        "Skaldaspillir": {
+            "SSID": "Skaldaspillir",
+            "channelName": ""
+        },
+    },
+    "CalB": {
+        "sumguy002": {
+            "SSID": "sumguy002",
+            "channelName": ""
+        },
+        "Kaosu": {
+            "SSID": "76561198127395609",
+            "channelName": ""
+        },
+        "Legend999991": {
+            "SSID": "Legend999991",
+            "channelName": ""
+        },
+    },
+    "CalC": {
+        "glummie": {
+            "SSID": "76561198351010444",
+            "channelName": ""
+        },
+        "ava_o7": {
+            "SSID": "ava_o7",
+            "channelName": ""
+        },
+        "YoniDaMan": {
+            "SSID": "3357739814345872",
+            "channelName": ""
+        },
+    },
+    "Nolan": {
+        "Nolanimations": {
+            "SSID": "76561198082797048",
+            "channelName": "nolanimations"
+        },
+    },
+    "UTDallas": {
+        "ShadowPixel27": {
+            "SSID": "76561198245321138",
+            "channelName": "shadowpixel27"
+        },
+    },
+    "UWaterloo": {
+        "Rivershrimp": {
+            "SSID": "76561198857586691",
+            "channelName": ""
+        },
+        "Kiwi": {
+            "SSID": "Kiwi",
+            "channelName": ""
+        },
+        "Quigomink": {
+            "SSID": "76561199180621175",
+            "channelName": ""
+        },
+        "Pinaspi": {
+            "SSID": "Pinaspi",
+            "channelName": ""
+        },
+    },
+    "EmptyTeam": {
+        "name": " ",
+        "logo": "images/EmptyTeam.png"
+    },
+
+
+
+
+
+}
+
+
+
+//OBS SHIT WEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+
+const OBSWebSocket = require('obs-websocket-js');
+const obs = new OBSWebSocket();
+OBSconnect();
+
+function OBSconnect() {
+    obs.connect({
+            address: 'localhost:4444',
+            password: 'ILoveMen####'
+        })
+        .then(() => {
+            console.log(`Connected to OBS!`);
+
+            return obs.send('GetSceneList');
+        })
+        .then(data => {
+            console.log(`${data.scenes.length} Available Scenes!`);
+        })
+        .catch(err => { // Promise convention dicates you have a catch on every chain.
+            console.log(err);
+            console.log("Reconnecting to OBS");
+            setTimeout(function () {
+                OBSconnect();
+            }, 1000);
+        });
+
+}
+
+function sourceUpdate() {
+
+    if (P1 != "") {
+        if (typeof teamInfo[Team1][P1].channelName === undefined) {
+            teamInfo[Team1][P1].channelName = "unknown";
+        }
+    }
+    if (P2 != "") {
+        if (typeof teamInfo[Team2][P2].channelName === undefined) {
+            teamInfo[Team2][P2].channelName = "unknown";
+        }
+    }
+    if (P3 != "") {
+        if (typeof teamInfo[Team1][P3].channelName === undefined) {
+            teamInfo[Team1][P3].channelName = "unknown";
+        }
+    }
+    if (P4 != "") {
+        if (typeof teamInfo[Team2][P4].channelName === undefined) {
+            teamInfo[Team2][P4].channelName = "unknown";
+        }
+    }
+
+
+    if (P1 != "") {
+        sourceSettings = {
+            "reroute_audio": true,
+            "url": `https://player.twitch.tv/?channel=${teamInfo[Team1][P1].channelName}&enableExtensions=false&muted=false&parent=twitch.tv&player=popout&volume=1`,
+        };
+
+        obs.send('SetSourceSettings', {
+            "sourceName": `P1 Twitch (1v1)`,
+            "sourceSettings": sourceSettings
+        });
+        obs.send('SetSourceSettings', {
+            "sourceName": `P1 Twitch (2v2)`,
+            "sourceSettings": sourceSettings
+        });
+    }
+    if (P2 != "") {
+        sourceSettings = {
+            "reroute_audio": true,
+            "url": `https://player.twitch.tv/?channel=${teamInfo[Team2][P2].channelName}&enableExtensions=false&muted=false&parent=twitch.tv&player=popout&volume=1`,
+        };
+
+        obs.send('SetSourceSettings', {
+            "sourceName": `P2 Twitch (1v1)`,
+            "sourceSettings": sourceSettings
+        });
+        obs.send('SetSourceSettings', {
+            "sourceName": `P2 Twitch (2v2)`,
+            "sourceSettings": sourceSettings
+        });
+    }
+    if (P3 != "") {
+        sourceSettings = {
+            "reroute_audio": true,
+            "url": `https://player.twitch.tv/?channel=${teamInfo[Team1][P3].channelName}&enableExtensions=false&muted=false&parent=twitch.tv&player=popout&volume=1`,
+        };
+
+        obs.send('SetSourceSettings', {
+            "sourceName": `P3 Twitch (1v1)`,
+            "sourceSettings": sourceSettings
+        });
+        obs.send('SetSourceSettings', {
+            "sourceName": `P3 Twitch (2v2)`,
+            "sourceSettings": sourceSettings
+        });
+    }
+    if (P4 != "") {
+        sourceSettings = {
+            "reroute_audio": true,
+            "url": `https://player.twitch.tv/?channel=${teamInfo[Team2][P4].channelName}&enableExtensions=false&muted=false&parent=twitch.tv&player=popout&volume=1`,
+        };
+
+        obs.send('SetSourceSettings', {
+            "sourceName": `P4 Twitch (1v1)`,
+            "sourceSettings": sourceSettings
+        });
+        obs.send('SetSourceSettings', {
+            "sourceName": `P4 Twitch (2v2)`,
+            "sourceSettings": sourceSettings
+        });
+    }
 }
