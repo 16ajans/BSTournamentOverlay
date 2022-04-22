@@ -204,10 +204,7 @@ server.on('connection', function (socket) {
             if (P4 != "") {
                 P4ScoreSaber = teamInfo[Team2][P4].SSID;
             }
-            console.log(P1ScoreSaber);
-            console.log(P2ScoreSaber);
-            console.log(P3ScoreSaber);
-            console.log(P4ScoreSaber);
+
 
             sourceUpdate();
 
@@ -278,6 +275,14 @@ server.on('connection', function (socket) {
                 console.log("Sending Stats");
                 setTimeout(function () {
                     scoreWipe();
+                    console.log(P1Name);
+                    console.log(P1ScoreSaber);
+                    console.log(P2Name);
+                    console.log(P2ScoreSaber);
+                    console.log(P3Name);
+                    console.log(P3ScoreSaber);
+                    console.log(P4Name);
+                    console.log(P4ScoreSaber);
 
                     if (/^\d/.test(P1ScoreSaber) == true) {
 
@@ -787,7 +792,7 @@ server.on('connection', function (socket) {
                     "P3": P3ScoreSaber,
                     "P4": P4ScoreSaber,
                     "Team1": data.Data.Team1,
-                    "Team2": data.Data.Team1,
+                    "Team2": data.Data.Team2,
                     "Caster1": data.Data.Caster1,
                     "Caster2": data.Data.Caster2,
                     "BestOf": data.Data.BestOf,
@@ -866,7 +871,7 @@ server.on('connection', function (socket) {
 
 
 
-
+// god i love men
 
 
 
@@ -1745,7 +1750,7 @@ var teamInfo = {
     "IlliniOrange": {
         "Benjo": {
             "SSID": "Benjo",
-            "channelName": ""
+            "channelName": "BoscoStixs"
         },
         "Nelson16": {
             "SSID": "2389030471126836",
@@ -1757,11 +1762,11 @@ var teamInfo = {
         },
         "InProgress": {
             "SSID": "76561198180733791",
-            "channelName": ""
+            "channelName": "inpr0gr3ss"
         },
         "BoscoStixs": {
             "SSID": "76561198346397884",
-            "channelName": ""
+            "channelName": "BoscoStixs"
         },
     },
 
@@ -1776,15 +1781,15 @@ var teamInfo = {
     "ucberkeley": {
         "vcninc": {
             "SSID": "76561198082405957",
-            "channelName": ""
+            "channelName": "vcninc"
         },
         "Sc2ad": {
             "SSID": "Sc2ad",
-            "channelName": ""
+            "channelName": "sc2ad"
         },
         "100 gecs": {
             "SSID": "76561198186628623",
-            "channelName": ""
+            "channelName": "megabeni"
         },
     },
 
@@ -1814,7 +1819,7 @@ var teamInfo = {
         },
         "killpopvixen": {
             "SSID": "76561198075543723",
-            "channelName": ""
+            "channelName": "UAFesports"
         },
     },
     "CSUF": {
@@ -1866,7 +1871,7 @@ var teamInfo = {
     "UCDavis": {
         "Ecal": {
             "SSID": "76561198122900561",
-            "channelName": ""
+            "channelName": "ecaliburmoon"
         },
         "jeprose": {
             "SSID": "76561198252901294",
@@ -1884,15 +1889,15 @@ var teamInfo = {
     "SUNY": {
         "$MJustin": {
             "SSID": "76561198255621372",
-            "channelName": ""
+            "channelName": "smjustin"
         },
     },
     "UCEsports": {
-        "$MakoCho": {
+        "MakoCho": {
             "SSID": "76561198308893404",
             "channelName": "makocho_"
         },
-        "$Lyrunis": {
+        "Lyrunis": {
             "SSID": "76561198187120155",
             "channelName": "Lyrunis"
         },
@@ -1906,7 +1911,7 @@ var teamInfo = {
     "TNTech": {
         "TheKingOfNowhere": {
             "SSID": "TheKingOfNowhere",
-            "channelName": ""
+            "channelName": "thekingof_nowhere"
         },
         "D W": {
             "SSID": "Ð W",
@@ -1914,13 +1919,13 @@ var teamInfo = {
         },
         "Sky": {
             "SSID": "Sky",
-            "channelName": ""
+            "channelName": "dausky"
         },
     },
     "Longhorns": {
         "Bootleg_Cars": {
             "SSID": "76561198048182406",
-            "channelName": ""
+            "channelName": "bootlegcars"
         },
         "Xmpo": {
             "SSID": "76561198212831695",
@@ -1932,27 +1937,31 @@ var teamInfo = {
         },
     },
     "GeorgiaTech": {
+        "JahSpank": {
+            "SSID": "2788507844505057",
+            "channelName": "jahspank"
+        },
         "AKSKL": {
             "SSID": "76561198158077485",
-            "channelName": ""
+            "channelName": "akskl"
         },
         "Rovio": {
             "SSID": "76561198066978261",
-            "channelName": ""
+            "channelName": "roviononincorporated"
         },
         "Elioc997472": {
             "SSID": "Elioc997472",
-            "channelName": ""
+            "channelName": "Elioc997472"
         },
         "energy999": {
-            "SSID": "76561198172264582",
-            "channelName": ""
+            "SSID": "energy999",
+            "channelName": "999energy999"
         },
     },
     "OntarioTech": {
         "EJ": {
             "SSID": "76561198321316302",
-            "channelName": ""
+            "channelName": "ej_ca"
         },
     },
     "DePaul": {
@@ -1986,7 +1995,7 @@ var teamInfo = {
     "Miami": {
         "SlimSchmidty": {
             "SSID": "76561198117306274",
-            "channelName": ""
+            "channelName": "miamivr"
         },
         "ChiefHookerRed": {
             "SSID": "3268941496561526",
@@ -2004,7 +2013,7 @@ var teamInfo = {
         },
         "Ferret": {
             "SSID": "76561198796337172",
-            "channelName": ""
+            "channelName": "alphablaze11"
         },
         "Ulmnh": {
             "SSID": "76561198096021868",
@@ -2013,6 +2022,12 @@ var teamInfo = {
         "Bladeskillz": {
             "SSID": "76561198166522772",
             "channelName": "bladeskillz"
+        },
+    },
+    "Crimson": {
+        "Skyward": {
+            "SSID": "76561198260517130",
+            "channelName": "skywardow"
         },
     },
     "CrimsonA": {
@@ -2114,6 +2129,10 @@ var teamInfo = {
         },
     },
     "UWaterloo": {
+        "Stud3nt_Acclete": {
+            "SSID": "76561198965353139",
+            "channelName": "Stud3nt_4thlete "
+        },
         "Rivershrimp": {
             "SSID": "76561198857586691",
             "channelName": ""
@@ -2130,11 +2149,7 @@ var teamInfo = {
             "SSID": "Pinaspi",
             "channelName": ""
         },
-    },
-    "EmptyTeam": {
-        "name": " ",
-        "logo": "images/EmptyTeam.png"
-    },
+    }
 
 
 
