@@ -249,7 +249,7 @@
         }
         .ConnectionStatus {
             position: absolute;
-            bottom: 5;
+            bottom: 170;
             left: 1300;
             background-color: rgba(0, 0, 0, 0.0);
             font-family: 'Montserrat';
@@ -357,6 +357,7 @@
 
     //var TAsock = new WebSocket("ws://beatsaber.networkauditor.org:10157");
     //var TAsock = new WebSocket("ws://ta.asodev.net:10157");
+    var taConnection = false;
     console.log("connecting to TA");
     var TAsock = new WebSocket("ws://beatsaber.networkauditor.org:10157");
     TAsock.onopen = function (event) {
@@ -365,6 +366,7 @@
         document.getElementById("P2ScoringInfo").style.display = "";
         document.getElementById("SongInfo").style.display = "";
         document.getElementById("ConnectionTA").style.display = "none";
+        var taConnection = true;
     };
 
     TAsock.onmessage = async function (event) {
@@ -567,9 +569,10 @@
                 P4ScoreSaber = data.Data.P4;
                 coordinatorName = data.Data.CoordinatorName;
 
+                if (taConnection == true) {
                 document.getElementById("P1ScoringInfo").style.display = "";
                 document.getElementById("P2ScoringInfo").style.display = "";
-
+                }
                 if (/^\d/.test(P1ScoreSaber) == false) {
 
                     console.log("P1 is a Quest user");

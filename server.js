@@ -191,6 +191,11 @@ server.on('connection', function (socket) {
             console.log(Team1);
             Team2 = data.Data.Team2;
 
+            P1ScoreSaber = '';
+            P2ScoreSaber = '';
+            P3ScoreSaber = '';
+            P4ScoreSaber = '';
+
             if (P1 != "") {
                 P1ScoreSaber = teamInfo[Team1][P1].SSID;
             }
@@ -1831,11 +1836,11 @@ var teamInfo = {
     "OCE": {
         "BoneBot": {
             "SSID": "2890698244283056",
-            "channelName": ""
+            "channelName": "b0nebot"
         },
         "Shadowdark": {
             "SSID": "76561198170118605",
-            "channelName": ""
+            "channelName": "shadowwdark"
         },
         "frostbit912": {
             "SSID": "76561198100038676",
@@ -1843,11 +1848,11 @@ var teamInfo = {
         },
         "HeroOfTime": {
             "SSID": "76561198256832206",
-            "channelName": ""
+            "channelName": "herooftime789"
         },
         "fireburningblue": {
             "SSID": "76561198086274067",
-            "channelName": ""
+            "channelName": "fireburningblue"
         },
     },
     "ChargerBlue": {
@@ -1875,7 +1880,7 @@ var teamInfo = {
         },
         "jeprose": {
             "SSID": "76561198252901294",
-            "channelName": ""
+            "channelName": "jeprose"
         },
         "tomwick707": {
             "SSID": "76561198147938990",
@@ -1883,7 +1888,7 @@ var teamInfo = {
         },
         "timmie": {
             "SSID": "76561198367036671",
-            "channelName": ""
+            "channelName": "timmieoc"
         },
     },
     "SUNY": {
@@ -2105,15 +2110,15 @@ var teamInfo = {
     "CalC": {
         "glummie": {
             "SSID": "76561198351010444",
-            "channelName": ""
+            "channelName": "theglumone"
         },
         "ava_o7": {
             "SSID": "ava_o7",
-            "channelName": ""
+            "channelName": "ava_o7"
         },
         "YoniDaMan": {
             "SSID": "3357739814345872",
-            "channelName": ""
+            "channelName": "theglumone"
         },
     },
     "Nolan": {
@@ -2131,7 +2136,7 @@ var teamInfo = {
     "UWaterloo": {
         "Stud3nt_Acclete": {
             "SSID": "76561198965353139",
-            "channelName": "Stud3nt_4thlete "
+            "channelName": "Stud3nt_4thlete"
         },
         "Rivershrimp": {
             "SSID": "76561198857586691",
@@ -2220,11 +2225,15 @@ function sourceUpdate() {
 
         obs.send('SetSourceSettings', {
             "sourceName": `P1 Twitch (1v1)`,
-            "sourceSettings": sourceSettings
+            "sourceSettings": sourceSettings,
+        }).catch(err => {
+            console.log(err)
         });
         obs.send('SetSourceSettings', {
             "sourceName": `P1 Twitch (2v2)`,
-            "sourceSettings": sourceSettings
+            "sourceSettings": sourceSettings,
+        }).catch(err => {
+            console.log(err)
         });
     }
     if (P2 != "") {
@@ -2235,11 +2244,13 @@ function sourceUpdate() {
 
         obs.send('SetSourceSettings', {
             "sourceName": `P2 Twitch (1v1)`,
-            "sourceSettings": sourceSettings
+            "sourceSettings": sourceSettings,
+        }).catch(err => {
+            console.log(err)
         });
         obs.send('SetSourceSettings', {
             "sourceName": `P2 Twitch (2v2)`,
-            "sourceSettings": sourceSettings
+            "sourceSettings": sourceSettings,
         });
     }
     if (P3 != "") {
@@ -2250,11 +2261,15 @@ function sourceUpdate() {
 
         obs.send('SetSourceSettings', {
             "sourceName": `P3 Twitch (1v1)`,
-            "sourceSettings": sourceSettings
+            "sourceSettings": sourceSettings,
+        }).catch(err => {
+            console.log(err)
         });
         obs.send('SetSourceSettings', {
             "sourceName": `P3 Twitch (2v2)`,
-            "sourceSettings": sourceSettings
+            "sourceSettings": sourceSettings,
+        }).catch(err => {
+            console.log(err)
         });
     }
     if (P4 != "") {
@@ -2265,11 +2280,16 @@ function sourceUpdate() {
 
         obs.send('SetSourceSettings', {
             "sourceName": `P4 Twitch (1v1)`,
-            "sourceSettings": sourceSettings
+            "sourceSettings": sourceSettings,
+        }).catch(err => {
+            console.log(err)
         });
         obs.send('SetSourceSettings', {
             "sourceName": `P4 Twitch (2v2)`,
-            "sourceSettings": sourceSettings
+            "sourceSettings": sourceSettings,
+        }).catch(err => {
+            console.log(err)
         });
+
     }
 }

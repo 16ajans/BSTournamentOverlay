@@ -360,8 +360,9 @@
     Map Pool: <select id="mapPoolID" onchange="mapPoolUpdate()">
         <option value="336">CVRE Div. 1 (336)</option>
         <option value="332">CVRE Div. 2 (332)</option>
-        <option value="338">Best Map Pool (338)</option>
         <option value="339">Season 8 Quals (339)</option>
+        <option value="347">CVRE Div. 1 Finals (347)</option>
+        <option value="346">CVRE Div. 2 Finals (346)</option>
     </select><br>
 
     <div class="map" id="map0Box">Map 1: <br> <span id="SongName0"> Song Name</span> <br> <select id="map0">
@@ -735,6 +736,10 @@
             teamListUpdate();
             bestofUpdate();
             mapUpdate();
+            mapPoolUpdate();
+
+            sendablePlayerName();
+
             var p1ScoreID = document.getElementById("p1SSID");
             var p2ScoreID = document.getElementById("p2SSID");
             var p3ScoreID = document.getElementById("p3SSID");

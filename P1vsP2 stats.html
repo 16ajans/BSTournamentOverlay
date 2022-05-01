@@ -67,27 +67,34 @@
         .P1PlayerInfo {
             position: fixed;
             bottom: 730;
-            right: 950;
-            width: 400px;
+            right: 965;
+            width: 370px;
             height: 100px;
             padding: 10px;
             margin: 0px;
             background-color: rgba(0, 0, 0, 0.0);
             border-radius: 40px;
             text-align: center;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow-wrap: break-word;
         }
 
         .P2PlayerInfo {
             position: fixed;
             bottom: 730;
-            left: 950px;
-            width: 400px;
+            left: 965px;
+            width: 370px;
             height: 100px;
             padding: 10px;
             margin: 0px;
             background-color: rgba(0, 0, 0, 0.0);
             border-radius: 40px;
             text-align: center;
+            overflow-wrap: break-word;
+            overflow: hidden;
+            white-space: nowrap;
         }
 
 
@@ -382,14 +389,15 @@
             text-align: center;
         }
 
-        .PlayerRAnk {
+        .PlayerRank {
             position: absolute;
             text-align: center;
-            top: -10px;
-            z-index: 4;
+            top: -5px;
+            z-index: 6;
             font-size: 25px;
             line-height: 0px;
-            width: 400px;
+            width: 370px;
+            overflow: visible;
 
 
         }
