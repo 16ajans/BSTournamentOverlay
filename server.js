@@ -196,19 +196,19 @@ server.on('connection', function (socket) {
             P3ScoreSaber = '';
             P4ScoreSaber = '';
 
-            if (P1 != "") {
-                P1ScoreSaber = teamInfo[Team1][P1].SSID;
-            }
-
-            if (P2 != "") {
-                P2ScoreSaber = teamInfo[Team2][P2].SSID;
-            }
-            if (P3 != "") {
-                P3ScoreSaber = teamInfo[Team1][P3].SSID;
-            }
-            if (P4 != "") {
-                P4ScoreSaber = teamInfo[Team2][P4].SSID;
-            }
+        //    if (P1 != "") {
+        //        P1ScoreSaber = teamInfo[Team1][P1].SSID;
+        //    }
+//
+        //    if (P2 != "") {
+        //        P2ScoreSaber = teamInfo[Team2][P2].SSID;
+        //    }
+        //    if (P3 != "") {
+        //        P3ScoreSaber = teamInfo[Team1][P3].SSID;
+        //    }
+        //    if (P4 != "") {
+        //        P4ScoreSaber = teamInfo[Team2][P4].SSID;
+        //    }
 
 
             sourceUpdate();
@@ -884,7 +884,7 @@ console.log("Started.")
 
 
 function mapPoolUpdate() {
-    fetch(`https://beatkhana.com/api/tournament/2147484253/map-pools`)
+    fetch(`https://beatkhana.com/api/tournament/2147484261/map-pools`)
         .then(response => {
             return response.json()
         })
@@ -2166,32 +2166,32 @@ var teamInfo = {
 
 //OBS SHIT WEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
 
-const OBSWebSocket = require('obs-websocket-js');
-const obs = new OBSWebSocket();
-OBSconnect();
-
-function OBSconnect() {
-    obs.connect({
-            address: 'localhost:4444',
-            password: 'ILoveMen####'
-        })
-        .then(() => {
-            console.log(`Connected to OBS!`);
-
-            return obs.send('GetSceneList');
-        })
-        .then(data => {
-            console.log(`${data.scenes.length} Available Scenes!`);
-        })
-        .catch(err => { // Promise convention dicates you have a catch on every chain.
-            console.log(err);
-            console.log("Reconnecting to OBS");
-            setTimeout(function () {
-                OBSconnect();
-            }, 1000);
-        });
-
-}
+//const OBSWebSocket = require('obs-websocket-js');
+//const obs = new OBSWebSocket();
+//OBSconnect();
+//
+//function OBSconnect() {
+//    obs.connect({
+//            address: 'localhost:4444',
+//            password: 'ILoveMen####'
+//        })
+//        .then(() => {
+//            console.log(`Connected to OBS!`);
+//
+//            return obs.send('GetSceneList');
+//        })
+//        .then(data => {
+//            console.log(`${data.scenes.length} Available Scenes!`);
+//        })
+//        .catch(err => { // Promise convention dicates you have a catch on every chain.
+//            console.log(err);
+//            console.log("Reconnecting to OBS");
+//            setTimeout(function () {
+//                OBSconnect();
+//            }, 1000);
+//        });
+//
+//}
 
 function sourceUpdate() {
 

@@ -206,7 +206,7 @@
 
 <body>
 
-    <div class="Team1" id="Player1">
+ <!--   <div class="Team1" id="Player1">
         <label for="Player1Select">Player 1</label>
         <select id="Player1Select">
             <option value="">--Please choose an option--</option>
@@ -232,14 +232,15 @@
             <option value="">--Please choose an option--</option>
         </select>
     </div>
-
+-->
     <br>
     <br>
     <label for="chkBoxHard">
         <input type="checkbox" id="chkBoxHard" onclick="ShowHideDivHard(this)" />
         Hard override?
     </label>
-    <div id="dvBoxHard" style="display: none">
+    
+    <div id="dvBoxHard">
         (Team 1) Player 1 SSID: <input type="text" class="input" id="p1SSID" value=""> (Team 2) Player
         2
         SSID: <input type="text" class="input" id="p2SSID" value=""> <br>
@@ -263,8 +264,8 @@
     <br>
     <br>
     <!--  Coordinator Name: <input type="text" id="coordName"><br> -->
-    Caster 1: <input type="text" id="caster1" class="input" value="Caster 1"><br>
-    Caster 2: <input type="text" id="caster2" class="input" value="Caster 2"><br>
+    <p style="display:none;">Caster 1: <input type="text" id="caster1" class="input" value="Caster 1"><br>
+    Caster 2: <input type="text" id="caster2" class="input" value="Caster 2"><br></p>
     <br>
     Team 1: <select id="team1">
         <!--  <option value="ArsenalAdjacent">Arsenal Adjacent (P)</option>
@@ -355,14 +356,12 @@
         <option value="bo9">9</option>
     </select><br>
 
-    Round Info: <input type="text" class="input long" id="roundInfo" value="Season 8 Div. # Round #"><br><br>
+    Round Info: <input type="text" class="input long" id="roundInfo" value="Season 9 Div. # Round #"><br><br>
 
     Map Pool: <select id="mapPoolID" onchange="mapPoolUpdate()">
-        <option value="336">CVRE Div. 1 (336)</option>
-        <option value="332">CVRE Div. 2 (332)</option>
-        <option value="339">Season 8 Quals (339)</option>
-        <option value="347">CVRE Div. 1 Finals (347)</option>
-        <option value="346">CVRE Div. 2 Finals (346)</option>
+        <option value="369">S9 CVRE Div. 2 (369)</option>
+        <option value="369">S9 CVRE Div. 1 Finals (369)</option>
+        <option value="369">S9 CVRE Div. 2 Finals (369)</option>
     </select><br>
 
     <div class="map" id="map0Box">Map 1: <br> <span id="SongName0"> Song Name</span> <br> <select id="map0">
@@ -466,8 +465,8 @@
     var p2ScoreID;
     var p3ScoreID;
     var p4ScoreID;
-    document.getElementById("SendButton").style.display = "none";
-    document.getElementById("SendStatsButton").style.display = "none";
+    //document.getElementById("SendButton").style.display = "none";
+   // document.getElementById("SendStatsButton").style.display = "none";
 
     function ShowHideDiv(chkBox) {
         var dvBox = document.getElementById("dvBox");
@@ -622,7 +621,7 @@
             mapUpdate();
             mapPoolUpdate();
 
-            sendablePlayerName();
+           // sendablePlayerName();
 
 
 
@@ -880,7 +879,7 @@
     var mapCount;
 
     function mapPoolUpdate() {
-        fetch(`https://beatkhana.com/api/tournament/2147484253/map-pools`)
+        fetch(`https://beatkhana.com/api/tournament/2147484261/map-pools`)
             .then(response => {
                 return response.json()
             })

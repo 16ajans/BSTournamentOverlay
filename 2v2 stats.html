@@ -304,7 +304,9 @@
             width: 400px;
             height: 150px;
             line-height: 20px;
-            text-shadow: 2px 2px #000000
+            text-shadow: 2px 2px #000000;
+            display:none;
+            
         }
 
         .casterName {
@@ -315,6 +317,7 @@
             font-size: 50px;
             line-height: 70px;
             width: 399.99px;
+            display:none;
         }
 
         .PickOrBan {
@@ -1120,7 +1123,8 @@
                 P2ScoreSaber = data.Data.P2;
                 P3ScoreSaber = data.Data.P3;
                 P4ScoreSaber = data.Data.P4;
-                MapPool = data.Data.MapPool + '';
+             //   MapPool = data.Data.MapPool + '';
+             MapPool = '369';
                 Map0 = data.Data.Map0;
                 Map1 = data.Data.Map1;
                 Map2 = data.Data.Map2;
@@ -1237,7 +1241,7 @@
     }
 
     function mapPoolUpdate() {
-        fetch(`https://beatkhana.com/api/tournament/2147484253/map-pools`)
+        fetch(`https://beatkhana.com/api/tournament/2147484261/map-pools`)
             .then(response => {
                 return response.json()
             })
