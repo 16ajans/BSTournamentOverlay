@@ -379,7 +379,7 @@
     }
 
     function mapPoolUpdate() {
-        fetch(`https://beatkhana.com/api/tournament/2147484253/map-pools`)
+        fetch(`https://beatkhana.com/api/tournament/2147484261/map-pools`)
             .then(response => {
                 return response.json()
             })
@@ -395,6 +395,7 @@
                 levelHashes = [];
                 levelHashesLower = [];
 
+                console.log(MapPool);
                 var mapCount = 0;
                 mapPoolName.innerHTML = data[MapPool].poolName;
 

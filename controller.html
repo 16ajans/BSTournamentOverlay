@@ -274,6 +274,10 @@
         <option value="Leftovers">The Leftovers (P)</option>
         <option value="IlliniBlack">Illini Black (P)</option>
         <option value="IlliniBlue">Illini Blue (P)</option>-->
+        <option value="Clemson">Clemson (BS)</option>
+        <option value="Clueless">Clueless Weary(BS)</option>
+        <option value="SSCC">SSCC (BS)</option>
+        <option value="TAMU">TAMU (BS)</option>
         <option value="IlliniOrange">Illini Orange (P/BS)</option>
         <!--  <option value="IlliniWhite">Illini White (P)</option> -->
         <option value="IlliniD1">Illini D1 (BS)</option>
@@ -281,7 +285,7 @@
         <option value="Gauchos">UCSB Gauchos (BS)</option>
         <option value="UAF">UAF Esports (BS)</option>
         <option value="CSUF">CSUF Esports (BS)</option>
-        <option value="OCE">Oklahoma Esports (BS)</option>
+        <option value="OCE">OCE Blue (BS)</option>
         <option value="ChargerBlue">Charger Blue (BS)</option>
         <option value="UCDavis">UC Davis (BS)</option>
         <option value="SUNY">SUNY Plattsburgh (BS)</option>
@@ -315,6 +319,10 @@
         <option value="Leftovers">The Leftovers (P)</option>
         <option value="IlliniBlack">Illini Black (P)</option>
         <option value="IlliniBlue">Illini Blue (P)</option>-->
+        <option value="Clemson">Clemson (BS)</option>
+        <option value="Clueless">Clueless Weary(BS)</option>
+        <option value="SSCC">SSCC (BS)</option>
+        <option value="TAMU">TAMU (BS)</option>
         <option value="IlliniOrange">Illini Orange (P/BS)</option>
         <!--  <option value="IlliniWhite">Illini White (P)</option> -->
         <option value="IlliniD1">Illini D1 (BS)</option>
@@ -322,7 +330,7 @@
         <option value="Gauchos">UCSB Gauchos (BS)</option>
         <option value="UAF">UAF Esports (BS)</option>
         <option value="CSUF">CSUF Esports (BS)</option>
-        <option value="OCE">Oklahoma Esports (BS)</option>
+        <option value="OCE">OCE Blue (BS)</option>
         <option value="ChargerBlue">Charger Blue (BS)</option>
         <option value="UCDavis">UC Davis (BS)</option>
         <option value="SUNY">SUNY Plattsburgh (BS)</option>
@@ -360,8 +368,8 @@
 
     Map Pool: <select id="mapPoolID" onchange="mapPoolUpdate()">
         <option value="369">S9 CVRE Div. 2 (369)</option>
-        <option value="369">S9 CVRE Div. 1 Finals (369)</option>
-        <option value="369">S9 CVRE Div. 2 Finals (369)</option>
+        <option value="382">S9 CVRE Div. 1 Finals (382)</option>
+        <option value="383">S9 CVRE Div. 2 Finals (383)</option>
     </select><br>
 
     <div class="map" id="map0Box">Map 1: <br> <span id="SongName0"> Song Name</span> <br> <select id="map0">
@@ -441,7 +449,7 @@
     <span id="team1Selection"></span>
     <span id="team2Selection"></span>
     <span id="bestofSelection"></span>
-    <span id="mapPoolSelection">336</span>
+    <span id="mapPoolSelection">368</span>
     <div class="pickbanText" style="display:none;">
         <span id="displayedMapsSelection"></span>
         <span id="map0Selection"></span>
@@ -737,7 +745,6 @@
             mapUpdate();
             mapPoolUpdate();
 
-            sendablePlayerName();
 
             var p1ScoreID = document.getElementById("p1SSID");
             var p2ScoreID = document.getElementById("p2SSID");
