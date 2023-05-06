@@ -379,11 +379,131 @@
     }
 
     function mapPoolUpdate() {
-        fetch(`https://beatkhana.com/api/tournament/2147484261/map-pools`)
-            .then(response => {
-                return response.json()
-            })
-            .then(data => {
+        
+   let data =     {
+    "2": {
+        "poolName": "Div. 2",
+        "songs": [
+            {
+                "name": "CapSule",
+                "songAuthor": "Calliope Mori x Hoshimachi Suisei",
+                "levelAuthor": "Irish, Rusty & fqrb",
+                "diff": "Hard",
+                "key": "2561d",
+                "hash": "727fad7b449265e42cf49292e3fce06629388633"
+            },
+            {
+                "name": "Feel So Gud",
+                "songAuthor": "Mo Falk",
+                "levelAuthor": "General Dumbass & Rexxz",
+                "diff": "Expert+",
+                "key": "29fab",
+                "hash": "5096d8659b9ef07e293ddd597b466be0eaab34b5"
+            },
+            {
+                "name": "Indoor Kei Nara Trackmaker",
+                "songAuthor": "Yunomi & nicamoq",
+                "levelAuthor": "Uragirimono",
+                "diff": "Expert+",
+                "key": "2eecb",
+                "hash": "58260a87e2aa9c9df7016c83300c4fcf9db9e459"
+            },
+            {
+                "name": "Clattanoia",
+                "songAuthor": "OxT",
+                "levelAuthor": "Joshabi",
+                "diff": "Expert+",
+                "key": "2b21d",
+                "hash": "a5acb2d4b2e5ac355c2d04938dc53cad0a203cec"
+            },
+            {
+                "name": "Readymade",
+                "songAuthor": "Ado",
+                "levelAuthor": "Chromia",
+                "diff": "Expert+",
+                "key": "309d2",
+                "hash": "0dda21b9b95279341f75ada808a534c6cb1b4f6f"
+            },
+            {
+                "name": "Playing God",
+                "songAuthor": "Polyphia",
+                "levelAuthor": "harbgy",
+                "diff": "Expert",
+                "key": "309d2",
+                "hash": "158880bf8ff1f1389aadf4130bb6d961e2ce1597"
+            },
+            {
+                "name": "Hank's Back",
+                "songAuthor": "Lil Hank",
+                "levelAuthor": "WalkingKat",
+                "diff": "Expert+",
+                "key": "2b2d1",
+                "hash": "7e7877cf2845ade35b0de8f12cf6862c708ac62a"
+            }
+        ]
+    },
+    "1": {
+        "poolName": "Div. 1",
+        "songs": [
+            {
+                "name": "Eye Candy",
+                "songAuthor": "Masha Ray",
+                "levelAuthor": "Nixie.Korten",
+                "diff": "Hard",
+                "key": "2ff04",
+                "hash": "965916d9cf59f262acb4bdd206369885e3e9b5c4"
+            },
+            {
+                "name": "RACER",
+                "songAuthor": "ITZY",
+                "levelAuthor": "simplymarvellous",
+                "diff": "Expert+",
+                "key": "28070",
+                "hash": "c89fcf9d26403f206801220d63009687192be7e0"
+            },
+            {
+                "name": "Storeulv 2016 (feat. Moberg)",
+                "songAuthor": "Bek & Wallin",
+                "levelAuthor": "Gabiel",
+                "diff": "Expert+",
+                "key": "309e1",
+                "hash": "3eed3cd6914bf71805b627a0840a9a598653c7d2"
+            },
+            {
+                "name": "Akkanbe (あっかんべ)",
+                "songAuthor": "Nekomata Okayu",
+                "levelAuthor": "Rusty & Nolanimations",
+                "diff": "Expert+",
+                "key": "2f2dc",
+                "hash": "4ae02d6bba3b2cc95ef5611019eb5901894f25ef"
+            },
+            {
+                "name": "Ragnarok",
+                "songAuthor": "Gram vs Camellia",
+                "levelAuthor": "Joshabi",
+                "diff": "Expert",
+                "key": "2d0b8",
+                "hash": "ea0b920fd18363a37ea33ce99a3f1844d727ae1e"
+            },
+            {
+                "name": "Slave to the Riff",
+                "songAuthor": "Aether Realm",
+                "levelAuthor": "Anti",
+                "diff": "Expert+",
+                "key": "26d3a",
+                "hash": "e97ad0068ecaa45b7021a5431ed048cb0ab6a40f"
+            },
+            {
+                "name": "Clock Control (DJ Myosuke Remix)",
+                "songAuthor": "Kobaryo",
+                "levelAuthor": "cerret & Daan",
+                "diff": "Expert+",
+                "key": "304b9",
+                "hash": "a691665ca3769e430024a709a824738c424747fc"
+            }
+        ]
+    }
+}
 
                 console.log(data);
                 // Do stuff here
@@ -900,10 +1020,6 @@
 
 
 
-            })
-            .catch(err => {
-                console.log(err)
-            })
     }
 
     function pickOrBan() {
