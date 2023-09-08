@@ -390,6 +390,8 @@
 
     <div class="ConnectionStatus" id="ConnectionStatus">
         <h1 id="ConnectionController">Connecting to control panel...</h1>
+        <h1 id="ConnectionTA">Connecting to TournamentAssistant...</h1>
+
     </div>
 
 
@@ -484,182 +486,186 @@
     document.getElementById("team2Accuracy").style.display = "none";
     document.getElementById("SongInfo").style.display = "none";
 
+    setTimeout(() => {
+        document.getElementById("ConnectionTA").style.display = "none";
+    }, 10000);
 
-    // console.log("connecting to TA...");
+
+    console.log("connecting to TA...");
     //var TAsock = new WebSocket("ws://beatsaber.networkauditor.org:10157");
     //var TAsock = new WebSocket("ws://ta.asodev.net:10157");
     var taConnection = false;
-    // var TAsock = new WebSocket("ws://beatsaber.networkauditor.org:10157");
-    // TAsock.onopen = function (event) {
+    var TAsock = new WebSocket("ws://beatsaber.networkauditor.org:10157");
+    TAsock.onopen = function (event) {
 
-    //     document.getElementById("P1ScoringInfo").style.display = "";
-    //     document.getElementById("P2ScoringInfo").style.display = "";
-    //     document.getElementById("P3ScoringInfo").style.display = "";
-    //     document.getElementById("P4ScoringInfo").style.display = "";
-    //     document.getElementById("team1Accuracy").style.display = "";
-    //     document.getElementById("team2Accuracy").style.display = "";
-    //     document.getElementById("SongInfo").style.display = "";
-    //     document.getElementById("ConnectionTA").style.display = "none";
-    //     taConnection = true;
+        document.getElementById("P1ScoringInfo").style.display = "";
+        document.getElementById("P2ScoringInfo").style.display = "";
+        document.getElementById("P3ScoringInfo").style.display = "";
+        document.getElementById("P4ScoringInfo").style.display = "";
+        document.getElementById("team1Accuracy").style.display = "";
+        document.getElementById("team2Accuracy").style.display = "";
+        document.getElementById("SongInfo").style.display = "";
+        document.getElementById("ConnectionTA").style.display = "none";
+        taConnection = true;
 
-    //     console.log("*hacker voice* I'm in.");
+        console.log("*hacker voice* I'm in.");
 
-    // };
+    };
 
-    // TAsock.onmessage = async function (event) {
-    //     //trimmed = event.data.substring(0, event.data.length - 7);
-    //     jsonObj = JSON.parse(event.data);
+    TAsock.onmessage = async function (event) {
+        //trimmed = event.data.substring(0, event.data.length - 7);
+        jsonObj = JSON.parse(event.data);
 
-    //     console.log(jsonObj);
+        console.log(jsonObj);
 
-    //     if (jsonObj.Type == 4) {
+        if (jsonObj.Type == 4) {
 
-    //         var matchData = jsonObj.SpecificPacket.ChangedObject;
+            var matchData = jsonObj.SpecificPacket.ChangedObject;
 
-    //         if (jsonObj.SpecificPacket.Type == 6) { // MatchLevelChanged
-
-
-    //             songGrabber();
+            if (jsonObj.SpecificPacket.Type == 6) { // MatchLevelChanged
 
 
-    //             for (var i = 0; i < matchData.Players.length; i++) {
-    //                 var playerData = matchData.Players[i];
-    //                 if (playerData.UserId == P1ScoreSaber) {
-    //                     P1Acc.innerText = '100.00%';
-    //                 }
-
-    //                 if (playerData.UserId == P2ScoreSaber) {
-    //                     P2Acc.innerText = '100.00%';
-    //                 }
-    //                 if (playerData.UserId == P3ScoreSaber) {
-    //                     P3Acc.innerText = '100.00%';
-    //                 }
-
-    //                 if (playerData.UserId == P4ScoreSaber) {
-    //                     P4Acc.innerText = '100.00%';
-    //                 }
-
-    //                 if (playerData.UserId == P1ScoreSaber || playerdata.UserId == P2ScoreSaber) {
-
-    //                     console.log(matchData);
-
-    //                 }
-
-    //             }
-    //         }
-    //     } else if (jsonObj.Type == 6) {
-    //         if (jsonObj.SpecificPacket.Type == 4) { // ScoreUpdate
-    //             if (jsonObj.SpecificPacket.SpecificPacket.Type == 1) {
-    //                 var playerData = jsonObj.SpecificPacket.SpecificPacket.ChangedObject;
-    //                 var playerId = playerData.UserId;
-    //                 var StreamDelayMs = jsonObj.SpecificPacket.SpecificPacket.ChangedObject.StreamDelayMs
-
-    //                 if (playerId == P1ScoreSaber) {
-    //                     //P1Score.style.fontSize = 20 + playerData.Misses + "px";
-    //                     setTimeout(() => {
-    //                             p1RawAcc = playerData.Accuracy;
-    //                             P1Combo.innerText = playerData.Combo + "x";
-    //                             P1Acc.innerText = (Math.round(p1RawAcc * 100 * 100) / 100).toFixed(2) + "%";
-    //                             // P1MissNew = playerData.Misses;
-    //                             // if (P1MissOld != P1MissNew) {
-    //                             //
-    //                             //     document.getElementById("P1Miss2v2").style.display = "";
-    //                             //     document.getElementById("P1Miss2v2").classList.add("animationFadeOut");
-    //                             //     setTimeout(() => {
-    //                             //         document.getElementById("P1Miss2v2").classList.remove(
-    //                             //             "animationFadeOut");
-    //                             //         document.getElementById("P1Miss2v2").style.display = "none";
-    //                             //     }, 500);
-    //                             //
-    //                             //     P1MissOld = P1MissNew;
-    //                             // }
-    //                             //
+                songGrabber();
 
 
-    //                         },
-    //                         StreamDelayMs);
+                for (var i = 0; i < matchData.Players.length; i++) {
+                    var playerData = matchData.Players[i];
+                    if (playerData.UserId == P1ScoreSaber) {
+                        P1Acc.innerText = '100.00%';
+                    }
+
+                    if (playerData.UserId == P2ScoreSaber) {
+                        P2Acc.innerText = '100.00%';
+                    }
+                    if (playerData.UserId == P3ScoreSaber) {
+                        P3Acc.innerText = '100.00%';
+                    }
+
+                    if (playerData.UserId == P4ScoreSaber) {
+                        P4Acc.innerText = '100.00%';
+                    }
+
+                    if (playerData.UserId == P1ScoreSaber || playerdata.UserId == P2ScoreSaber) {
+
+                        console.log(matchData);
+
+                    }
+
+                }
+            }
+        } else if (jsonObj.Type == 6) {
+            if (jsonObj.SpecificPacket.Type == 4) { // ScoreUpdate
+                if (jsonObj.SpecificPacket.SpecificPacket.Type == 1) {
+                    var playerData = jsonObj.SpecificPacket.SpecificPacket.ChangedObject;
+                    var playerId = playerData.UserId;
+                    var StreamDelayMs = jsonObj.SpecificPacket.SpecificPacket.ChangedObject.StreamDelayMs
+
+                    if (playerId == P1ScoreSaber) {
+                        //P1Score.style.fontSize = 20 + playerData.Misses + "px";
+                        setTimeout(() => {
+                                p1RawAcc = playerData.Accuracy;
+                                P1Combo.innerText = playerData.Combo + "x";
+                                P1Acc.innerText = (Math.round(p1RawAcc * 100 * 100) / 100).toFixed(2) + "%";
+                                // P1MissNew = playerData.Misses;
+                                // if (P1MissOld != P1MissNew) {
+                                //
+                                //     document.getElementById("P1Miss2v2").style.display = "";
+                                //     document.getElementById("P1Miss2v2").classList.add("animationFadeOut");
+                                //     setTimeout(() => {
+                                //         document.getElementById("P1Miss2v2").classList.remove(
+                                //             "animationFadeOut");
+                                //         document.getElementById("P1Miss2v2").style.display = "none";
+                                //     }, 500);
+                                //
+                                //     P1MissOld = P1MissNew;
+                                // }
+                                //
 
 
-    //                 }
+                            },
+                            StreamDelayMs);
 
-    //                 if (playerId == P2ScoreSaber) {
-    //                     setTimeout(() => {
-    //                             p2RawAcc = playerData.Accuracy;
-    //                             P2Combo.innerText = playerData.Combo + "x";
-    //                             P2Acc.innerText = (Math.round(p2RawAcc * 100 * 100) / 100).toFixed(2) + "%";
-    //                             // P2MissNew = playerData.Misses;
-    //                             // if (P2MissOld != P2MissNew) {
-    //                             //
-    //                             //     document.getElementById("P2Miss2v2").style.display = "";
-    //                             //     document.getElementById("P2Miss2v2").classList.add("animationFadeOut");
-    //                             //     setTimeout(() => {
-    //                             //         document.getElementById("P2Miss2v2").classList.remove(
-    //                             //             "animationFadeOut");
-    //                             //         document.getElementById("P2Miss2v2").style.display = "none";
-    //                             //     }, 500);
-    //                             //
-    //                             //     P2MissOld = P2MissNew;
-    //                             // }
 
-    //                         },
-    //                         StreamDelayMs);
-    //                 }
-    //                 if (playerId == P3ScoreSaber) {
-    //                     setTimeout(() => {
-    //                             p3RawAcc = playerData.Accuracy;
-    //                             P3Combo.innerText = playerData.Combo + "x";
-    //                             P3Acc.innerText = (Math.round(p3RawAcc * 100 * 100) / 100).toFixed(2) + "%";
+                    }
 
-    //                             //  P3MissNew = playerData.Misses;
-    //                             //  if (P3MissOld != P3MissNew) {
-    //                             //
-    //                             //      document.getElementById("P3Miss2v2").style.display = "";
-    //                             //      document.getElementById("P3Miss2v2").classList.add("animationFadeOut");
-    //                             //      setTimeout(() => {
-    //                             //          document.getElementById("P3Miss2v2").classList.remove(
-    //                             //              "animationFadeOut");
-    //                             //          document.getElementById("P3Miss2v2").style.display = "none";
-    //                             //      }, 500);
-    //                             //
-    //                             //      P3MissOld = P3MissNew;
-    //                             //  }
-    //                         },
-    //                         StreamDelayMs);
-    //                 }
-    //                 if (playerId == P4ScoreSaber) {
-    //                     setTimeout(() => {
-    //                             p4RawAcc = playerData.Accuracy;
-    //                             P4Combo.innerText = playerData.Combo + "x";
-    //                             P4Acc.innerText = (Math.round(p4RawAcc * 100 * 100) / 100).toFixed(2) + "%";
-    //                             //  P4MissNew = playerData.Misses;
-    //                             //  if (P4MissOld != P4MissNew) {
-    //                             //
-    //                             //      document.getElementById("P4Miss2v2").style.display = "";
-    //                             //      document.getElementById("P4Miss2v2").classList.add("animationFadeOut");
-    //                             //      setTimeout(() => {
-    //                             //          document.getElementById("P4Miss2v2").classList.remove(
-    //                             //              "animationFadeOut");
-    //                             //          document.getElementById("P4Miss2v2").style.display = "none";
-    //                             //      }, 500);
-    //                             //
-    //                             //      P4MissOld = P4MissNew;
-    //                             //  }
-    //                         },
-    //                         StreamDelayMs);
-    //                 }
+                    if (playerId == P2ScoreSaber) {
+                        setTimeout(() => {
+                                p2RawAcc = playerData.Accuracy;
+                                P2Combo.innerText = playerData.Combo + "x";
+                                P2Acc.innerText = (Math.round(p2RawAcc * 100 * 100) / 100).toFixed(2) + "%";
+                                // P2MissNew = playerData.Misses;
+                                // if (P2MissOld != P2MissNew) {
+                                //
+                                //     document.getElementById("P2Miss2v2").style.display = "";
+                                //     document.getElementById("P2Miss2v2").classList.add("animationFadeOut");
+                                //     setTimeout(() => {
+                                //         document.getElementById("P2Miss2v2").classList.remove(
+                                //             "animationFadeOut");
+                                //         document.getElementById("P2Miss2v2").style.display = "none";
+                                //     }, 500);
+                                //
+                                //     P2MissOld = P2MissNew;
+                                // }
 
-    //                 team1AccTogether = ((p1RawAcc + p3RawAcc) / 2);
-    //                 team1Acc.innerText = (Math.round(team1AccTogether * 100 * 100) / 100).toFixed(2) + "%";
+                            },
+                            StreamDelayMs);
+                    }
+                    if (playerId == P3ScoreSaber) {
+                        setTimeout(() => {
+                                p3RawAcc = playerData.Accuracy;
+                                P3Combo.innerText = playerData.Combo + "x";
+                                P3Acc.innerText = (Math.round(p3RawAcc * 100 * 100) / 100).toFixed(2) + "%";
 
-    //                 team2AccTogether = ((p2RawAcc + p4RawAcc) / 2);
-    //                 team2Acc.innerText = (Math.round(team2AccTogether * 100 * 100) / 100).toFixed(2) + "%";
+                                //  P3MissNew = playerData.Misses;
+                                //  if (P3MissOld != P3MissNew) {
+                                //
+                                //      document.getElementById("P3Miss2v2").style.display = "";
+                                //      document.getElementById("P3Miss2v2").classList.add("animationFadeOut");
+                                //      setTimeout(() => {
+                                //          document.getElementById("P3Miss2v2").classList.remove(
+                                //              "animationFadeOut");
+                                //          document.getElementById("P3Miss2v2").style.display = "none";
+                                //      }, 500);
+                                //
+                                //      P3MissOld = P3MissNew;
+                                //  }
+                            },
+                            StreamDelayMs);
+                    }
+                    if (playerId == P4ScoreSaber) {
+                        setTimeout(() => {
+                                p4RawAcc = playerData.Accuracy;
+                                P4Combo.innerText = playerData.Combo + "x";
+                                P4Acc.innerText = (Math.round(p4RawAcc * 100 * 100) / 100).toFixed(2) + "%";
+                                //  P4MissNew = playerData.Misses;
+                                //  if (P4MissOld != P4MissNew) {
+                                //
+                                //      document.getElementById("P4Miss2v2").style.display = "";
+                                //      document.getElementById("P4Miss2v2").classList.add("animationFadeOut");
+                                //      setTimeout(() => {
+                                //          document.getElementById("P4Miss2v2").classList.remove(
+                                //              "animationFadeOut");
+                                //          document.getElementById("P4Miss2v2").style.display = "none";
+                                //      }, 500);
+                                //
+                                //      P4MissOld = P4MissNew;
+                                //  }
+                            },
+                            StreamDelayMs);
+                    }
 
-    //             }
-    //             console.log(team1AccTogether);
+                    team1AccTogether = ((p1RawAcc + p3RawAcc) / 2);
+                    team1Acc.innerText = (Math.round(team1AccTogether * 100 * 100) / 100).toFixed(2) + "%";
 
-    //         }
-    //     }
-    // }
+                    team2AccTogether = ((p2RawAcc + p4RawAcc) / 2);
+                    team2Acc.innerText = (Math.round(team2AccTogether * 100 * 100) / 100).toFixed(2) + "%";
+
+                }
+                console.log(team1AccTogether);
+
+            }
+        }
+    }
 
     function connect() {
 
@@ -768,12 +774,63 @@
                     document.getElementById('P4pfp').src = "https://cdn.scoresaber.com/avatars/oculus.png";
                 }
 
+                fetch(`https://new.scoresaber.com/api/player/${P1ScoreSaber}/full`)
+                    .then(response => {
+                        return response.json()
+                    })
+                    .then(data => {
+                        console.log(data);
+                        // Do stuff here
+                        P1Name.innerText = data.playerInfo.playerName;
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+                fetch(`https://new.scoresaber.com/api/player/${P2ScoreSaber}/full`)
+                    .then(response => {
+                        return response.json()
+                    })
+                    .then(data => {
+                        console.log(data);
+                        // Do stuff here
+                        P2Name.innerText = data.playerInfo.playerName;
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+
 
 
                 caster1 = data.Data.Caster1;
                 caster2 = data.Data.Caster2;
                 caster1Name.innerText = caster1;
                 caster2Name.innerText = caster2;
+
+                fetch(`https://new.scoresaber.com/api/player/${P3ScoreSaber}/full`)
+                    .then(response => {
+                        return response.json()
+                    })
+                    .then(data => {
+                        console.log(data);
+                        // Do stuff here
+                        P3Name.innerText = data.playerInfo.playerName;
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+
+                fetch(`https://new.scoresaber.com/api/player/${P4ScoreSaber}/full`)
+                    .then(response => {
+                        return response.json()
+                    })
+                    .then(data => {
+                        console.log(data);
+                        // Do stuff here
+                        P4Name.innerText = data.playerInfo.playerName;
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
 
                 if (data.Data.NameOverride == true) {
                     setTimeout(() => {

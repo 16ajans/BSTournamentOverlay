@@ -949,116 +949,11 @@ console.log("Started.")
 
 
 function mapPoolUpdate() {
-    let data = {
-"2": {
-    "poolName": "Div. 2",
-    "songs": [
-        {
-            "name": "CapSule",
-            "songAuthor": "Calliope Mori x Hoshimachi Suisei",
-            "levelAuthor": "Irish, Rusty & fqrb",
-            "diff": "Hard",
-            "key": "2561d"
-        },
-        {
-            "name": "Feel So Gud",
-            "songAuthor": "Mo Falk",
-            "levelAuthor": "General Dumbass & Rexxz",
-            "diff": "Expert+",
-            "key": "29fab"
-        },
-        {
-            "name": "Indoor Kei Nara Trackmaker",
-            "songAuthor": "Yunomi & nicamoq",
-            "levelAuthor": "Uragirimono",
-            "diff": "Expert+",
-            "key": "2eecb"
-        },
-        {
-            "name": "Clattanoia",
-            "songAuthor": "OxT",
-            "levelAuthor": "Joshabi",
-            "diff": "Expert+",
-            "key": "2b21d"
-        },
-        {
-            "name": "Readymade",
-            "songAuthor": "Ado",
-            "levelAuthor": "Chromia",
-            "diff": "Expert+",
-            "key": "309d2"
-        },
-        {
-            "name": "Playing God",
-            "songAuthor": "Polyphia",
-            "levelAuthor": "harbgy",
-            "diff": "Expert",
-            "key": "309d2"
-        },
-        {
-            "name": "Hank's Back",
-            "songAuthor": "Lil Hank",
-            "levelAuthor": "WalkingKat",
-            "diff": "Expert+",
-            "key": "2b2d1"
-        }
-    ]
-},
-"1": {
-    "poolName": "Div. 1",
-    "songs": [
-        {
-            "name": "Eye Candy",
-            "songAuthor": "Masha Ray",
-            "levelAuthor": "Nixie.Korten",
-            "diff": "Hard",
-            "key": "2ff04"
-        },
-        {
-            "name": "RACER",
-            "songAuthor": "ITZY",
-            "levelAuthor": "simplymarvellous",
-            "diff": "Expert+",
-            "key": "28070"
-        },
-        {
-            "name": "Storeulv 2016 (feat. Moberg)",
-            "songAuthor": "Bek & Wallin",
-            "levelAuthor": "Gabiel",
-            "diff": "Expert+",
-            "key": "309e1"
-        },
-        {
-            "name": "Akkanbe (あっかんべ)",
-            "songAuthor": "Nekomata Okayu",
-            "levelAuthor": "Rusty & Nolanimations",
-            "diff": "Expert+",
-            "key": "2f2dc"
-        },
-        {
-            "name": "Ragnarok",
-            "songAuthor": "Gram vs Camellia",
-            "levelAuthor": "Joshabi",
-            "diff": "Expert",
-            "key": "2d0b8"
-        },
-        {
-            "name": "Slave to the Riff",
-            "songAuthor": "Aether Realm",
-            "levelAuthor": "Anti",
-            "diff": "Expert+",
-            "key": "26d3a"
-        },
-        {
-            "name": "Clock Control (DJ Myosuke Remix)",
-            "songAuthor": "Kobaryo",
-            "levelAuthor": "cerret & Daan",
-            "diff": "Expert+",
-            "key": "304b9"
-        }
-    ]
-}
-}
+    fetch(`https://beatkhana.com/api/tournament/2147484261/map-pools`)
+        .then(response => {
+            return response.json()
+        })
+        .then(data => {
             //console.log(data);
             // Do stuff here
 
@@ -1083,7 +978,12 @@ function mapPoolUpdate() {
             mapCount = data[MapPool].songs.length;
             console.log(mapCount);
 
-        }
+        })
+
+        .catch(err => {
+            console.log(err)
+        })
+}
 
 function P1accFinder() {
     console.log(P1Name);
