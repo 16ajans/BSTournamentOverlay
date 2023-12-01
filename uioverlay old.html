@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+
+
+<head>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Heebo:wght@700&family=Montserrat&family=Share+Tech&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+	<style>
+		.team1 {
+			background-color: rgba(0, 0, 0, 0.0);
+			font-family: 'Montserrat';
+			font-weight: 600;
+			font-style: normal;
+			color: #ffffff;
+			font-size: 53px;
+			font-weight: 700;
+			line-height: 83.32px;
+			left: 160px;
+			top: 3px;
+			position: absolute;
+			width: 360px;
+			inline-size: 360px;
+			overflow-wrap: break-word;
+			z-index: 25;
+
+		}
+
+		.team2 {
+			background-color: rgba(0, 0, 0, 0.0);
+			font-family: 'Montserrat';
+			font-weight: 600;
+			font-style: normal;
+			color: #ffffff;
+			font-size: 53px;
+			font-weight: 700;
+			line-height: 83.32px;
+			inline-size: 360px;
+			overflow-wrap: break-word;
+			right: 160px;
+			top: 3px;
+			width: 360px;
+			position: absolute;
+			z-index: 26;
+			text-align: right;
+
+		}
+
+		#RightImage {
+			right: 7px;
+			top: 13px;
+			position: absolute;
+			width: 145px;
+			height: 145px;
+			z-index: 5;
+		}
+
+		#LeftImage {
+			left: 7px;
+			top: 13px;
+			position: absolute;
+			width: 145px;
+			height: 145px;
+			padding: 0px;
+			z-index: 5;
+		}
+
+		.bg {
+			height: 100%;
+			position: absolute;
+			left: 0;
+			top: 0;
+			z-index: -1;
+
+		}
+
+		.Scores {
+			height: 100%;
+			z-index: 3;
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+
+
+		.RoundInfo {
+			background-color: rgba(0, 0, 0, 0.0);
+			font-family: 'Montserrat';
+			font-weight: 600;
+			font-style: normal;
+			color: #ffffff;
+			font-size: 40px;
+			font-weight: 700;
+			line-height: 50px;
+			inline-size: 400px;
+			overflow-wrap: none;
+			right: 10px;
+			bottom: 10px;
+			width: 700px;
+			position: absolute;
+			z-index: 26;
+			text-align: right;
+
+		}
+	</style>
+</head>
+<html>
+
+<body>
+	<div class=team1>
+		<span id="team1Name">Team 1</span>
+	</div>
+	<div class=team2>
+		<span id="team2Name">Team 2
+		</span>
+	</div>
+
+	<div id="LeftImage" class="rounded-corners"><img id="team1Image" src="images/LeftTeam.png"
+			style="border-radius:25px;"></div>
+	<div id="RightImage" class="rounded-corners"><img id="team2Image" src="images/RightTeam.png"
+			style="border-radius:25px;"></div>
+
+
+	</div>
+	<div class="Scores">
+		<img id="team1ScoreImage" src="">
+
+	</div>
+	<div class="Scores"> <img id="team2ScoreImage" src=""> </div>
+
+	<div class=bg>
+
+		<img id="bestOfImage" src="images/bestof/unselected.png">
+
+	</div>
+
+	<div class="RoundInfo">
+		<span id="roundInfoText"></span>
+	</div>
+
+
+
+
+
+	<script>
+		function connect() {
+
+			sock = new WebSocket("ws://localhost:1337");
+			sock.onopen = function () {
+				console.log("Connected to BSTournamentHelper");
+			};
+
+			sock.onclose = function (e) {
+				console.log("Socket is closed. Reconnect attempt in 1 second");
+				setTimeout(function () {
+					connect();
+				}, 1000);
+			}
+
+			sock.onerror = function (err) {
+				console.log(err);
+				sock.close();
+			}
+			sock.onmessage = function (msg) {
+				let data = JSON.parse(msg.data);
+				console.log(data);
+
+				if (data.Event == "MatchData") {
+					team1Selection = data.Data.Team1;
+					team2Selection = data.Data.Team2;
+					team1Score = data.Data.Team1Score;
+					team2Score = data.Data.Team2Score;
+					bestof = data.Data.BestOf;
+					roundInfo = data.Data.RoundInfo;
+					roundInfoText.innerText = roundInfo;
+					console.log(bestof + team1Score + team2Score);
+					var team1Info = {
+						"ArsenalAdjacent": {
+							"name": "Arsenal Adjacent",
+							"logo": "images/ArsenalAdjacent.png"
+						},
+						"ucberkeley": {
+							"name": "Cal Esports",
+							"logo": "images/UCBerkeley.png"
+						},
+						"Clemson": {
+							"name": "Clemson",
+							"logo": "images/Clemson.png"
+						},
+						"Clueless": {
+							"name": "Clueless Weary",
+							"logo": "images/OntarioTech.png"
+						},
+						"SSCC": {
+							"name": "SSCC",
+							"logo": "images/SSCC.png"
+						},
+						"TAMU": {
+							"name": "TAMU Esports",
+							"logo": "images/TAMU.png"
+						},
+						"Tech": {
+							"name": "Tech Esports",
+							"logo": "images/Tech.png"
+						},
+						"SJSU": {
+							"name": "SJSU Esports",
+							"logo": "images/SJSU.png"
+						},
+						"Leftovers": {
+							"name": "The Leftovers",
+							"logo": "images/Leftovers.png"
+						},
+						"IlliniBlack": {
+							"name": "Illini Esports Black",
+							"logo": "images/IlliniBlack.png"
+						},
+						"IlliniBlue": {
+							"name": "Illini Esports Blue",
+							"logo": "images/IlliniBlue.png"
+						},
+						"IlliniOrange": {
+							"name": "Illini Esports Orange",
+							"logo": "images/IlliniOrange.png"
+						},
+						"IlliniWhite": {
+							"name": "Illini Esports White",
+							"logo": "images/IlliniWhite.png"
+						},
+						"IlliniD1": {
+							"name": "Illini Esports D1",
+							"logo": "images/IlliniD1.png"
+						},
+						"Gauchos": {
+							"name": "Gauchos",
+							"logo": "images/Gauchos.png"
+						},
+						"UAF": {
+							"name": "UAF Esports",
+							"logo": "images/UAF.png"
+						},
+						"CSUF": {
+							"name": "CSUF Esports",
+							"logo": "images/CSUF.png"
+						},
+						"OCE": {
+							"name": "OC Esports Blue",
+							"logo": "images/OCE.png"
+						},
+						"ChargerBlue": {
+							"name": "Charger Blue",
+							"logo": "images/ChargerBlue.png"
+						},
+						"UCDavis": {
+							"name": "UC Davis",
+							"logo": "images/UCDavis.png"
+						},
+						"SUNY": {
+							"name": "SUNY Plattsburgh",
+							"logo": "images/SUNY.png"
+						},
+						"UCEsports": {
+							"name": "UC Esports",
+							"logo": "images/UCEsports.png"
+						},
+						"Stevens": {
+							"name": "Stevens Esports",
+							"logo": "images/Stevens.png"
+						},
+						"TNTech": {
+							"name": "TNTech",
+							"logo": "images/TNTech.png"
+						},
+						"Beatcats": {
+							"name": "Beatcats Blue",
+							"logo": "images/Beatcats.png"
+						},
+						"Longhorns": {
+							"name": "Longhorn Gaming A",
+							"logo": "images/Longhorn.png"
+						},
+						"GeorgiaTech": {
+							"name": "Georgia Tech A",
+							"logo": "images/GeorgiaTech.png"
+						},
+						"OntarioTech": {
+							"name": "Ontario Tech",
+							"logo": "images/OntarioTech.png"
+						},
+						"DePaul": {
+							"name": "DePaul Esports",
+							"logo": "images/DePaul.png"
+						},
+						"Akron": {
+							"name": "Akron Esports",
+							"logo": "images/Akron.png"
+						},
+						"Miami": {
+							"name": "Miami Maelstrom",
+							"logo": "images/Miami.png"
+						},
+						"SJSU": {
+							"name": "SJSU Esports",
+							"logo": "images/SJSU.png"
+						},
+						"CrimsonA": {
+							"name": "Crimson Gaming A",
+							"logo": "images/Crimson.png"
+						},
+						"CrimsonB": {
+							"name": "Crimson Gaming B",
+							"logo": "images/Crimson.png"
+						},
+						"CalA": {
+							"name": "Cal Esports A",
+							"logo": "images/UCBerkeley.png"
+						},
+						"CalB": {
+							"name": "Cal Esports B",
+							"logo": "images/UCBerkeley.png"
+						},
+						"CalC": {
+							"name": "Cal Esports C",
+							"logo": "images/UCBerkeley.png"
+						},
+						"Nolan": {
+							"name": "Nolaniversity",
+							"logo": "images/Nolan.png"
+						},
+						"UTDallas": {
+							"name": "UT Dallas",
+							"logo": "images/UTDallas.png"
+						},
+						"UWaterloo": {
+							"name": "UWaterloo Esports",
+							"logo": "images/UWaterloo.png"
+						},
+						"EmptyTeam": {
+							"name": " ",
+							"logo": "images/EmptyTeam.png"
+						},
+					}
+					var team2Info = {
+						"ArsenalAdjacent": {
+							"name": "Arsenal Adjacent",
+							"logo": "images/ArsenalAdjacent.png"
+						},
+						"ucberkeley": {
+							"name": "Cal Esports",
+							"logo": "images/UCBerkeley.png"
+						},
+						"Clemson": {
+							"name": "Clemson",
+							"logo": "images/Clemson.png"
+						},
+						"Clueless": {
+							"name": "Clueless Weary",
+							"logo": "images/OntarioTech.png"
+						},
+						"SSCC": {
+							"name": "SSCC",
+							"logo": "images/SSCC.png"
+						},
+						"TAMU": {
+							"name": "TAMU Esports",
+							"logo": "images/TAMU.png"
+						},
+						"Tech": {
+							"name": "Tech Esports",
+							"logo": "images/Tech.png"
+						},
+						"SJSU": {
+							"name": "SJSU Esports",
+							"logo": "images/SJSU.png"
+						},
+						"Leftovers": {
+							"name": "The Leftovers",
+							"logo": "images/Leftovers.png"
+						},
+						"IlliniBlack": {
+							"name": "Illini Esports Black",
+							"logo": "images/IlliniBlack.png"
+						},
+						"IlliniBlue": {
+							"name": "Illini Esports Blue",
+							"logo": "images/IlliniBlue.png"
+						},
+						"IlliniOrange": {
+							"name": "Illini Esports Orange",
+							"logo": "images/IlliniOrange.png"
+						},
+						"IlliniWhite": {
+							"name": "Illini Esports White",
+							"logo": "images/IlliniWhite.png"
+						},
+						"IlliniD1": {
+							"name": "Illini Esports D1",
+							"logo": "images/IlliniD1.png"
+						},
+						"Gauchos": {
+							"name": "Gauchos",
+							"logo": "images/Gauchos.png"
+						},
+						"UAF": {
+							"name": "UAF Esports",
+							"logo": "images/UAF.png"
+						},
+						"CSUF": {
+							"name": "CSUF Esports",
+							"logo": "images/CSUF.png"
+						},
+						"OCE": {
+							"name": "OC Esports Blue",
+							"logo": "images/OCE.png"
+						},
+						"ChargerBlue": {
+							"name": "Charger Blue",
+							"logo": "images/ChargerBlue.png"
+						},
+						"UCDavis": {
+							"name": "UC Davis",
+							"logo": "images/UCDavis.png"
+						},
+						"SUNY": {
+							"name": "SUNY Plattsburgh",
+							"logo": "images/SUNY.png"
+						},
+						"UCEsports": {
+							"name": "UC Esports",
+							"logo": "images/UCEsports.png"
+						},
+						"Stevens": {
+							"name": "Stevens Esports",
+							"logo": "images/Stevens.png"
+						},
+						"TNTech": {
+							"name": "TNTech",
+							"logo": "images/TNTech.png"
+						},
+						"Beatcats": {
+							"name": "Beatcats Blue",
+							"logo": "images/Beatcats.png"
+						},
+						"Longhorns": {
+							"name": "Longhorn Gaming A",
+							"logo": "images/Longhorn.png"
+						},
+						"GeorgiaTech": {
+							"name": "Georgia Tech A",
+							"logo": "images/GeorgiaTech.png"
+						},
+						"OntarioTech": {
+							"name": "Ontario Tech",
+							"logo": "images/OntarioTech.png"
+						},
+						"DePaul": {
+							"name": "DePaul Esports",
+							"logo": "images/DePaul.png"
+						},
+						"Akron": {
+							"name": "Akron Esports",
+							"logo": "images/Akron.png"
+						},
+						"Miami": {
+							"name": "Miami Maelstrom",
+							"logo": "images/Miami.png"
+						},
+						"SJSU": {
+							"name": "SJSU Esports",
+							"logo": "images/SJSU.png"
+						},
+						"Crimson": {
+							"name": "Crimson Gaming D1",
+							"logo": "images/Crimson.png"
+						},
+						"CrimsonA": {
+							"name": "Crimson Gaming A",
+							"logo": "images/Crimson.png"
+						},
+						"CrimsonB": {
+							"name": "Crimson Gaming B",
+							"logo": "images/Crimson.png"
+						},
+						"CalA": {
+							"name": "Cal Esports A",
+							"logo": "images/UCBerkeley.png"
+						},
+						"CalB": {
+							"name": "Cal Esports B",
+							"logo": "images/UCBerkeley.png"
+						},
+						"CalC": {
+							"name": "Cal Esports C",
+							"logo": "images/UCBerkeley.png"
+						},
+						"Nolan": {
+							"name": "Nolaniversity",
+							"logo": "images/Nolan.png"
+						},
+						"UTDallas": {
+							"name": "UT Dallas",
+							"logo": "images/UTDallas.png"
+						},
+						"UWaterloo": {
+							"name": "UWaterloo Esports",
+							"logo": "images/UWaterloo.png"
+						},
+						"EmptyTeam": {
+							"name": " ",
+							"logo": "images/EmptyTeam.png"
+						},
+					}
+					
+					team1Name.innerText = team1Info[team1Selection].name;
+					document.getElementById('team1Image').src = team1Info[team1Selection].logo;
+
+					team2Name.innerText = team2Info[team2Selection].name;
+					document.getElementById('team2Image').src = team1Info[team2Selection].logo;
+
+					var bestOfImage = {
+						"bo3": {
+							"name": "Best of 3",
+							"image": "images/bestof/bo3.png"
+						},
+						"bo5": {
+							"name": "Best of 5",
+							"image": "images/bestof/bo5.png"
+						},
+						"bo7": {
+							"name": "Best of 7",
+							"image": "images/bestof/bo7.png"
+						},
+						"bo9": {
+							"name": "Best of 7",
+							"image": "images/bestof/bo9.png"
+						},
+					}
+					bestof.innerText = team1Info[team1Selection].name;
+					document.getElementById('bestOfImage').src = bestOfImage[bestof].image;
+
+					//Scoring
+
+					document.getElementById('team1ScoreImage').src = "images/bestof/" + bestof + "/team1score" +
+						team1Score + ".png";
+					document.getElementById('team2ScoreImage').src = "images/bestof/" + bestof + "/team2score" +
+						team2Score + ".png";
+
+
+				}
+			}
+
+
+		}
+
+
+
+
+		connect();
+	</script>
+
+
+</body>
+
+</html>

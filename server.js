@@ -177,7 +177,72 @@ server.on('connection', function (socket) {
 
 
 
+        if (data.Event == "MatchData") {
 
+            if (data.Data.StatsUpdate == 1) {
+                console.log("updating stats");
+                P1ScoreSaber = data.Data.P1;
+                P2ScoreSaber = data.Data.P2;
+                P3ScoreSaber = data.Data.P3;
+                P4ScoreSaber = data.Data.P4;
+
+
+                fetch(`https://new.scoresaber.com/api/player/${P1ScoreSaber}/full`)
+                    .then(response => {
+                        return response.json()
+                    })
+                    .then(data => {
+                        //console.log(data);
+                        P1Name = data.playerInfo.playerName;
+                        console.log(P1Name);
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+                fetch(`https://new.scoresaber.com/api/player/${P2ScoreSaber}/full`)
+                    .then(response => {
+                        return response.json()
+                    })
+                    .then(data => {
+                        //console.log(data);
+                        // Do stuff here
+                        P2Name = data.playerInfo.playerName;
+                        console.log(P2Name);
+                    })
+                    .catch(err => {
+                        //console.log(err)
+                    })
+
+                fetch(`https://new.scoresaber.com/api/player/${P3ScoreSaber}/full`)
+                    .then(response => {
+                        return response.json()
+                    })
+                    .then(data => {
+                        // console.log(data);
+                        // Do stuff here
+                        P3Name = data.playerInfo.playerName;
+                        console.log(P3Name);
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+
+                fetch(`https://new.scoresaber.com/api/player/${P4ScoreSaber}/full`)
+                    .then(response => {
+                        return response.json()
+                    })
+                    .then(data => {
+                        //console.log(data);
+                        // Do stuff here
+                        P4Name = data.playerInfo.playerName;
+                        console.log(P4Name);
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+                statsUpdate();
+            }
+        }
 
         if (data.Event == "ControllerData") {
             console.log("Recieved ControllerData")
@@ -196,22 +261,22 @@ server.on('connection', function (socket) {
             P3ScoreSaber = '';
             P4ScoreSaber = '';
 
-            if (P1 != "") {
-                P1ScoreSaber = teamInfo[Team1][P1].SSID;
-            }
+            //    if (P1 != "") {
+            //        P1ScoreSaber = teamInfo[Team1][P1].SSID;
+            //    }
+            //
+            //    if (P2 != "") {
+            //        P2ScoreSaber = teamInfo[Team2][P2].SSID;
+            //    }
+            //    if (P3 != "") {
+            //        P3ScoreSaber = teamInfo[Team1][P3].SSID;
+            //    }
+            //    if (P4 != "") {
+            //        P4ScoreSaber = teamInfo[Team2][P4].SSID;
+            //    }
 
-            if (P2 != "") {
-                P2ScoreSaber = teamInfo[Team2][P2].SSID;
-            }
-            if (P3 != "") {
-                P3ScoreSaber = teamInfo[Team1][P3].SSID;
-            }
-            if (P4 != "") {
-                P4ScoreSaber = teamInfo[Team2][P4].SSID;
-            }
 
-
-            sourceUpdate();
+            // sourceUpdate();
 
 
 
@@ -838,32 +903,32 @@ server.on('connection', function (socket) {
         }
 
 
-        if (data.Event == "ControllerTeamData") {
-            console.log("Recieved ControllerTeamData")
-            console.log(data);
-
-            Team1 = data.Data.Team1;
-            Team2 = data.Data.Team2;
-
-
-            const team1Players = Object.keys(teamInfo[Team1]);
-            console.log(team1Players);
-            const team2Players = Object.keys(teamInfo[Team2]);
-            console.log(team2Players);
-
-            var messageData = {
-                "Event": "TeamPlayers",
-                "Data": {
-                    "Team1": team1Players,
-                    "Team2": team2Players,
-                }
-            }
-            var messageString = JSON.stringify(messageData);
-
-            console.log("Sending TeamPlayers");
-            console.log(messageString);
-            sockets.forEach(s => s.send(messageString));
-        }
+        //        if (data.Event == "ControllerTeamData") {
+        //            console.log("Recieved ControllerTeamData")
+        //            console.log(data);
+        //
+        //            Team1 = data.Data.Team1;
+        //            Team2 = data.Data.Team2;
+        //
+        //
+        //            const team1Players = Object.keys(teamInfo[Team1]);
+        //            console.log(team1Players);
+        //            const team2Players = Object.keys(teamInfo[Team2]);
+        //            console.log(team2Players);
+        //
+        //            var messageData = {
+        //                "Event": "TeamPlayers",
+        //                "Data": {
+        //                    "Team1": team1Players,
+        //                    "Team2": team2Players,
+        //                }
+        //            }
+        //            var messageString = JSON.stringify(messageData);
+        //
+        //            console.log("Sending TeamPlayers");
+        //            console.log(messageString);
+        //            sockets.forEach(s => s.send(messageString));
+        //        }
 
 
 
@@ -884,11 +949,36 @@ console.log("Started.")
 
 
 function mapPoolUpdate() {
-    fetch(`https://beatkhana.com/api/tournament/2147484253/map-pools`)
-        .then(response => {
-            return response.json()
-        })
-        .then(data => {
+    let data = {
+        "1": {
+            "poolName": "Div. 1",
+            "songs": [
+	{ songAuthor: 'Gourmet Race', name: '(Qumu Remix)', levelAuthor: 'Rashed', diff: 'Hard', key: '2680c', hash: '075a3c6598289bd485bb0319718031f5528e5ca2'},
+    { songAuthor: 'Gold', name: 'Echos', levelAuthor: 'Olaf', diff: 'Expert+', key: '36cab', hash: '50bce3ee46cdc11557e5969247689c06aa55b6b1'},
+    { songAuthor: 'Rec Hall', name: 'She Doesn’t Get It', levelAuthor: 'Chromia', diff: 'Expert+', key: '360ed', hash: '91febe27ee06b27de9ec2b6c4c5d26079136f00e'},
+    { songAuthor: 'Five Finger Deathpunch', name: 'Lift Me Up', levelAuthor: 'Olaf', diff: 'Expert+', key: '33c67', hash: '1939dd6d7131de4397231a6ff99a5a146f789dcf'},
+    { songAuthor: 'USAO & Kobaryo', name: 'WACCA ULTRA DREAM MEGAMIX', levelAuthor: 'Nolanimations', diff: 'Tanoc+', key: '36cb1', hash: '825ecc693778e112609168ede82642076c585a9b'},
+    { songAuthor: 'Curbi ft. Jess Ball', name: 'Lied To', levelAuthor: 'oegoe', diff: 'Lied To (Tech)', key: '34c35', hash: '64606ce394718815deecd696737ea1aee40e8cf4'},
+	{ songAuthor: 'Giga & TeddyLoid', name: 'Kitsuneno Mado (Queen Fox) (covered by KOKO)', levelAuthor: 'Gabriel', diff: 'Expert+', key: '34873', hash: '409db485951246edffad7667e950c50ee938fb6a'},
+    { songAuthor: 't+pazolite', name: 'Hoshikuzu Struck', levelAuthor: 'Joshabi', diff: 'Expert+', key: '355d8', hash: '1d47953a0492547c6e04aabe6fb2ea78c5a6f87c'},
+    { songAuthor: 'The Hero !!!', name: 'cover by Jonathan Young', levelAuthor: 'Emir', diff: 'Expert+', key: '31b86', hash: '9bc732ce7d9003948df7a46d2aba593565c789d0'},
+    { songAuthor: 'Ashrount', name: 'AureoLe ~for Triumph~', levelAuthor: 'Cobayo & Nolanimations', diff: 'Expert', key: '254fc', hash: '44cf3b0235470221fcd1e0ce5a8bc9fe87a041fe'},
+    { songAuthor: 'Camellia', name: 'Exit This Earth’s Atomosphere', levelAuthor: 'Aquaflee', diff: 'Hypersonic', key: '33317', hash: '74a2ac567499e7a170f385c0ab5b7cd3ee93a73b'}]},
+        "2": {
+            "poolName": "Div. 2",
+            "songs": [
+	{ songAuthor: 'Stellar', name: 'El Dorado', levelAuthor: 'Melon', diff: 'Easy', key: '35333', hash: 'dc44b1632e211749dbfd777b70c4196d55d24fa1'},
+    { songAuthor: 'Gold', name: 'Echos', levelAuthor: 'Olaf', diff: 'Expert+', key: '36cab', hash: '50bce3ee46cdc11557e5969247689c06aa55b6b1'},
+    { songAuthor: 'Dance Gavin Dance', name: 'Back On Deck', levelAuthor: 'Melon', diff: 'Expert+', key: '328b4', hash: '9fdb0db57c754b58369046cc803c60c8d95beb77'},
+    { songAuthor: 'Mine', name: 'POWFU', levelAuthor: 'Olaf', diff: 'ExpertPlus', key: '2fad1', hash: '5fbde9a39457b63f272b6dc632361029584b3de3'},
+    { songAuthor: 'Origami Angel', name: 'The Title Track', levelAuthor: 'Harbgy', diff: 'A', key: '27142', hash: 'b90d1ffd137c8f2db90d95780fd7a8de3d35e3eb'},
+    { songAuthor: 'Sakuzyo', name: 'Synthesized Angel', levelAuthor: 'Slayx', diff: 'Expert+', key: '358e9', hash: '14de09851cecc21f9e0a6aa80164995ce7a47d51'},
+	{ songAuthor: 'Kanaria (ft. Seisei)', name: 'Requiem', levelAuthor: 'EOP Glacier', diff: 'Expert+', key: '31da8', hash: '56c281c3a43c4ee198d2d3351da7ae6932fb5bd0'},
+    { songAuthor: 'Sana', name: 'Packet Hero', levelAuthor: 'Joshabi', diff: 'Expert+', key: '3357c', hash: 'db9588466cd0d60bb461e8e4b7e5badc3f6b6c73'},
+    { songAuthor: 'CS4W', name: 'EX-ris', levelAuthor: 'ilvory', diff: 'Expert+', key: '3554e', hash: '32c9a4bf8c05028cbcef32030c69949ac5fb18fd'},
+    { songAuthor: 'Ludicin', name: 'Onus Rēgulus', levelAuthor: 'Slayx', diff: 'Hard', key: '35f5b', hash: 'f9b192855f44ec3e0047895935dd1f8b86aec75e'},
+    { songAuthor: 'Camellia', name: 'Machinegun', levelAuthor: 'Cerret', diff: 'Machine', key: '34e06', hash: '26b5524ef7f156d35a9710c37e472e301e14bff3'}]}
+    }
             //console.log(data);
             // Do stuff here
 
@@ -913,12 +1003,7 @@ function mapPoolUpdate() {
             mapCount = data[MapPool].songs.length;
             console.log(mapCount);
 
-        })
-
-        .catch(err => {
-            console.log(err)
-        })
-}
+        }
 
 function P1accFinder() {
     console.log(P1Name);
@@ -2166,32 +2251,32 @@ var teamInfo = {
 
 //OBS SHIT WEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
 
-const OBSWebSocket = require('obs-websocket-js');
-const obs = new OBSWebSocket();
-OBSconnect();
-
-function OBSconnect() {
-    obs.connect({
-            address: 'localhost:4444',
-            password: 'ILoveMen####'
-        })
-        .then(() => {
-            console.log(`Connected to OBS!`);
-
-            return obs.send('GetSceneList');
-        })
-        .then(data => {
-            console.log(`${data.scenes.length} Available Scenes!`);
-        })
-        .catch(err => { // Promise convention dicates you have a catch on every chain.
-            console.log(err);
-            console.log("Reconnecting to OBS");
-            setTimeout(function () {
-                OBSconnect();
-            }, 1000);
-        });
-
-}
+//const OBSWebSocket = require('obs-websocket-js');
+//const obs = new OBSWebSocket();
+//OBSconnect();
+//
+//function OBSconnect() {
+//    obs.connect({
+//            address: 'localhost:4444',
+//            password: 'ILoveMen####'
+//        })
+//        .then(() => {
+//            console.log(`Connected to OBS!`);
+//
+//            return obs.send('GetSceneList');
+//        })
+//        .then(data => {
+//            console.log(`${data.scenes.length} Available Scenes!`);
+//        })
+//        .catch(err => { // Promise convention dicates you have a catch on every chain.
+//            console.log(err);
+//            console.log("Reconnecting to OBS");
+//            setTimeout(function () {
+//                OBSconnect();
+//            }, 1000);
+//        });
+//
+//}
 
 function sourceUpdate() {
 
@@ -2292,4 +2377,517 @@ function sourceUpdate() {
         });
 
     }
+}
+
+
+function statsUpdate() {
+
+
+    setTimeout(function () {
+        scoreWipe();
+        console.log(P1Name);
+        console.log(P1ScoreSaber);
+        console.log(P2Name);
+        console.log(P2ScoreSaber);
+        console.log(P3Name);
+        console.log(P3ScoreSaber);
+        console.log(P4Name);
+        console.log(P4ScoreSaber);
+
+        if (/^\d/.test(P1ScoreSaber) == true) {
+
+            console.log("P1 Scoresaber Located")
+            P1accFinder();
+
+        }
+
+
+        if (/^\d/.test(P2ScoreSaber) == true) {
+
+            console.log("P2 Scoresaber Located")
+            P2accFinder();
+
+        }
+        if (P3ScoreSaber != "") {
+
+            if (/^\d/.test(P3ScoreSaber) == true) {
+
+                console.log("P3 Scoresaber Located")
+                P3accFinder();
+
+            }
+
+
+
+        }
+        if (P4ScoreSaber != "") {
+            if (/^\d/.test(P4ScoreSaber) == true) {
+
+                console.log("P4 Scoresaber Located")
+                P4accFinder();
+
+            }
+        }
+    }, 3000);
+    setTimeout(function () {
+
+        if (typeof P1Map0Score === 'undefined') {
+            P1Map0Score = "0";
+        }
+        if (typeof P1Map0Acc === 'undefined') {
+            P1Map0SAcc = "0";
+        }
+        if (typeof P1Map0Misses === 'undefined') {
+            P1Map0Misses = "0";
+        }
+        if (typeof P1Map1Score === 'undefined') {
+            P1Map1Score = "0";
+        }
+        if (typeof P1Map1Acc === 'undefined') {
+            P1Map1Acc = "0";
+        }
+        if (typeof P1Map1Misses === 'undefined') {
+            P1Map1Misses = "0";
+        }
+        if (typeof P1Map2Score === 'undefined') {
+            P1Map2Score = "0";
+        }
+        if (typeof P1Map2Acc === 'undefined') {
+            P1Map2Acc = "0";
+        }
+        if (typeof P1Map2Misses === 'undefined') {
+            P1Map2Misses = "0";
+        }
+        if (typeof P1Map3Score === 'undefined') {
+            P1Map3Score = "0";
+        }
+        if (typeof P1Map3Acc === 'undefined') {
+            P1Map3Acc = "0";
+        }
+        if (typeof P1Map3Misses === 'undefined') {
+            P1Map3Misses = "0";
+        }
+        if (typeof P1Map4Score === 'undefined') {
+            P1Map4Score = "0";
+        }
+        if (typeof P1Map4Acc === 'undefined') {
+            P1Map4Acc = "0";
+        }
+        if (typeof P1Map4Misses === 'undefined') {
+            P1Map4Misses = "0";
+        }
+        if (typeof P1Map5Score === 'undefined') {
+            P1Map5Score = "0";
+        }
+        if (typeof P1Map5Acc === 'undefined') {
+            P1Map5Acc = "0";
+        }
+        if (typeof P1Map5Misses === 'undefined') {
+            P1Map5Misses = "0";
+        }
+        if (typeof P1Map6Score === 'undefined') {
+            P1Map6Score = "0";
+        }
+        if (typeof P1Map6Acc === 'undefined') {
+            P1Map6Acc = "0";
+        }
+        if (typeof P1Map6Misses === 'undefined') {
+            P1Map6Misses = "0";
+        }
+        if (typeof P1Map7Score === 'undefined') {
+            P1Map7Score = "0";
+        }
+        if (typeof P1Map7Acc === 'undefined') {
+            P1Map7Acc = "0";
+        }
+        if (typeof P1Map7Misses === 'undefined') {
+            P1Map7Misses = "0";
+        }
+        if (typeof P1Map8Score === 'undefined') {
+            P1Map8Score = "0";
+        }
+        if (typeof P1Map8Acc === 'undefined') {
+            P1Map8Acc = "0";
+        }
+        if (typeof P1Map8Misses === 'undefined') {
+            P1Map8Misses = "0";
+        }
+        if (typeof P2Map0Acc === 'undefined') {
+            P2Map0Score = "0";
+        }
+        if (typeof P2Map0Misses === 'undefined') {
+            P2Map0Misses = "0";
+        }
+        if (typeof P2Map1Score === 'undefined') {
+            P2Map1Score = "0";
+        }
+        if (typeof P2Map1Acc === 'undefined') {
+            P2Map1Acc = "0";
+        }
+        if (typeof P2Map1Misses === 'undefined') {
+            P2Map1Misses = "0";
+        }
+        if (typeof P2Map2Score === 'undefined') {
+            P2Map2Score = "0";
+        }
+        if (typeof P2Map2Acc === 'undefined') {
+            P2Map2Acc = "0";
+        }
+        if (typeof P2Map2Misses === 'undefined') {
+            P2Map2Misses = "0";
+        }
+        if (typeof P2Map3Score === 'undefined') {
+            P2Map3Score = "0";
+        }
+        if (typeof P2Map3Acc === 'undefined') {
+            P2Map3Acc = "0";
+        }
+        if (typeof P2Map3Misses === 'undefined') {
+            P2Map3Misses = "0";
+        }
+        if (typeof P2Map4Score === 'undefined') {
+            P2Map4Score = "0";
+        }
+        if (typeof P2Map4Acc === 'undefined') {
+            P2Map4Acc = "0";
+        }
+        if (typeof P2Map4Misses === 'undefined') {
+            P2Map4Misses = "0";
+        }
+        if (typeof P2Map5Score === 'undefined') {
+            P2Map5Score = "0";
+        }
+        if (typeof P2Map5Acc === 'undefined') {
+            P2Map5Acc = "0";
+        }
+        if (typeof P2Map5Misses === 'undefined') {
+            P2Map5Misses = "0";
+        }
+        if (typeof P2Map6Score === 'undefined') {
+            P2Map6Score = "0";
+        }
+        if (typeof P2Map6Acc === 'undefined') {
+            P2Map6Acc = "0";
+        }
+        if (typeof P2Map6Misses === 'undefined') {
+            P2Map6Misses = "0";
+        }
+        if (typeof P2Map7Score === 'undefined') {
+            P2Map7Score = "0";
+        }
+        if (typeof P2Map7Acc === 'undefined') {
+            P2Map7Acc = "0";
+        }
+        if (typeof P2Map7Misses === 'undefined') {
+            P2Map7Misses = "0";
+        }
+        if (typeof P2Map8Score === 'undefined') {
+            P2Map8Score = "0";
+        }
+        if (typeof P2Map8Acc === 'undefined') {
+            P2Map8Acc = "0";
+        }
+        if (typeof P2Map8Misses === 'undefined') {
+            P2Map8Misses = "0";
+        }
+        if (typeof P3Map0Acc === 'undefined') {
+            P3Map0Score = "0";
+        }
+        if (typeof P3Map0Misses === 'undefined') {
+            P3Map0Misses = "0";
+        }
+        if (typeof P3Map1Score === 'undefined') {
+            P3Map1Score = "0";
+        }
+        if (typeof P3Map1Acc === 'undefined') {
+            P3Map1Acc = "0";
+        }
+        if (typeof P3Map1Misses === 'undefined') {
+            P3Map1Misses = "0";
+        }
+        if (typeof P3Map2Score === 'undefined') {
+            P3Map2Score = "0";
+        }
+        if (typeof P3Map2Acc === 'undefined') {
+            P3Map2Acc = "0";
+        }
+        if (typeof P3Map2Misses === 'undefined') {
+            P3Map2Misses = "0";
+        }
+        if (typeof P3Map3Score === 'undefined') {
+            P3Map3Score = "0";
+        }
+        if (typeof P3Map3Acc === 'undefined') {
+            P3Map3Acc = "0";
+        }
+        if (typeof P3Map3Misses === 'undefined') {
+            P3Map3Misses = "0";
+        }
+        if (typeof P3Map4Score === 'undefined') {
+            P3Map4Score = "0";
+        }
+        if (typeof P3Map4Acc === 'undefined') {
+            P3Map4Acc = "0";
+        }
+        if (typeof P3Map4Misses === 'undefined') {
+            P3Map4Misses = "0";
+        }
+        if (typeof P3Map5Score === 'undefined') {
+            P3Map5Score = "0";
+        }
+        if (typeof P3Map5Acc === 'undefined') {
+            P3Map5Acc = "0";
+        }
+        if (typeof P3Map5Misses === 'undefined') {
+            P3Map5Misses = "0";
+        }
+        if (typeof P3Map6Score === 'undefined') {
+            P3Map6Score = "0";
+        }
+        if (typeof P3Map6Acc === 'undefined') {
+            P3Map6Acc = "0";
+        }
+        if (typeof P3Map6Misses === 'undefined') {
+            P3Map6Misses = "0";
+        }
+        if (typeof P3Map7Score === 'undefined') {
+            P3Map7Score = "0";
+        }
+        if (typeof P3Map7Acc === 'undefined') {
+            P3Map7Acc = "0";
+        }
+        if (typeof P3Map7Misses === 'undefined') {
+            P3Map7Misses = "0";
+        }
+        if (typeof P3Map8Score === 'undefined') {
+            P3Map8Score = "0";
+        }
+        if (typeof P3Map8Acc === 'undefined') {
+            P3Map8Acc = "0";
+        }
+        if (typeof P3Map8Misses === 'undefined') {
+            P3Map8Misses = "0";
+        }
+        if (typeof P4Map0Acc === 'undefined') {
+            P4Map0Score = "0";
+        }
+        if (typeof P4Map0Misses === 'undefined') {
+            P4Map0Misses = "0";
+        }
+        if (typeof P4Map1Score === 'undefined') {
+            P4Map1Score = "0";
+        }
+        if (typeof P4Map1Acc === 'undefined') {
+            P4Map1Acc = "0";
+        }
+        if (typeof P4Map1Misses === 'undefined') {
+            P4Map1Misses = "0";
+        }
+        if (typeof P4Map2Score === 'undefined') {
+            P4Map2Score = "0";
+        }
+        if (typeof P4Map2Acc === 'undefined') {
+            P4Map2Acc = "0";
+        }
+        if (typeof P4Map2Misses === 'undefined') {
+            P4Map2Misses = "0";
+        }
+        if (typeof P4Map3Score === 'undefined') {
+            P4Map3Score = "0";
+        }
+        if (typeof P4Map3Acc === 'undefined') {
+            P4Map3Acc = "0";
+        }
+        if (typeof P4Map3Misses === 'undefined') {
+            P4Map3Misses = "0";
+        }
+        if (typeof P4Map4Score === 'undefined') {
+            P4Map4Score = "0";
+        }
+        if (typeof P4Map4Acc === 'undefined') {
+            P4Map4Acc = "0";
+        }
+        if (typeof P4Map4Misses === 'undefined') {
+            P4Map4Misses = "0";
+        }
+        if (typeof P4Map5Score === 'undefined') {
+            P4Map5Score = "0";
+        }
+        if (typeof P4Map5Acc === 'undefined') {
+            P4Map5Acc = "0";
+        }
+        if (typeof P4Map5Misses === 'undefined') {
+            P4Map5Misses = "0";
+        }
+        if (typeof P4Map6Score === 'undefined') {
+            P4Map6Score = "0";
+        }
+        if (typeof P4Map6Acc === 'undefined') {
+            P4Map6Acc = "0";
+        }
+        if (typeof P4Map6Misses === 'undefined') {
+            P4Map6Misses = "0";
+        }
+        if (typeof P4Map7Score === 'undefined') {
+            P4Map7Score = "0";
+        }
+        if (typeof P4Map7Acc === 'undefined') {
+            P4Map7Acc = "0";
+        }
+        if (typeof P4Map7Misses === 'undefined') {
+            P4Map7Misses = "0";
+        }
+        if (typeof P4Map8Score === 'undefined') {
+            P4Map8Score = "0";
+        }
+        if (typeof P4Map8Acc === 'undefined') {
+            P4Map8Acc = "0";
+        }
+        if (typeof P4Map8Misses === 'undefined') {
+            P4Map8Misses = "0";
+        }
+
+
+
+
+
+
+
+        var messageData = {
+            "Event": "StatsPage",
+            "Data": {
+                "P1Map0Score": P1Map0Score,
+                "P1Map0Acc": P1Map0Acc,
+                "P1Map0Misses": P1Map0Misses,
+                "P1Map1Score": P1Map1Score,
+                "P1Map1Acc": P1Map1Acc,
+                "P1Map1Misses": P1Map1Misses,
+                "P1Map2Score": P1Map2Score,
+                "P1Map2Acc": P1Map2Acc,
+                "P1Map2Misses": P1Map2Misses,
+                "P1Map3Score": P1Map3Score,
+                "P1Map3Acc": P1Map3Acc,
+                "P1Map3Misses": P1Map3Misses,
+                "P1Map4Score": P1Map4Score,
+                "P1Map4Acc": P1Map4Acc,
+                "P1Map4Misses": P1Map4Misses,
+                "P1Map5Score": P1Map5Score,
+                "P1Map5Acc": P1Map5Acc,
+                "P1Map5Misses": P1Map5Misses,
+                "P1Map6Score": P1Map6Score,
+                "P1Map6Acc": P1Map6Acc,
+                "P1Map6Misses": P1Map6Misses,
+                "P1Map7Score": P1Map7Score,
+                "P1Map7Acc": P1Map7Acc,
+                "P1Map7Misses": P1Map7Misses,
+                "P1Map8Score": P1Map8Score,
+                "P1Map8Acc": P1Map8Acc,
+                "P1Map8Misses": P1Map8Misses,
+                "P2Map0Score": P2Map0Score,
+                "P2Map0Acc": P2Map0Acc,
+                "P2Map0Misses": P2Map0Misses,
+                "P2Map1Score": P2Map1Score,
+                "P2Map1Acc": P2Map1Acc,
+                "P2Map1Misses": P2Map1Misses,
+                "P2Map2Score": P2Map2Score,
+                "P2Map2Acc": P2Map2Acc,
+                "P2Map2Misses": P2Map2Misses,
+                "P2Map3Score": P2Map3Score,
+                "P2Map3Acc": P2Map3Acc,
+                "P2Map3Misses": P2Map3Misses,
+                "P2Map4Score": P2Map4Score,
+                "P2Map4Acc": P2Map4Acc,
+                "P2Map4Misses": P2Map4Misses,
+                "P2Map5Score": P2Map5Score,
+                "P2Map5Acc": P2Map5Acc,
+                "P2Map5Misses": P2Map5Misses,
+                "P2Map6Score": P2Map6Score,
+                "P2Map6Acc": P2Map6Acc,
+                "P2Map6Misses": P2Map6Misses,
+                "P2Map7Score": P2Map7Score,
+                "P2Map7Acc": P2Map7Acc,
+                "P2Map7Misses": P2Map7Misses,
+                "P2Map8Score": P2Map8Score,
+                "P2Map8Acc": P2Map8Acc,
+                "P2Map8Misses": P2Map8Misses,
+                "P3Map0Score": P3Map0Score,
+                "P3Map0Acc": P3Map0Acc,
+                "P3Map0Misses": P3Map0Misses,
+                "P3Map1Score": P3Map1Score,
+                "P3Map1Acc": P3Map1Acc,
+                "P3Map1Misses": P3Map1Misses,
+                "P3Map2Score": P3Map2Score,
+                "P3Map2Acc": P3Map2Acc,
+                "P3Map2Misses": P3Map2Misses,
+                "P3Map3Score": P3Map3Score,
+                "P3Map3Acc": P3Map3Acc,
+                "P3Map3Misses": P3Map3Misses,
+                "P3Map4Score": P3Map4Score,
+                "P3Map4Acc": P3Map4Acc,
+                "P3Map4Misses": P3Map4Misses,
+                "P3Map5Score": P3Map5Score,
+                "P3Map5Acc": P3Map5Acc,
+                "P3Map5Misses": P3Map5Misses,
+                "P3Map6Score": P3Map6Score,
+                "P3Map6Acc": P3Map6Acc,
+                "P3Map6Misses": P3Map6Misses,
+                "P3Map7Score": P3Map7Score,
+                "P3Map7Acc": P3Map7Acc,
+                "P3Map7Misses": P3Map7Misses,
+                "P3Map8Score": P3Map8Score,
+                "P3Map8Acc": P3Map8Acc,
+                "P3Map8Misses": P3Map8Misses,
+                "P4Map0Score": P4Map0Score,
+                "P4Map0Acc": P4Map0Acc,
+                "P4Map0Misses": P4Map0Misses,
+                "P4Map1Score": P4Map1Score,
+                "P4Map1Acc": P4Map1Acc,
+                "P4Map1Misses": P4Map1Misses,
+                "P4Map2Score": P4Map2Score,
+                "P4Map2Acc": P4Map2Acc,
+                "P4Map2Misses": P4Map2Misses,
+                "P4Map3Score": P4Map3Score,
+                "P4Map3Acc": P4Map3Acc,
+                "P4Map3Misses": P4Map3Misses,
+                "P4Map4Score": P4Map4Score,
+                "P4Map4Acc": P4Map4Acc,
+                "P4Map4Misses": P4Map4Misses,
+                "P4Map5Score": P4Map5Score,
+                "P4Map5Acc": P4Map5Acc,
+                "P4Map5Misses": P4Map5Misses,
+                "P4Map6Score": P4Map6Score,
+                "P4Map6Acc": P4Map6Acc,
+                "P4Map6Misses": P4Map6Misses,
+                "P4Map7Score": P4Map7Score,
+                "P4Map7Acc": P4Map7Acc,
+                "P4Map7Misses": P4Map7Misses,
+                "P4Map8Score": P4Map8Score,
+                "P4Map8Acc": P4Map8Acc,
+                "P4Map8Misses": P4Map8Misses,
+
+
+            }
+
+
+
+
+
+        }
+
+
+
+        var messageString = JSON.stringify(messageData);
+
+
+        console.log(messageString);
+        sockets.forEach(s => s.send(messageString));
+
+
+
+
+
+
+
+
+    }, 5000);
 }

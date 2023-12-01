@@ -1,0 +1,641 @@
+<html>
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@700&family=Montserrat&family=Share+Tech&display=swap"
+        rel="stylesheet">
+
+    <style>
+        @font-face {
+            font-family: 'Matamata';
+            /*a name to be used later*/
+            src: url('Matamata-Bold.otf');
+            /*URL to font*/
+        }
+
+        .Displayed {
+            font-family: 'Matamata';
+            color: rgb(255, 255, 255);
+        }
+
+        .Displayed.PlayerName {
+            font-size: 35px;
+            color: rgb(255, 255, 255);
+            line-height: 0.5;
+            margin-left: 15x;
+        }
+
+        .Displayed.MissText {
+            font-size: 30px;
+            line-height: 0.5;
+        }
+
+        .Displayed.Acc {
+            font-size: 40px;
+            line-height: 0.5;
+            display: block;
+        }
+
+        .Displayed.Combo {
+            font-size: 40px;
+            line-height: 0.5;
+        }
+
+        .left {
+            text-align: left;
+        }
+
+        .right {
+            text-align: right;
+        }
+
+        .P1PlayerInfo {
+            position: fixed;
+            bottom: 710;
+            right: 733;
+            width: 925px;
+            height: 180px;
+            padding: 10px;
+            margin: 0px;
+            background-color: rgba(0, 0, 0, 0.0);
+            border-radius: 40px;
+        }
+
+        .P1ScoringInfo {
+            position: fixed;
+            bottom: 375;
+            right: 965;
+            width: 500px;
+            height: 180px;
+            padding: 10px;
+            margin: 0px;
+            background-color: rgba(0, 0, 0, 0.0);
+            border-radius: 40px;
+        }
+
+        .P2PlayerInfo {
+            position: fixed;
+            bottom: 710;
+            right: 242;
+            width: 925px;
+            height: 180px;
+            padding: 10px;
+            margin: 0px;
+            background-color: rgba(0, 0, 0, 0.0);
+            border-radius: 40px;
+        }
+
+        .P2ScoringInfo {
+            position: fixed;
+            bottom: 375;
+            right: 435;
+            width: 500px;
+            height: 180px;
+            padding: 10px;
+            margin: 0px;
+            background-color: rgba(0, 0, 0, 0.0);
+            border-radius: 40px;
+        }
+
+        .P3PlayerInfo {
+            position: fixed;
+            bottom: 300;
+            right: 733;
+            width: 925px;
+            height: 180px;
+            padding: 10px;
+            margin: 0px;
+            background-color: rgba(0, 0, 0, 0.0);
+            border-radius: 40px;
+        }
+
+        .P3ScoringInfo {
+            position: fixed;
+            bottom: -27;
+            right: 965;
+            width: 500px;
+            height: 180px;
+            padding: 10px;
+            margin: 0px;
+            background-color: rgba(0, 0, 0, 0.0);
+            border-radius: 40px;
+        }
+
+        .P4PlayerInfo {
+            position: fixed;
+            bottom: 300;
+            right: 242;
+            width: 925px;
+            height: 180px;
+            padding: 10px;
+            margin: 0px;
+            background-color: rgba(0, 0, 0, 0.0);
+            border-radius: 40px;
+        }
+
+        .P4ScoringInfo {
+            position: fixed;
+            bottom: -27;
+            right: 435;
+            width: 500px;
+            height: 180px;
+            padding: 10px;
+            margin: 0px;
+            background-color: rgba(0, 0, 0, 0.0);
+            border-radius: 40px;
+        }
+
+
+
+        .pfpimg {
+            height: 50px;
+            width: 50px;
+            border-radius: 100px;
+            bottom: 0;
+            padding: 5px;
+
+        }
+
+        .P1Image {
+            display: block;
+            float: left;
+            bottom: 10;
+        }
+
+        .P2Image {
+            display: block;
+            float: right;
+            padding: 0px;
+        }
+
+        .SongInfo {
+            position: fixed;
+            top: 200px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            text-align: center;
+            font-family: 'Matamata';
+            overflow-wrap: break-word;
+            overflow: hidden;
+            color: rgb(255, 255, 255);
+            width: 210px;
+            height: 400px;
+            line-height: 20px;
+            text-shadow: 2px 2px #000000
+        }
+
+        .SongArtist {
+            position: relative;
+            text-align: center;
+            top: 30px;
+            z-index: 1;
+            font-size: 30px;
+            line-height: 30px;
+            height: 60px;
+            overflow: hidden;
+        }
+
+        .SongName {
+            position: absolute;
+            text-align: center;
+            top: 130px;
+            z-index: -1;
+            font-size: 30px;
+            line-height: 30px;
+            width: 199.99px;
+            height: 120px;
+            overflow: hidden;
+
+
+        }
+
+        .SongDiff {
+            position: absolute;
+            text-align: right;
+            top: -10px;
+            right: 15px;
+            z-index: 2;
+            font-size: 25px;
+
+
+        }
+
+        .SongKey {
+            position: absolute;
+            text-align: left;
+            top: -5px;
+            left: 15px;
+            z-index: 2;
+            font-size: 20px;
+
+
+        }
+
+        .SongMapper {
+            position: absolute;
+            text-align: center;
+            bottom: 0px;
+            z-index: 4;
+            height: 30px;
+            font-size: 25px;
+            line-height: 0px;
+            width: 200px;
+        }
+
+
+
+        .SongCover {
+            position: absolute;
+            bottom: 0;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            z-index: -4;
+            filter: blur(8px);
+            -webkit-filter: blur(8px);
+
+        }
+
+        .casterInfo {
+            position: fixed;
+            top: 200px;
+            left: 10px;
+            background-color: rgba(0, 0, 0, 0.0);
+            text-align: center;
+            font-family: 'Matamata';
+            overflow-wrap: break-word;
+            overflow: hidden;
+            color: rgb(255, 255, 255);
+            width: 220px;
+            height: 200px;
+            line-height: 10px;
+            text-shadow: 2px 2px #000000
+        }
+
+        .casterName {
+            position: relative;
+            text-align: center;
+            top: 0;
+            z-index: -1;
+            font-size: 40px;
+            line-height: 70px;
+            width: 399.99px;
+        }
+
+        .team1Accuracy {
+            position: absolute;
+            bottom: 5;
+            right: 965;
+            background-color: rgba(0, 0, 0, 0.0);
+            text-align: right;
+            font-family: 'Matamata';
+            color: rgb(255, 255, 255);
+            font-size: 60px;
+        }
+
+
+        .team2Accuracy {
+            position: absolute;
+            bottom: 5;
+            right: 733;
+            background-color: rgba(0, 0, 0, 0.0);
+            text-align: left;
+            font-family: 'Matamata';
+            color: rgb(255, 255, 255);
+            font-size: 60px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class=P1PlayerInfo>
+        <h1 id="P1Name" class="Displayed PlayerName left">Player 1</h1>
+        <img id="P1pfp" src="" class="P1Image pfpimg">
+    </div>
+    <div class="P1ScoringInfo">
+        <h2 id="P1Acc" class="Displayed Acc right">00.00%</h2>
+    </div>
+
+    <div class="P2PlayerInfo">
+        <h1 id="P2Name" class="Displayed PlayerName right">Player 2</h1>
+        <img id="P2pfp" src="" class="P2Image pfpimg">
+    </div>
+    <div class="P2ScoringInfo">
+        <h2 id="P2Acc" class="Displayed Acc left">00.00%</h2>
+    </div>
+
+    <div class="P3PlayerInfo">
+        <h1 id="P3Name" class="Displayed PlayerName left">Player 3</h1>
+        <img id="P3pfp" src="" class="P1Image pfpimg">
+    </div>
+    <div class="P3ScoringInfo">
+        <h2 id="P3Acc" class="Displayed Acc right">00.00%</h2>
+    </div>
+
+    <div class="P4PlayerInfo">
+        <h1 id="P4Name" class="Displayed PlayerName right">Player 4</h1>
+        <img id="P4pfp" src="" class="P2Image pfpimg">
+    </div>
+    <div class="P4ScoringInfo">
+        <h2 id="P4Acc" class="Displayed Acc left">00.00%</h2>
+    </div>
+
+
+
+
+
+
+
+    <div class="SongInfo" style="border-radius:25px;">
+        <p id="SongArtist" class="SongArtist">Artist</p>
+        <p id="SongName" class="SongName">Song Name</p>
+        <img id="songCover" src="images/nosongcover.png" class="SongCover">
+        <p id="SongMapper" class="SongMapper">Mapper</p>
+        <p id="SongDiff" class="SongDiff">Diff</p>
+        <p id="SongKey" class="SongKey">Key</p>
+
+    </div>
+    <div class=casterInfo>
+        <span id="caster1Name" class="casterName">Caster 1</span><br>
+        <span id="caster2Name" class="casterName">Caster 2</span>
+
+
+    </div>
+
+    <div class="team1Accuracy">
+        <span id="team1Acc">100.00%</span>
+    </div>
+
+    <div class="team2Accuracy">
+        <span id="team2Acc">100.00%</span>
+    </div>
+</body>
+
+</body>
+<script>
+    var P1Name = document.getElementById('P1Name');
+    var P2Name = document.getElementById('P2Name');
+    var P3Name = document.getElementById('P3Name');
+    var P4Name = document.getElementById('P4Name');
+
+    var P1Combo = document.getElementById('P1Combo');
+    var P2Combo = document.getElementById('P2Combo');
+    var P3Combo = document.getElementById('P3Combo');
+    var P4Combo = document.getElementById('P4Combo');
+
+    var P1Misses = document.getElementById('P1Misses');
+    var P2Misses = document.getElementById('P2Misses');
+    var P3Misses = document.getElementById('P3Misses');
+    var P4Misses = document.getElementById('P4Misses');
+
+    var P1Acc = document.getElementById('P1Acc');
+    var P2Acc = document.getElementById('P2Acc');
+    var P3Acc = document.getElementById('P3Acc');
+    var P4Acc = document.getElementById('P4Acc');
+
+    var SongName = document.getElementById('SongName');
+    var SongID = document.getElementById('SongID');
+    var SongDiff = document.getElementById('SongDiff');
+
+
+    var P1ScoreSaber = '';
+    var P2ScoreSaber = '';
+    var P3ScoreSaber = '';
+    var P4ScoreSaber = '';
+
+    var coordinatorName = '';
+
+    //var TAsock = new WebSocket("ws://beatsaber.networkauditor.org:10157");
+    //var TAsock = new WebSocket("ws://ta.asodev.net:10157");
+    console.log("connecting");
+    var TAsock = new WebSocket("ws://beatsaber.networkauditor.org:10157");
+    TAsock.onopen = function (event) {
+        console.log("*hacker voice* I'm in.");
+    };
+
+    TAsock.onmessage = async function (event) {
+        //trimmed = event.data.substring(0, event.data.length - 7);
+        jsonObj = JSON.parse(event.data);
+
+        console.log(jsonObj);
+
+        if (jsonObj.Type == 4) {
+
+
+            if (jsonObj.SpecificPacket.Type == 6) { // MatchLevelChanged
+                var matchData = jsonObj.SpecificPacket.ChangedObject;
+
+
+
+
+                for (var i = 0; i < matchData.Players.length; i++) {
+                    var playerData = matchData.Players[i];
+                    if (playerData.UserId == P1ScoreSaber) {
+                        P1Misses.innerText = '0 misses';
+                        P1Acc.innerText = '00.00%';
+                        P1Combo.innertext = "0x";
+                    }
+
+                    if (playerData.UserId == P2ScoreSaber) {
+                        P2Misses.innerText = '0 misses';
+                        P2Acc.innerText = '00.00%';
+                        P2Combo.innerText = "0x";
+                    }
+
+                    if (playerData.UserId == P1ScoreSaber || playerdata.UserId == P2ScoreSaber) {
+
+                        console.log(matchData);
+                        var LevelHash = matchData.SelectedLevel.LevelId.split("custom_level_")[1];
+
+                        var difficultyNames = {
+                            "0": "Easy",
+                            "1": "Normal",
+                            "2": "Hard",
+                            "3": "Expert",
+                            "4": 'Expert+',
+                        }
+                        fetch(`https://api.beatsaver.com/maps/hash/${LevelHash}`)
+                            .then(response => {
+                                return response.json()
+                            })
+                            .then(data => {
+                                console.log(data);
+                                // Do stuff here
+                                SongName.innerText = data.name;
+                                SongArtist.innerText = data.metadata.songAuthorName;
+                                SongKey.innerText = data.id;
+                                SongMapper.innerText = data.metadata.levelAuthorName;
+                                SongDiff.innerText = difficultyNames[matchData.SelectedDifficulty];
+                                //For image use lower case hash (.toLowerCase) or something
+                                lowerHash = LevelHash.toLowerCase();
+                                console.log(lowerHash);
+
+
+                                document.getElementById('songCover').src = "https://na.cdn.beatsaver.com/" +
+                                    lowerHash + ".jpg"
+
+                            })
+                            .catch(err => {
+                                console.log(err)
+                            })
+                    }
+
+                }
+            }
+        } else if (jsonObj.Type == 6) {
+            if (jsonObj.SpecificPacket.Type == 4) { // ScoreUpdate
+                if (jsonObj.SpecificPacket.SpecificPacket.Type == 1) {
+                    var playerData = jsonObj.SpecificPacket.SpecificPacket.ChangedObject;
+                    var playerId = playerData.UserId;
+
+                    if (playerId == P1ScoreSaber) {
+                        //P1Acc.innerText = playerData.Accuracy * 100 + "%";
+                        //P1Score.style.fontSize = 20 + playerData.Misses + "px";
+                        var p1RawAcc = ''
+                        P1AccEdit = (Math.round(playerData.Accuracy * 100 * 100) / 100).toFixed(2) + "%";
+                        P1Acc.innerText = P1AccEdit;
+                        p1RawAcc = (Math.round(playerData.Accuracy * 100 * 100) / 100).toFixed(2);
+                    }
+
+                    if (playerId == P2ScoreSaber) {
+                        var p2RawAcc = (Math.round(playerData.Accuracy * 100 * 100) / 100).toFixed(2);
+                        P2Acc.innerText = (Math.round(playerData.Accuracy * 100 * 100) / 100).toFixed(2) + "%";
+                    }
+
+                    if (playerId == P3ScoreSaber) {
+                        var p3RawAcc = playerData.Accuracy;
+                        P3Acc.innerText = (Math.round(playerData.Accuracy * 100 * 100) / 100).toFixed(2) + "%";
+                    }
+                    if (playerId == P4ScoreSaber) {
+                        var p4RawAcc = playerData.Accuracy;
+                        P4Acc.innerText = (Math.round(playerData.Accuracy * 100 * 100) / 100).toFixed(2) + "%";
+                    }
+
+                    team1AccRaw = ((p1RawAcc + p3RawAcc) / 2);
+                    team1Acc = (Math.round(team1AccRaw * 100) / 2).toFixed(2) + "%";
+                    team1Acc.innerText = team1Acc;
+                    console.log(p1RawAcc);
+
+
+
+
+
+                }
+            }
+        }
+    }
+
+    function connect() {
+
+        sock = new WebSocket("ws://localhost:1337");
+        sock.onopen = function () {
+            console.log("Connected to BSTournamentHelper");
+        };
+
+        sock.onclose = function (e) {
+            console.log("Socket is closed. Reconnect attempt in 1 second");
+            setTimeout(function () {
+                connect();
+            }, 1000);
+        }
+
+        sock.onerror = function (err) {
+            console.log(err);
+            sock.close();
+        }
+        sock.onmessage = function (msg) {
+            let data = JSON.parse(msg.data);
+            console.log(data);
+
+            if (data.Event == "MatchData") {
+                P1ScoreSaber = data.Data.P1;
+                P2ScoreSaber = data.Data.P2;
+                P3ScoreSaber = data.Data.P3;
+                P4ScoreSaber = data.Data.P4;
+                coordinatorName = data.Data.CoordinatorName;
+
+                document.getElementById('P1pfp').src = "https://cdn.scoresaber.com/avatars/" + P1ScoreSaber +
+                ".jpg";
+                document.getElementById('P2pfp').src = "https://cdn.scoresaber.com/avatars/" + P2ScoreSaber +
+                ".jpg";
+                document.getElementById('P3pfp').src = "https://cdn.scoresaber.com/avatars/" + P3ScoreSaber +
+                ".jpg";
+                document.getElementById('P4pfp').src = "https://cdn.scoresaber.com/avatars/" + P4ScoreSaber +
+                ".jpg";
+
+                fetch(`https://new.scoresaber.com/api/player/${P1ScoreSaber}/full`)
+                    .then(response => {
+                        return response.json()
+                    })
+                    .then(data => {
+                        console.log(data);
+                        // Do stuff here
+                        P1Name.innerText = data.playerInfo.playerName;
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+                fetch(`https://new.scoresaber.com/api/player/${P2ScoreSaber}/full`)
+                    .then(response => {
+                        return response.json()
+                    })
+                    .then(data => {
+                        console.log(data);
+                        // Do stuff here
+                        P2Name.innerText = data.playerInfo.playerName;
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+
+
+
+                caster1 = data.Data.Caster1;
+                caster2 = data.Data.Caster2;
+                caster1Name.innerText = caster1;
+                caster2Name.innerText = caster2;
+
+                fetch(`https://new.scoresaber.com/api/player/${P3ScoreSaber}/full`)
+                    .then(response => {
+                        return response.json()
+                    })
+                    .then(data => {
+                        console.log(data);
+                        // Do stuff here
+                        P3Name.innerText = data.playerInfo.playerName;
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+
+                fetch(`https://new.scoresaber.com/api/player/${P4ScoreSaber}/full`)
+                    .then(response => {
+                        return response.json()
+                    })
+                    .then(data => {
+                        console.log(data);
+                        // Do stuff here
+                        P4Name.innerText = data.playerInfo.playerName;
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+            }
+
+
+        }
+
+
+
+    }
+
+
+
+
+    connect();
+</script>
+
+</html>

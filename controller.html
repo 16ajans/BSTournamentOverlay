@@ -34,7 +34,6 @@
     div,
     p {
         color: #BABECC;
-        text-shadow: 1px 1px 1px #FFF;
     }
 
 
@@ -199,14 +198,13 @@
         text-align: center;
         color: rgb(255, 255, 255);
         font-size: 15px;
-        text-shadow: 6px 6px 8px #000000;
 
     }
 </style>
 
-<body>
+<body onload="mapPoolUpdate()">
 
-    <div class="Team1" id="Player1">
+ <!--   <div class="Team1" id="Player1">
         <label for="Player1Select">Player 1</label>
         <select id="Player1Select">
             <option value="">--Please choose an option--</option>
@@ -232,72 +230,52 @@
             <option value="">--Please choose an option--</option>
         </select>
     </div>
-
+-->
     <br>
     <br>
-    <label for="chkBoxHard">
-        <input type="checkbox" id="chkBoxHard" onclick="ShowHideDivHard(this)" />
-        Hard override?
-    </label>
-    <div id="dvBoxHard" style="display: none">
-        (Team 1) Player 1 SSID: <input type="text" class="input" id="p1SSID" value=""> (Team 2) Player
-        2
-        SSID: <input type="text" class="input" id="p2SSID" value=""> <br>
-        (Team 1)Player 3 SSID: <input type="text" class="input" id="p3SSID" value=""> (Team 2) Player 4
-        SSID: <input type="text" class="input" id="p4SSID" value=""><br>
-    </div>
-    <label for="chkBox">
-        <input type="checkbox" id="chkBox" onclick="ShowHideDiv(this)" />
-        Name override?
-    </label>
-    <div id="dvBox" style="display: none">
+    <form id="dvBox">
         (Team 1) Player 1 Name: <input type="text" class="input" id="p1Name" value=""> (Team 2) Player 2 Name: <input
             type="text" class="input" id="p2Name" value=""> <br>
         (Team 1)Player 3 Name: <input type="text" class="input" id="p3Name" value=""> (Team 2) Player 4 Name: <input
             type="text" class="input" id="p4Name" value=""><br>
-    </div>
+    </form> <button onclick="resetPlayers()">Reset Players</button>
     <br>
 
     <br>
-    Make sure to run Send Data + Get Stats when players change!!
     <br>
     <br>
     <!--  Coordinator Name: <input type="text" id="coordName"><br> -->
-    Caster 1: <input type="text" id="caster1" class="input" value="Caster 1"><br>
-    Caster 2: <input type="text" id="caster2" class="input" value="Caster 2"><br>
+    <p style="display:none;">Caster 1: <input type="text" id="caster1" class="input" value="Caster 1"><br>
+    Caster 2: <input type="text" id="caster2" class="input" value="Caster 2"><br></p>
     <br>
+    <form id="formTeams">
     Team 1: <select id="team1">
-        <!-- Div 1 -->
-        <optgroup label="Div 1">
-        <option>RandStad Beesten</option>
-        <option>Team UW +1</option>
+        <option>Australian Knights</option>
         <option>Cal Esports A</option>
-        <option>Athlings</option>
-    </optgroup>
-        <!-- Div 2 -->
-        <optgroup label="Div 2">
-
-        <option>Georgia Tech A</option>
+        <option>Cal Esports B</option>
+        <option>Lone Star Sabers Blue</option>
         <option>Lone Star Sabers Red</option>
-        <option>Beatcats Red</option>
+        <option>Lone Star Sabers White</option>
+        <option>OC Esports Maroon</option>
         <option>OC Esports Silver</option>
-        <option>Beatcats Blue</option>
-    </optgroup>
+        <option>Randstad Beesten + DLC</option>
+        <option>Sploob ON Top</option>
+        <option>Stanford XR</option>
     </select> Score: <input type="number" class="input" class="number" id="team1Score" value="0" min="0" max="5"><br>
     Team 2: <select id="team2">
-                <!-- Div 1 -->
-                <option>RandStad Beesten</option>
-                <option>Team UW +1</option>
-                <option>Cal Esports A</option>
-                <option>Athlings</option>
-                <!-- Div 2 -->
-                <option>Georgia Tech A</option>
-                <option>Lone Star Sabers Red</option>
-                <option>Beatcats Red</option>
-                <option>OC Esports Silver</option>
-                <option>Beatcats Blue</option>
-    </select> Score: <input type="number" class="input" class="number" id="team2Score" value="0" min="0" max="5"><br>
-    <button id="GetPlayers">Get Players</button>
+        <option>Australian Knights</option>
+        <option>Cal Esports A</option>
+        <option>Cal Esports B</option>
+        <option>Lone Star Sabers Blue</option>
+        <option>Lone Star Sabers Red</option>
+        <option>Lone Star Sabers White</option>
+        <option>OC Esports Maroon</option>
+        <option>OC Esports Silver</option>
+        <option>Randstad Beesten + DLC</option>
+        <option>Sploob ON Top</option>
+        <option>Stanford XR</option>
+    </select> Score: <input type="number" class="input" class="number" id="team2Score" value="0" min="0" max="5">
+</form> <button onclick="resetTeams()">Reset Teams & Score</button><br><br>
     Best of: <select id="bestof">
         <option value="bo3">3</option>
         <option value="bo5">5</option>
@@ -305,16 +283,13 @@
         <option value="bo9">9</option>
     </select><br>
 
-    Round Info: <input type="text" class="input long" id="roundInfo" value="Season 8 Div. # Round #"><br><br>
+    Round Info: <input type="text" class="input long" id="roundInfo" value=""><br><br>
 
     Map Pool: <select id="mapPoolID" onchange="mapPoolUpdate()">
-        <option value="336">CVRE Div. 1 (336)</option>
-        <option value="332">CVRE Div. 2 (332)</option>
-        <option value="339">Season 8 Quals (339)</option>
-        <option value="347">CVRE Div. 1 Finals (347)</option>
-        <option value="346">CVRE Div. 2 Finals (346)</option>
-    </select><br>
-
+        <option value="1">Div. 1</option>
+        <option value="2">Div. 2</option>
+    </select> <button onclick="resetMaps()">Reset Picks & Bans</button><br>
+    <form id="resettable">
     <div class="map" id="map0Box">Map 1: <br> <span id="SongName0"> Song Name</span> <br> <select id="map0">
 
             <option value="default">Default</option>
@@ -334,7 +309,7 @@
             <option value="default">Default</option>
             <option value="pick">Pick</option>
             <option value="ban">Ban</option>
-        </select></div><br>
+        </select></div><br><br>
 
 
 
@@ -357,7 +332,7 @@
             <option value="default">Default</option>
             <option value="pick">Pick</option>
             <option value="ban">Ban</option>
-        </select></div><br>
+        </select></div><br><br>
 
 
     <div class="map" id="map6Box">Map 7: <br> <span id="SongName6"> Song Name</span> <br> <select id="map6">
@@ -379,20 +354,37 @@
             <option value="default">Default</option>
             <option value="pick">Pick</option>
             <option value="ban">Ban</option>
-        </select></div><br>
+        </select></div><br><br>
 
-    <br>Stats Page Displayed Maps: <select id="displayedMaps">
-        <option value="3">1-3</option>
-        <option value="6">4-6</option>
-        <option value="9">7-9</option>
-    </select>
+        <div class="map" id="map9Box">Map 10: <br> <span id="SongName9"> Song Name</span> <br> <select id="map9">
+
+            <option value="default">Default</option>
+            <option value="pick">Pick</option>
+            <option value="ban">Ban</option>
+        </select></div>
+
+    <div class="map" id="map10Box">Map 11: <br> <span id="SongName10"> Song Name</span> <br> <select id="map10">
+
+            <option value="default">Default</option>
+            <option value="pick">Pick</option>
+            <option value="ban">Ban</option>
+        </select></div>
+
+    <div class="map" id="map11Box">Map 12: <br> <span id="SongName11"> Song Name</span> <br> <select id="map11">
+
+            <option value="default">Default</option>
+            <option value="pick">Pick</option>
+            <option value="ban">Ban</option>
+        </select></div><br><br>
+    </form>
+    <br>
     <br> <br>
     <button id="SendButton">Send Data</button>
-    <button id="SendStatsButton">Send Data + Get Stats</button>
+    <!-- <button id="SendStatsButton">Send Data + Get Stats</button> -->
     <span id="team1Selection"></span>
     <span id="team2Selection"></span>
     <span id="bestofSelection"></span>
-    <span id="mapPoolSelection">336</span>
+    <span id="mapPoolSelection">1</span>
     <div class="pickbanText" style="display:none;">
         <span id="displayedMapsSelection"></span>
         <span id="map0Selection"></span>
@@ -404,6 +396,9 @@
         <span id="map6Selection"></span>
         <span id="map7Selection"></span>
         <span id="map8Selection"></span>
+        <span id="map9Selection"></span>
+        <span id="map10Selection"></span>
+        <span id="map11Selection"></span>
     </div></br>
 
 
@@ -416,18 +411,8 @@
     var p2ScoreID;
     var p3ScoreID;
     var p4ScoreID;
-    document.getElementById("SendButton").style.display = "none";
-    document.getElementById("SendStatsButton").style.display = "none";
-
-    function ShowHideDiv(chkBox) {
-        var dvBox = document.getElementById("dvBox");
-        dvBox.style.display = chkBox.checked ? "block" : "none";
-    }
-
-    function ShowHideDivHard(chkBoxHard) {
-        var dvBoxHard = document.getElementById("dvBoxHard");
-        dvBoxHard.style.display = chkBoxHard.checked ? "block" : "none";
-    }
+    //document.getElementById("SendButton").style.display = "none";
+   // document.getElementById("SendStatsButton").style.display = "none";
 
 
     function teamListUpdate() {
@@ -460,13 +445,7 @@
 
     function mapUpdate() {
 
-        var e11 = document.getElementById("displayedMaps");
-        var displayedMapsSelection = e11.options[e11.selectedIndex].value;
-        console.log(displayedMapsSelection);
-        document.getElementById("displayedMapsSelection").innerHTML = displayedMapsSelection;
-
-        var e10 = document.getElementById("mapPoolID");
-        var mapPoolSelection = e10.options[e10.selectedIndex].value;
+        var mapPoolSelection = document.getElementById("mapPoolID").value;
         console.log(mapPoolSelection);
         document.getElementById("mapPoolSelection").innerHTML = mapPoolSelection;
 
@@ -480,6 +459,9 @@
         document.getElementById('map6Box').className = 'map';
         document.getElementById('map7Box').className = 'map';
         document.getElementById('map8Box').className = 'map';
+        document.getElementById('map9Box').className = 'map';
+        document.getElementById('map10Box').className = 'map';
+        document.getElementById('map11Box').className = 'map';
 
         var e0 = document.getElementById("map0");
         var map0Selection = e0.options[e0.selectedIndex].value;
@@ -534,6 +516,24 @@
 
         document.getElementById("map8Selection").innerHTML = map8Selection;
         document.getElementById('map8Box').className += ' ' + map8Selection;
+
+        var e9 = document.getElementById("map9");
+        var map9Selection = e9.options[e9.selectedIndex].value;
+
+        document.getElementById("map9Selection").innerHTML = map9Selection;
+        document.getElementById('map9Box').className += ' ' + map9Selection;
+
+        var e10 = document.getElementById("map10");
+        var map10Selection = e10.options[e10.selectedIndex].value;
+
+        document.getElementById("map10Selection").innerHTML = map10Selection;
+        document.getElementById('map10Box').className += ' ' + map10Selection;
+
+        var e11 = document.getElementById("map11");
+        var map11Selection = e11.options[e11.selectedIndex].value;
+
+        document.getElementById("map11Selection").innerHTML = map11Selection;
+        document.getElementById('map11Box').className += ' ' + map11Selection;
     }
 
 
@@ -572,7 +572,7 @@
             mapUpdate();
             mapPoolUpdate();
 
-            sendablePlayerName();
+           // sendablePlayerName();
 
 
 
@@ -587,19 +587,13 @@
             var team2Score = document.getElementById("team2Score");
             var roundInfoText = document.getElementById("roundInfo");
 
-            if (chkBoxHard.checked == true) {
-                p1ScoreID = document.getElementById("p1SSID");
-                p2ScoreID = document.getElementById("p2SSID");
-                p3ScoreID = document.getElementById("p3SSID");
-                p4ScoreID = document.getElementById("p4SSID");
-
                 var messageData = {
                 "Event": "MatchData",
                 "Data": {
-                    "P1": p1ScoreID.value,
-                    "P2": p2ScoreID.value,
-                    "P3": p3ScoreID.value,
-                    "P4": p4ScoreID.value,
+                    "P1": "0000",
+                    "P2": "0000",
+                    "P3": "0000",
+                    "P4": "0000",
                     "Team1": team1Selection.innerHTML,
                     "Team2": team2Selection.innerHTML,
                     "Caster1": caster1Name.value,
@@ -618,53 +612,19 @@
                     "Map6": map6Selection.innerHTML,
                     "Map7": map7Selection.innerHTML,
                     "Map8": map8Selection.innerHTML,
+                    "Map9": map9Selection.innerHTML,
+                    "Map10": map10Selection.innerHTML,
+                    "Map11": map11Selection.innerHTML,
                     "DisplayedMaps": displayedMapsSelection.innerHTML,
                     "StatsUpdate": 0,
-                    "NameOverride": chkBox.checked,
+                    "NameOverride": true,
                     "P1Name": p1Name.value,
                     "P2Name": p2Name.value,
                     "P3Name": p3Name.value,
                     "P4Name": p4Name.value,
                 }
-            }
+            
 
-            } else {
-    
-            var messageData = {
-                "Event": "ControllerData",
-                "Data": {
-                    "P1": P1,
-                    "P2": P2,
-                    "P3": P3,
-                    "P4": P4,
-                    "Team1": team1Selection.innerHTML,
-                    "Team2": team2Selection.innerHTML,
-                    "Caster1": caster1Name.value,
-                    "Caster2": caster2Name.value,
-                    "BestOf": bestofSelection.innerHTML,
-                    "Team1Score": team1Score.value,
-                    "Team2Score": team2Score.value,
-                    "RoundInfo": roundInfoText.value,
-                    "MapPool": mapPoolSelection.innerHTML,
-                    "Map0": map0Selection.innerHTML,
-                    "Map1": map1Selection.innerHTML,
-                    "Map2": map2Selection.innerHTML,
-                    "Map3": map3Selection.innerHTML,
-                    "Map4": map4Selection.innerHTML,
-                    "Map5": map5Selection.innerHTML,
-                    "Map6": map6Selection.innerHTML,
-                    "Map7": map7Selection.innerHTML,
-                    "Map8": map8Selection.innerHTML,
-                    "DisplayedMaps": displayedMapsSelection.innerHTML,
-                    "StatsUpdate": 0,
-                    "NameOverride": chkBox.checked,
-                    "P1Name": p1Name.value,
-                    "P2Name": p2Name.value,
-                    "P3Name": p3Name.value,
-                    "P4Name": p4Name.value,
-                }
-
-            }
 
 
 
@@ -681,145 +641,74 @@
 
 
 
-        var button = document.getElementById("SendStatsButton");
-        button.onclick = function (e) {
-            teamListUpdate();
-            bestofUpdate();
-            mapUpdate();
-            mapPoolUpdate();
+        // var button = document.getElementById("SendStatsButton");
+        // button.onclick = function (e) {
+        //     teamListUpdate();
+        //     bestofUpdate();
+        //     mapUpdate();
+        //     mapPoolUpdate();
 
-            sendablePlayerName();
 
-            var p1ScoreID = document.getElementById("p1SSID");
-            var p2ScoreID = document.getElementById("p2SSID");
-            var p3ScoreID = document.getElementById("p3SSID");
-            var p4ScoreID = document.getElementById("p4SSID");
-            var caster1Name = document.getElementById("caster1");
-            var caster2Name = document.getElementById("caster2");
-            var team1Score = document.getElementById("team1Score");
-            var team2Score = document.getElementById("team2Score");
-            var roundInfoText = document.getElementById("roundInfo");
+        //     var caster1Name = document.getElementById("caster1");
+        //     var caster2Name = document.getElementById("caster2");
+        //     var team1Score = document.getElementById("team1Score");
+        //     var team2Score = document.getElementById("team2Score");
+        //     var roundInfoText = document.getElementById("roundInfo");
 
 
             
-            if (chkBoxHard.checked == true) {
-                p1ScoreID = document.getElementById("p1SSID");
-                p2ScoreID = document.getElementById("p2SSID");
-                p3ScoreID = document.getElementById("p3SSID");
-                p4ScoreID = document.getElementById("p4SSID");
+        //     var messageData = {
+        //         "Event": "MatchData",
+        //         "Data": {
+        //             "P1": "0000",
+        //             "P2": "0000",
+        //             "P3": "0000",
+        //             "P4": "0000",
+        //             "Team1": team1Selection.innerHTML,
+        //             "Team2": team2Selection.innerHTML,
+        //             "Caster1": caster1Name.value,
+        //             "Caster2": caster2Name.value,
+        //             "BestOf": bestofSelection.innerHTML,
+        //             "Team1Score": team1Score.value,
+        //             "Team2Score": team2Score.value,
+        //             "RoundInfo": roundInfoText.value,
+        //             "MapPool": mapPoolSelection.innerHTML,
+        //             "Map0": map0Selection.innerHTML,
+        //             "Map1": map1Selection.innerHTML,
+        //             "Map2": map2Selection.innerHTML,
+        //             "Map3": map3Selection.innerHTML,
+        //             "Map4": map4Selection.innerHTML,
+        //             "Map5": map5Selection.innerHTML,
+        //             "Map6": map6Selection.innerHTML,
+        //             "Map7": map7Selection.innerHTML,
+        //             "Map8": map8Selection.innerHTML,
+        //             "DisplayedMaps": displayedMapsSelection.innerHTML,
+        //             "StatsUpdate": 0,
+        //             "NameOverride": chkBox.checked,
+        //             "P1Name": p1Name.value,
+        //             "P2Name": p2Name.value,
+        //             "P3Name": p3Name.value,
+        //             "P4Name": p4Name.value,
+        //         }
+            
 
-                var messageData = {
-                "Event": "MatchData",
-                "Data": {
-                    "P1": p1ScoreID.value,
-                    "P2": p2ScoreID.value,
-                    "P3": p3ScoreID.value,
-                    "P4": p4ScoreID.value,
-                    "Team1": team1Selection.innerHTML,
-                    "Team2": team2Selection.innerHTML,
-                    "Caster1": caster1Name.value,
-                    "Caster2": caster2Name.value,
-                    "BestOf": bestofSelection.innerHTML,
-                    "Team1Score": team1Score.value,
-                    "Team2Score": team2Score.value,
-                    "RoundInfo": roundInfoText.value,
-                    "MapPool": mapPoolSelection.innerHTML,
-                    "Map0": map0Selection.innerHTML,
-                    "Map1": map1Selection.innerHTML,
-                    "Map2": map2Selection.innerHTML,
-                    "Map3": map3Selection.innerHTML,
-                    "Map4": map4Selection.innerHTML,
-                    "Map5": map5Selection.innerHTML,
-                    "Map6": map6Selection.innerHTML,
-                    "Map7": map7Selection.innerHTML,
-                    "Map8": map8Selection.innerHTML,
-                    "DisplayedMaps": displayedMapsSelection.innerHTML,
-                    "StatsUpdate": 1,
-                    "NameOverride": chkBox.checked,
-                    "P1Name": p1Name.value,
-                    "P2Name": p2Name.value,
-                    "P3Name": p3Name.value,
-                    "P4Name": p4Name.value,
-                }
-            }
 
-            } else {
-    
-            var messageData = {
-                "Event": "ControllerData",
-                "Data": {
-                    "P1": P1,
-                    "P2": P2,
-                    "P3": P3,
-                    "P4": P4,
-                    "Team1": team1Selection.innerHTML,
-                    "Team2": team2Selection.innerHTML,
-                    "Caster1": caster1Name.value,
-                    "Caster2": caster2Name.value,
-                    "BestOf": bestofSelection.innerHTML,
-                    "Team1Score": team1Score.value,
-                    "Team2Score": team2Score.value,
-                    "RoundInfo": roundInfoText.value,
-                    "MapPool": mapPoolSelection.innerHTML,
-                    "Map0": map0Selection.innerHTML,
-                    "Map1": map1Selection.innerHTML,
-                    "Map2": map2Selection.innerHTML,
-                    "Map3": map3Selection.innerHTML,
-                    "Map4": map4Selection.innerHTML,
-                    "Map5": map5Selection.innerHTML,
-                    "Map6": map6Selection.innerHTML,
-                    "Map7": map7Selection.innerHTML,
-                    "Map8": map8Selection.innerHTML,
-                    "DisplayedMaps": displayedMapsSelection.innerHTML,
-                    "StatsUpdate": 1,
-                    "NameOverride": chkBox.checked,
-                    "P1Name": p1Name.value,
-                    "P2Name": p2Name.value,
-                    "P3Name": p3Name.value,
-                    "P4Name": p4Name.value,
-                }
 
-            }
+
+            
 
         
 
-            }
+        //     }
 
 
 
-            var messageString = JSON.stringify(messageData);
+        //     var messageString = JSON.stringify(messageData);
 
-            console.log(messageString);
+        //     console.log(messageString);
 
-            sock.send(messageString);
-        }
-    }
-    var button = document.getElementById("GetPlayers");
-    button.onclick = function (e) {
-        teamListUpdate();
-        document.getElementById("SendButton").style.display = "";
-        document.getElementById("SendStatsButton").style.display = "";
-        var messageData = {
-            "Event": "ControllerTeamData",
-            "Data": {
-                "Team1": team1Selection.innerHTML,
-                "Team2": team2Selection.innerHTML,
-            }
-
-
-
-
-
-
-        }
-
-
-
-        var messageString = JSON.stringify(messageData);
-
-        console.log(messageString);
-
-        sock.send(messageString);
+        //     sock.send(messageString);
+        // }
     }
 
 
@@ -830,24 +719,51 @@
     var mapCount;
 
     function mapPoolUpdate() {
-        fetch(`https://beatkhana.com/api/tournament/2147484253/map-pools`)
-            .then(response => {
-                return response.json()
-            })
-            .then(data => {
 
-                console.log(data);
+        let data = {
+        "1": {
+            "poolName": "Div. 1",
+            "songs": [
+	{ songAuthor: 'Gourmet Race', name: '(Qumu Remix)', levelAuthor: 'Rashed', diff: 'Hard', key: '2680c', hash: '075a3c6598289bd485bb0319718031f5528e5ca2'},
+    { songAuthor: 'Gold', name: 'Echos', levelAuthor: 'Olaf', diff: 'Expert+', key: '36cab', hash: '50bce3ee46cdc11557e5969247689c06aa55b6b1'},
+    { songAuthor: 'Rec Hall', name: 'She Doesn’t Get It', levelAuthor: 'Chromia', diff: 'Expert+', key: '360ed', hash: '91febe27ee06b27de9ec2b6c4c5d26079136f00e'},
+    { songAuthor: 'Five Finger Deathpunch', name: 'Lift Me Up', levelAuthor: 'Olaf', diff: 'Expert+', key: '33c67', hash: '1939dd6d7131de4397231a6ff99a5a146f789dcf'},
+    { songAuthor: 'USAO & Kobaryo', name: 'WACCA ULTRA DREAM MEGAMIX', levelAuthor: 'Nolanimations', diff: 'Tanoc+', key: '36cb1', hash: '825ecc693778e112609168ede82642076c585a9b'},
+    { songAuthor: 'Curbi ft. Jess Ball', name: 'Lied To', levelAuthor: 'oegoe', diff: 'Lied To (Tech)', key: '34c35', hash: '64606ce394718815deecd696737ea1aee40e8cf4'},
+	{ songAuthor: 'Giga & TeddyLoid', name: 'Kitsuneno Mado (Queen Fox) (covered by KOKO)', levelAuthor: 'Gabriel', diff: 'Expert+', key: '34873', hash: '409db485951246edffad7667e950c50ee938fb6a'},
+    { songAuthor: 't+pazolite', name: 'Hoshikuzu Struck', levelAuthor: 'Joshabi', diff: 'Expert+', key: '355d8', hash: '1d47953a0492547c6e04aabe6fb2ea78c5a6f87c'},
+    { songAuthor: 'The Hero !!!', name: 'cover by Jonathan Young', levelAuthor: 'Emir', diff: 'Expert+', key: '31b86', hash: '9bc732ce7d9003948df7a46d2aba593565c789d0'},
+    { songAuthor: 'Ashrount', name: 'AureoLe ~for Triumph~', levelAuthor: 'Cobayo & Nolanimations', diff: 'Expert', key: '254fc', hash: '44cf3b0235470221fcd1e0ce5a8bc9fe87a041fe'},
+    { songAuthor: 'Camellia', name: 'Exit This Earth’s Atomosphere', levelAuthor: 'Aquaflee', diff: 'Hypersonic', key: '33317', hash: '74a2ac567499e7a170f385c0ab5b7cd3ee93a73b'}]},
+        "2": {
+            "poolName": "Div. 2",
+            "songs": [
+	{ songAuthor: 'Stellar', name: 'El Dorado', levelAuthor: 'Melon', diff: 'Easy', key: '35333', hash: 'dc44b1632e211749dbfd777b70c4196d55d24fa1'},
+    { songAuthor: 'Gold', name: 'Echos', levelAuthor: 'Olaf', diff: 'Expert+', key: '36cab', hash: '50bce3ee46cdc11557e5969247689c06aa55b6b1'},
+    { songAuthor: 'Dance Gavin Dance', name: 'Back On Deck', levelAuthor: 'Melon', diff: 'Expert+', key: '328b4', hash: '9fdb0db57c754b58369046cc803c60c8d95beb77'},
+    { songAuthor: 'Mine', name: 'POWFU', levelAuthor: 'Olaf', diff: 'ExpertPlus', key: '2fad1', hash: '5fbde9a39457b63f272b6dc632361029584b3de3'},
+    { songAuthor: 'Origami Angel', name: 'The Title Track', levelAuthor: 'Harbgy', diff: 'A', key: '27142', hash: 'b90d1ffd137c8f2db90d95780fd7a8de3d35e3eb'},
+    { songAuthor: 'Sakuzyo', name: 'Synthesized Angel', levelAuthor: 'Slayx', diff: 'Expert+', key: '358e9', hash: '14de09851cecc21f9e0a6aa80164995ce7a47d51'},
+	{ songAuthor: 'Kanaria (ft. Seisei)', name: 'Requiem', levelAuthor: 'EOP Glacier', diff: 'Expert+', key: '31da8', hash: '56c281c3a43c4ee198d2d3351da7ae6932fb5bd0'},
+    { songAuthor: 'Sana', name: 'Packet Hero', levelAuthor: 'Joshabi', diff: 'Expert+', key: '3357c', hash: 'db9588466cd0d60bb461e8e4b7e5badc3f6b6c73'},
+    { songAuthor: 'CS4W', name: 'EX-ris', levelAuthor: 'ilvory', diff: 'Expert+', key: '3554e', hash: '32c9a4bf8c05028cbcef32030c69949ac5fb18fd'},
+    { songAuthor: 'Ludicin', name: 'Onus Rēgulus', levelAuthor: 'Slayx', diff: 'Hard', key: '35f5b', hash: 'f9b192855f44ec3e0047895935dd1f8b86aec75e'},
+    { songAuthor: 'Camellia', name: 'Machinegun', levelAuthor: 'Cerret', diff: 'Machine', key: '34e06', hash: '26b5524ef7f156d35a9710c37e472e301e14bff3'}]}
+    }
+
+
                 // Do stuff here
                 levelNames = [];
                 SongName = [];
 
                 var mapCount = 0;
-                console.log(mapPoolSelection.innerHTML);
-                for (var i = 0; i < data[mapPoolSelection.innerHTML].songs.length; i++) {
+                var mapPoolSelection = document.getElementById("mapPoolID").value;
+                document.getElementById("mapPoolSelection").innerHTML = mapPoolSelection;
 
-                    levelNames.push(data[mapPoolSelection.innerHTML].songs[i].name);
-                    mapCount = data[mapPoolSelection.innerHTML].songs.length;
-                    console.log(mapCount);
+                for (var i = 0; i < data[mapPoolSelection].songs.length; i++) {
+
+                    levelNames.push(data[mapPoolSelection].songs[i].name);
+                    mapCount = data[mapPoolSelection].songs.length;
                 }
                 namePush();
 
@@ -855,69 +771,60 @@
                 //Not pushing names
 
 
-
+                                
 
 
                 function namePush() {
-                    if (mapCount >= 1) {
                         SongName.push(levelNames[0]);
-                        SongName0 = SongName.at(0);
+                        SongName0 = SongName.at(0) || "";
                         document.getElementById('SongName0').innerHTML = SongName0;
-                    }
 
-                    if (mapCount >= 2) {
                         SongName.push(levelNames[1]);
-                        SongName1 = SongName.at(1);
+                        SongName1 = SongName.at(1) || "";
                         document.getElementById('SongName1').innerHTML = SongName1;
-                    }
 
-                    if (mapCount >= 3) {
                         SongName.push(levelNames[2]);
-                        SongName2 = SongName.at(2);
+                        SongName2 = SongName.at(2) || "";
                         document.getElementById('SongName2').innerHTML = SongName2;
-                    }
 
-                    if (mapCount >= 4) {
                         SongName.push(levelNames[3]);
-                        SongName3 = SongName.at(3);
+                        SongName3 = SongName.at(3) || "";
                         document.getElementById('SongName3').innerHTML = SongName3;
-                    }
 
-                    if (mapCount >= 5) {
                         SongName.push(levelNames[4]);
-                        SongName4 = SongName.at(4);
+                        SongName4 = SongName.at(4) || "";
                         document.getElementById('SongName4').innerHTML = SongName4;
-                    }
 
-                    if (mapCount >= 6) {
                         SongName.push(levelNames[5]);
-                        SongName5 = SongName.at(5);
+                        SongName5 = SongName.at(5) || "";
                         document.getElementById('SongName5').innerHTML = SongName5;
-                    }
 
-                    if (mapCount >= 7) {
                         SongName.push(levelNames[6]);
-                        SongName6 = SongName.at(6);
+                        SongName6 = SongName.at(6) || "";
                         document.getElementById('SongName6').innerHTML = SongName6;
-                    }
 
-                    if (mapCount >= 8) {
                         SongName.push(levelNames[7]);
-                        SongName7 = SongName.at(7);
+                        SongName7 = SongName.at(7) || "";
                         document.getElementById('SongName7').innerHTML = SongName7;
-                    }
 
-                    if (mapCount >= 9) {
                         SongName.push(levelNames[8]);
-                        SongName8 = SongName.at(8);
+                        SongName8 = SongName.at(8) || "";
                         document.getElementById('SongName8').innerHTML = SongName8;
-                    }
+
+                        SongName.push(levelNames[9]);
+                        SongName9 = SongName.at(9) || "";
+                        document.getElementById('SongName9').innerHTML = SongName9;
+
+                        SongName.push(levelNames[10]);
+                        SongName10 = SongName.at(10) || "";
+                        document.getElementById('SongName10').innerHTML = SongName10;
+
+                        SongName.push(levelNames[11]);
+                        SongName11 = SongName.at(11) || "";
+                        document.getElementById('SongName11').innerHTML = SongName11;
                 }
 
-            })
-            .catch(err => {
-                console.log(err)
-            })
+
     }
     sock.onmessage = function (msg) {
         let data = JSON.parse(msg.data);
@@ -1001,6 +908,26 @@
         for (i = length - 1; i >= 1; i--) {
             select.options[i] = null;
         }
+    }
+
+    function resetMaps() {
+        let form = document.getElementById('resettable');
+        form.reset();
+
+        mapUpdate();
+    } 
+
+    function resetPlayers() {
+        let form = document.getElementById('dvBox');
+
+        form.reset();
+    }
+
+    function resetTeams() {
+        let form = document.getElementById('formTeams');
+        form.reset();
+
+        teamListUpdate();
     }
 </script>
 
